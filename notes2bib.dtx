@@ -233,7 +233,7 @@ This work consists of the file  notes2bib.dtx
 % which will always be added to the bibliography. The package allows
 % footnotes and endnotes to be moved into the bibliography in the same
 % way.  The package can be used with \pkg{natbib} and \pkg{biblatex} as
-% well as plain \LaTeX\ citations. Both sorted and unsorted bibliography 
+% well as plain LaTeX citations. Both sorted and unsorted bibliography 
 % styles are supported.
 %\end{abstract}
 %
@@ -254,7 +254,7 @@ This work consists of the file  notes2bib.dtx
 % 
 % The aim of the \pkg{notes2bib} package is to make integration of notes
 % into the bibliography easy.  Notes can be written as normal in the
-% \LaTeX\ source, and are automatically moved to the bibliography. The 
+% LaTeX source, and are automatically moved to the bibliography. The 
 % package is compatible with sorted and unsorted bibliography styles. 
 % The package has been designed for use with numerical citations, 
 % although it will work with other systems.
@@ -272,12 +272,12 @@ This work consists of the file  notes2bib.dtx
 % \texttt{latex \jobname.dtx} will extract it and also typeset the
 % documentation.
 %
-% The package requires \LaTeX3 support as provided in the 
+% The package requires LaTeX3 support as provided in the 
 % \pkg{expl3} and \pkg{xpackages} bundles. Both of these are available
 % on \href{http://www.ctan.org}{\textsc{ctan}} as ready-to-install
-% zip files. Suitable versions are available in MiK\TeX\ 2.8 and
-% \TeX\ Live 2009 (updating the relevant packages online may be
-% necessary). \LaTeX3, and so \pkg{notes2bib}, requires the \eTeX\ 
+% zip files. Suitable versions are available in MiKTeX 2.8 and
+% TeX Live 2009 (updating the relevant packages online may be
+% necessary). LaTeX3, and so \pkg{notes2bib}, requires the e-TeX 
 % extensions: these are available on all modern \TeX\ systems.
 % 
 % Typesetting the documentation requires a number of packages in
@@ -343,7 +343,7 @@ This work consists of the file  notes2bib.dtx
 %\end{syntax} 
 % In common with \cs{footnote}, the basic \cs{bibnote} macro has
 % companion macros \cs{bibnotemark} and \cs{bibnotetext}. In contrast
-% to the \LaTeXe\ kernel \cs{footnote} macro, \cs{bibnote} is naturally
+% to the LaTeX2e kernel \cs{footnote} macro, \cs{bibnote} is naturally
 % robust and so \cs{bibnotemark} and \cs{bibnotetext} should be needed
 % much more rarely than the \cs{footnote} versions.
 % 
@@ -588,8 +588,8 @@ This work consists of the file  notes2bib.dtx
 % \end{syntax}
 % These functions record the notes which have been placed outside of
 % the normal order by the package. This information is used to check
-% for changes in note order between \LaTeX\ runs, so that the need for
-% re-running \LaTeX\ and \BibTeX\ can be detected.
+% for changes in note order between LaTeX runs, so that the need for
+% re-running LaTeX and BibTeX can be detected.
 % 
 %\section{Notes for upgrading from version one}
 %
@@ -695,7 +695,7 @@ This work consists of the file  notes2bib.dtx
 %   "\niib_cite:w" \marg{note-name}
 % \end{syntax}
 % The function used by \pkg{notes2bib} to store the citation command
-% needed to cite notes. This will be a \LaTeXe\ user function, and so
+% needed to cite notes. This will be a LaTeX2e user function, and so
 % the input syntax will require one mandatory argument.
 %\end{function}
 %
@@ -780,27 +780,12 @@ This work consists of the file  notes2bib.dtx
 % <text>.
 %\end{function}
 %
-%\begin{function}{\niib_check_cite:}
-% \begin{syntax}
-%   "\niib_check_cite:" 
-% \end{syntax}
-% Checks and makes changes appropriate if the \pkg{cite} package is
-% loaded.
-%\end{function}
-%
-%\begin{function}{\niib_check_rerun:}
-% \begin{syntax}
-%   "\niib_check_rerun:" 
-% \end{syntax}
-% Checks if additional \LaTeX\ runs are required.
-%\end{function}
-%
 %\begin{function}{\niib_create_print_notes:}
 % \begin{syntax}
 %   "\niib_create_print_notes:"
 % \end{syntax}
-% Creates the appropriate \cs{niib_print_notes:} function at the 
-% start of the document.
+% Creates the \cs{niib_print_notes:} function when using
+% \pkg{biblatex}.
 %\end{function}
 %
 %\begin{function}{
@@ -819,10 +804,10 @@ This work consists of the file  notes2bib.dtx
 % \begin{syntax}
 %   "\niib_filesw:"
 % \end{syntax}
-% A copy of \LaTeXe's \cs{if@filesw}.
+% A copy of LaTeXe's \cs{if@filesw}.
 %\end{function}
 %
-%\begin{function}{ \niib_record_notes:}
+%\begin{function}{\niib_record_notes:}
 %\changes{v2.0b}{2010/01/09}{Documentation change from erroneous
 %  \cs{niib_flush_after_notes:}}
 % \begin{syntax}
@@ -882,44 +867,7 @@ This work consists of the file  notes2bib.dtx
 %\end{function}
 %
 %\begin{function}{
-%  \niib_save_endnote:  |
-%  \niib_save_footnote:
-%}  
-% \begin{syntax}
-%   "\niib_save_endnote:"
-% \end{syntax}
-% Saves current definitions for endnote and footnote functions for 
-% later recovery.
-%\end{function}
-%
-%\begin{function}{\niib_set_mark_note_after:}
-%
-%\changes{v2.0a}{2009/11/01}{Documentation correction from incorrect 
-%  name \cs{niib_set_cite_after:}}
-% \begin{syntax}
-%   "\niib_set_mark_note_after:" 
-% \end{syntax}
-% Sets up function for including notes after citations, appropriate to 
-% the other packages loaded.
-%\end{function}
-%
-%\begin{function}{\niib_set_sortkey_name:}
-% \begin{syntax}
-%   "\niib_set_sortkey_name:" 
-% \end{syntax}
-% Sets up name for sort key, appropriate to the other packages loaded.
-%\end{function}
-%
-%\begin{function}{\niib_stream_check:}
-% \begin{syntax}
-%   "\niib_stream_check:"
-% \end{syntax}
-% Checks that a stream is open to write notes into: one is opened if
-% not. 
-%\end{function}
-%
-%\begin{function}{
-%  \niib_to_bibnote:n |
+%  \niib_to_bibnote:n   |
 %  \niib_from_bibnote:n 
 %}
 % \begin{syntax}
@@ -948,13 +896,6 @@ This work consists of the file  notes2bib.dtx
 % Writes <text> of <note-name> to database.
 %\end{function}
 %
-%\begin{function}{\niib_write_total_notes:}
-% \begin{syntax}
-%   "\niib_write_total_notes:"
-% \end{syntax}
-% Records total number of auto-numbered notes to the \texttt{aux} file.
-%\end{function}
-%
 %\section{Implementation}
 %
 %\changes{v2.0a}{2009/11/01}{Changed all \cs{cs_set:Nn}, \emph{etc}.\
@@ -962,7 +903,17 @@ This work consists of the file  notes2bib.dtx
 %\changes{v2.0b}{2010/01/09}{A few missed \cs{cs_set:Nn}, \cs{cs_set:Nx}, 
 %  \emph{etc}.\ changed}
 %\changes{v2.0b}{2010/01/09}{Reformatted code to reflect style settled
-%  on by \LaTeX3 Project}
+%  on by LaTeX3 Project}
+%\changes{v2.0c}{2010/02/09}{Switch from \cs{iow_space:} to
+%  \cs{c_space_tl}}
+%\changes{v2.0c}{2010/02/09}{Collect all notes into a token register
+%  and write in one go to file (using a pooled stream)}
+%\changes{v2.0c}{2010/02/09}{Items \cs{AtBeginDocument} and
+%  \cs{AtEndDocument} now set up directly (no functions needed) 
+%  unless the function is required for other reasons}
+%\changes{v2.0c}{2010/03/30}{Make internal functions protected}
+%\changes{v2.0c}{2010/03/30}{Change token registers to token list
+%  variables}
 %
 %    \begin{macrocode}
 %<*package>
@@ -971,7 +922,7 @@ This work consists of the file  notes2bib.dtx
 % Version data to start with.
 %    \begin{macrocode}
 \ProvidesExplPackage
-  {notes2bib} {2010/01/11} {2.0b}
+  {notes2bib} {2010/03/30} {2.0c}
   {Integrating notes into the bibliography}
 \RequirePackage{l3keys2e}
 %    \end{macrocode} 
@@ -983,8 +934,9 @@ This work consists of the file  notes2bib.dtx
 % file. Setting this up as a constant means that it can be changed
 % (for example for translation) if necessary.
 %    \begin{macrocode}
-\tl_new:Nn \c_niib_file_message_tl {
-  This~is~an~auxiliary~file~used~by~the~`notes2bib'~package.
+\tl_new:N \c_niib_file_message_tl
+\tl_set:Nn \c_niib_file_message_tl {
+  This~is~an~auxiliary~file~used~by~the~'notes2bib'~package.
     \iow_newline:
   This~file~may~safely~be~deleted.
     \iow_newline:
@@ -1038,7 +990,7 @@ This work consists of the file  notes2bib.dtx
 %\begin{macro}{\g_niib_previous_after_clist}
 %\begin{macro}{\g_niib_previous_before_clist}
 % For comparison purposes, the lists of out-of-order notes from the
-% previous \LaTeX\ run are needed.
+% previous LaTeX run are needed.
 %    \begin{macrocode}
 \clist_new:N \g_niib_previous_after_clist
 \clist_new:N \g_niib_previous_before_clist
@@ -1049,9 +1001,17 @@ This work consists of the file  notes2bib.dtx
 %\begin{macro}{\g_niib_previous_notes_int}
 % The total number of notes created is needed, as this is used to see
 % if any zero-padding is required for the numbers. Of course, for this
-% to work there has to be a second \LaTeX\ run.
+% to work there has to be a second LaTeX run.
 %    \begin{macrocode}
 \int_new:N \g_niib_previous_notes_int
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\g_niib_notes_tl}
+% Used to collect up the note text for writing in a single block
+% at the end of the document.
+%    \begin{macrocode}
+\tl_new:N \g_niib_notes_tl
 %    \end{macrocode}
 %\end{macro}
 %
@@ -1178,11 +1138,11 @@ This work consists of the file  notes2bib.dtx
 % A few options need to be altered or deactivated at the start of
 % the document.
 %    \begin{macrocode}
-\cs_set_nopar:Npn \niib_options_redefine: {
+\AtBeginDocument {
   \keys_define:nn { notes2bib } 
     {
       cite-function     .code:n      = 
-        { \cs_set_eq:NN \niib_cite:w ##1 }                             ,
+        { \cs_set_eq:NN \niib_cite:w #1 }                              ,
       file-name .code:n = 
         { \msg_info:nnn { notes2bib } { preamble-only } { file-name } },
       convert-endnotes / false .code:n = 
@@ -1197,7 +1157,6 @@ This work consists of the file  notes2bib.dtx
 }
 \msg_new:nnn { notes2bib } { preamble-only } 
   {The option `#1' can only be used in the preamble.}
-\AtBeginDocument { \niib_options_redefine: }
 %    \end{macrocode}
 %    
 %\subsection{Options from version one}
@@ -1241,7 +1200,7 @@ This work consists of the file  notes2bib.dtx
 % something printable. The value tests here mean that if there are more
 % than nine notes, notes 1--9 have the number padded to get proper 
 % sorting. This needs two passes, as the total number of notes is only
-% available at the end of the \LaTeX\ run.
+% available at the end of the LaTeX run.
 %    \begin{macrocode}
 \cs_new_nopar:Npn \niib_note_name: {
   \tl_use:N \l_niib_note_name_tl
@@ -1281,7 +1240,7 @@ This work consists of the file  notes2bib.dtx
 % auxiliary is called. The nature of the second function is dependent
 % on the other packages loaded.
 %    \begin{macrocode}
-\cs_new:Npn \niib_mark_note_after:n #1 {
+\cs_new_protected:Npn \niib_mark_note_after:n #1 {
   \int_gincr:N \g_niib_total_notes_int
   \clist_gput_right:Nx \g_niib_after_clist {#1}
   \niib_mark_note_after_aux:n {#1}
@@ -1293,9 +1252,9 @@ This work consists of the file  notes2bib.dtx
 %
 %\begin{macro}{\niib_mark_note_before:n}
 % Notes to appear before all citations are simple recorded, as they will
-% be set up on the next \LaTeX\ run.
+% be set up on the next LaTeX run.
 %    \begin{macrocode}
-\cs_new:Npn \niib_mark_note_before:n #1 {
+\cs_new_protected:Npn \niib_mark_note_before:n #1 {
   \int_gincr:N \g_niib_total_notes_int
   \clist_gput_right:Nx \g_niib_before_clist {#1}
   \niib_cite:w {#1}
@@ -1307,7 +1266,7 @@ This work consists of the file  notes2bib.dtx
 % Mixed citations are very easy to handle: just use whatever cite
 % command is current.
 %    \begin{macrocode}
-\cs_new:Npn \niib_mark_note_mixed:n #1 {
+\cs_new_protected:Npn \niib_mark_note_mixed:n #1 {
   \int_gincr:N \g_niib_total_notes_int
   \niib_cite:w {#1}
 }
@@ -1315,25 +1274,6 @@ This work consists of the file  notes2bib.dtx
 %\end{macro}
 %
 %\subsection{Writing note text to the database}
-%
-%\begin{macro}{\niib_stream_check:}
-%\begin{macro}{\g_niib_file_stream}
-% All notes are written to a temporary file. This is only opened if
-% necessary, as this means that \pkg{notes2bib} can be loaded 
-% \enquote{silently} in classes, \emph{etc}. The file name
-% is variable, but the extension is always \file{.bib}. 
-%    \begin{macrocode}
-\cs_new_nopar:Npn \niib_stream_check: {
-  \cs_if_free:NT \g_niib_file_stream 
-    {
-      \iow_new:N \g_niib_file_stream
-      \iow_open:Nn \g_niib_file_stream { \g_niib_filename_tl .bib }
-      \iow_now:Nx \g_niib_file_stream { \c_niib_file_message_tl }
-    }
-}
-%    \end{macrocode}
-%\end{macro}
-%\end{macro}
 %    
 %\begin{macro}{\niib_write_field:nn}
 %\begin{macro}{\niib_write_field:Vn}
@@ -1344,7 +1284,7 @@ This work consists of the file  notes2bib.dtx
 % the intention of the code here clearer.
 %    \begin{macrocode}
 \cs_new:Npn \niib_write_field:nn #1#2 {
-  \iow_space: \iow_space: #1 \iow_space: = \iow_space: {#2} , 
+  \c_space_tl \c_space_tl #1 \c_space_tl = \c_space_tl {#2} , 
   \iow_newline:
 }
 \cs_generate_variant:Nn \niib_write_field:nn { V }
@@ -1358,20 +1298,19 @@ This work consists of the file  notes2bib.dtx
 %\begin{macro}[aux]{\niib_write_note_aux:nn}
 %\begin{macro}{\niib_write_note:xn}
 % The writing function takes two arguments: the name of the note, and
-% the text itself. There is a need to check on the \LaTeXe\ system to
+% the text itself. There is a need to check on the LaTeX2e system to
 % turn off writing, with a hand-over so there is no problem with 
 % balancing ifs.
 %    \begin{macrocode}
-\cs_new_nopar:Npn \niib_write_note:nn {
+\cs_new_protected_nopar:Npn \niib_write_note:nn {
   \if@filesw
     \exp_after:wN \niib_write_note_aux:nn
   \else:
     \exp_after:wN \use_none:nn  
   \fi:
 }
-\cs_new:Npn \niib_write_note_aux:nn #1#2 {
-  \niib_stream_check:
-  \iow_now:Nx \g_niib_file_stream 
+\cs_new_protected:Npn \niib_write_note_aux:nn #1#2 {
+  \tl_gput_right:Nx \g_niib_notes_tl
     {
       @ \l_niib_record_type_tl 
         {
@@ -1385,6 +1324,8 @@ This work consists of the file  notes2bib.dtx
           \niib_write_field:nn { keywords } { \l_niib_keyword_tl }
           \niib_write_field:nn { presort } { \l_niib_presort_tl }
         }
+      \iow_newline:
+      \iow_newline:  
     }
 }
 \cs_generate_variant:Nn \niib_write_note:nn { x }
@@ -1400,16 +1341,16 @@ This work consists of the file  notes2bib.dtx
 % Notes after citations are not written to the \file{aux} file when 
 % given, but are held in a queue. This is flushed here, which means
 % actually doing the citation and also recording the notes so they
-% are available in the next \LaTeX\ run. The list is also transferred
+% are available in the next LaTeX run. The list is also transferred
 % to a secondary one, which is used for comparison purposes right at the
 % end of the document.
 %    \begin{macrocode}
-\cs_new_nopar:Npn \niib_record_notes: {
+\cs_new_protected_nopar:Npn \niib_record_notes: {
   \if@filesw
     \exp_after:wN \niib_flush_notes_aux:
   \fi
 }
-\cs_new_nopar:Npn \niib_flush_notes_aux: {
+\cs_new_protected_nopar:Npn \niib_flush_notes_aux: {
   \clist_if_empty:NF \g_niib_before_clist 
     {
       \iow_now:Nx \@auxout 
@@ -1436,7 +1377,7 @@ This work consists of the file  notes2bib.dtx
 % Converting other notes to bibliography notes is simple: just set
 % them equal.
 %    \begin{macrocode}
-\cs_new_nopar:Npn \niib_to_bibnote:n #1 {
+\cs_new_protected_nopar:Npn \niib_to_bibnote:n #1 {
   \cs_set_eq:cN {#1}        \bibnote
   \cs_set_eq:cN { #1 mark } \bibnotemark
   \cs_set_eq:cN { #1 text } \bibnotetext
@@ -1448,7 +1389,7 @@ This work consists of the file  notes2bib.dtx
 % The reverse process needs the original definitions, which are saved
 % by the module for later recovery.
 %    \begin{macrocode}
-\cs_new_nopar:Npn \niib_from_bibnote:n #1 {
+\cs_new_protected_nopar:Npn \niib_from_bibnote:n #1 {
   \cs_set_eq:cc {#1}        { niib_ #1 :w }
   \cs_set_eq:cc { #1 mark } { niib_ #1 mark:w }
   \cs_set_eq:cc { #1 text } { niib_ #1 text:w }
@@ -1456,11 +1397,9 @@ This work consists of the file  notes2bib.dtx
 %    \end{macrocode}
 %\end{macro}
 %
-%\begin{macro}{\niib_save_endnote:}
 %\begin{macro}{\niib_endnote:w}
 %\begin{macro}{\niib_endnotemark:w}
 %\begin{macro}{\niib_endnotetext:w}
-%\begin{macro}{\niib_save_footnote:}
 %\begin{macro}{\niib_footnote:w}
 %\begin{macro}{\niib_footnotemark:w}
 %\begin{macro}{\niib_footnotetext:w}
@@ -1468,23 +1407,15 @@ This work consists of the file  notes2bib.dtx
 % footnotes are saved so that footnotes and endnotes can be turned into
 % bibliography notes and back again.
 %    \begin{macrocode}
-\cs_new_nopar:Npn \niib_save_endnote: {
+\AtBeginDocument {
   \cs_set_eq:NN \niib_endnote:w     \endnote     
   \cs_set_eq:NN \niib_endnotemark:w \endnotemark 
   \cs_set_eq:NN \niib_endnotetext:w \endnotetext
-}
-\cs_new_nopar:Npn \niib_save_footnote: {
   \cs_set_eq:NN \niib_footnote:w     \footnote     
   \cs_set_eq:NN \niib_footnotemark:w \footnotemark 
   \cs_set_eq:NN \niib_footnotetext:w \footnotetext
 }
-\AtBeginDocument {
-  \niib_save_endnote:
-  \niib_save_footnote:
-}
 %    \end{macrocode}
-%\end{macro}
-%\end{macro}
 %\end{macro}
 %\end{macro}
 %\end{macro}
@@ -1495,35 +1426,32 @@ This work consists of the file  notes2bib.dtx
 %\subsection{Package-dependent code}
 %
 %\begin{macro}{\niib_create_print_notes:}
-%\begin{macro}[aux]{\niib_create_print_notes_aux:}
 %\begin{macro}{\niib_print_notes:}
 % The method for printing notes depends on whether \pkg{biblatex} is
 % in use. If it is, then a selective call to \cs{printbibliography} is
 % made. Otherwise, the original \cs{bibliography} function is called,
 % and passed the name of the notes file.
 %    \begin{macrocode}
-\cs_new_nopar:Npn \niib_create_print_notes: {
+\AtBeginDocument {
   \@ifpackageloaded { biblatex } 
     {
-      \cs_new_nopar:Npn \niib_print_notes: 
+      \cs_new_protected_nopar:Npn \niib_print_notes: 
         {
-          \cs_set_nopar:Npx \niib_create_print_notes_aux: 
+          \cs_set_nopar:Npx \niib_create_print_notes: 
             {
               \printbibliography 
                 [ keyword = \exp_not:V \l_niib_keyword_tl ] 
             }
-            \niib_create_print_notes_aux:
+            \niib_create_print_notes:
         }
     }
     {
-      \cs_new_nopar:Npn \niib_print_notes: 
+      \cs_new_protected_nopar:Npn \niib_print_notes: 
         { \exp_args:NV \niib_bibliography:n \g_niib_filename_tl }
     }
 }
-\cs_new_nopar:Npn \niib_create_print_notes_aux: { }
-\AtBeginDocument { \niib_create_print_notes: }
+\cs_new_nopar:Npn \niib_create_print_notes: { }
 %    \end{macrocode}
-%\end{macro}
 %\end{macro}
 %\end{macro}
 %
@@ -1559,61 +1487,53 @@ This work consists of the file  notes2bib.dtx
         }
     }
 }
-\@ifpackageloaded { biblatex } {
-  \exp_args:NV \bibliography \g_niib_filename_tl
-  \cs_gundefine:N \niib_attach_bibliography:
-}{
-  \AtBeginDocument { \niib_attach_bibliography: }
-}
+\@ifpackageloaded { biblatex } 
+  {
+    \exp_args:NV \bibliography \g_niib_filename_tl
+    \cs_gundefine:N \niib_attach_bibliography:
+  }
+  { \AtBeginDocument { \niib_attach_bibliography: } }
 %    \end{macrocode}
 %\end{macro}
 %\end{macro}
 %\end{macro}
 %
-%\begin{macro}{\niib_set_sortkey_name:}
 % \pkg{biblatex} uses the name \texttt{sortkey} for a key to sort by,
 % whereas other style call the same concept \texttt{key}.
 %    \begin{macrocode}
-\cs_new_nopar:Npn \niib_set_sortkey_name: {
+\AtBeginDocument {
   \@ifpackageloaded { biblatex } 
     { \tl_set:Nn \l_niib_sortkey_field_tl { sortkey } }
     { \tl_set:Nn \l_niib_sortkey_field_tl { key } }
-  \cs_gundefine:N \niib_set_sortkey_name:
 }
-\AtBeginDocument { \niib_set_sortkey_name: }
 %    \end{macrocode}
-%\end{macro}
 %
-%\begin{macro}{\niib_set_mark_note_after:}
 % To get the correct ordering for notes, writing to the \file{aux} file
 % needs to be turned on and off. With \pkg{biblatex}, there is a 
 % convenient hook for this. Otherwise, everything has to happen after
 % the citation command.
 %    \begin{macrocode}
-\cs_new_nopar:Npn \niib_set_mark_note_after: {
+\AtBeginDocument {
   \@ifpackageloaded { biblatex } 
     {
-      \cs_set:Npn \niib_mark_note_after_aux:n ##1 
+      \cs_set:Npn \niib_mark_note_after_aux:n #1 
         {
           \AtNextCite { \@fileswfalse }
-          \niib_cite:w {##1}
+          \niib_cite:w {#1}
         }
     }
     {
-      \cs_set:Npn \niib_mark_note_after_aux:n ##1 
+      \cs_set:Npn \niib_mark_note_after_aux:n #1 
         {
           \cs_set_eq:NN \niib_filesw: \if@filesw
           \@fileswfalse
-          \niib_cite:w {##1}
+          \niib_cite:w {#1}
           \cs_set_eq:NN \if@filesw \niib_filesw:
         }    
     }
 }
-\AtBeginDocument { \niib_set_mark_note_after: }
 %    \end{macrocode}
-%\end{macro}
 %
-%\begin{macro}{\niib_check_cite:}
 %\begin{macro}{\niib_aux_hook:}
 % If the \pkg{cite} package is loaded, then there is a hook to
 % reset the \file{aux} file after the citation. This means that moving
@@ -1621,10 +1541,10 @@ This work consists of the file  notes2bib.dtx
 % way \pkg{cite} sets things up is a little complicated. The link needs
 % to be made at the end of the \cs{document} macro.
 %    \begin{macrocode}
-\cs_new_nopar:Npn \niib_check_cite: {
+\AtBeginDocument {
   \@ifpackageloaded { cite } 
     {
-      \cs_set:Npn \niib_mark_note_after_aux:n ##1 
+      \cs_set:Npn \niib_mark_note_after_aux:n #1 
         {
           \cs_set_eq:NN \niib_filesw: \if@filesw
           \@fileswfalse
@@ -1633,7 +1553,7 @@ This work consists of the file  notes2bib.dtx
               \cs_set_eq:NN \if@filesw \niib_filesw:
               \cs_set_nopar:Npn \niib_aux_hook: { }
             }
-          \niib_cite:w {##1}
+          \niib_cite:w {#1}
         }
       \cs_new_nopar:Npn \niib_aux_hook: { }
       \tl_gput_right:Nn \g_niib_document_hook_tl 
@@ -1645,9 +1565,7 @@ This work consists of the file  notes2bib.dtx
     } 
     { }
 }
-\AtBeginDocument { \niib_check_cite: }
 %    \end{macrocode}
-%\end{macro}
 %\end{macro}
 %
 %\subsection{User functions}
@@ -1670,7 +1588,7 @@ This work consists of the file  notes2bib.dtx
     }
     { \niib_bibnote:nn {#1} {#2} }
 }
-\cs_new:Npn \niib_bibnote:nn #1#2 {
+\cs_new_protected:Npn \niib_bibnote:nn #1#2 {
   \niib_write_note:nn {#1} {#2}
   \niib_mark_note:n {#1}
 }
@@ -1813,7 +1731,7 @@ This work consists of the file  notes2bib.dtx
 %\subsection{Code at end of the document}
 %
 % There are a few tasks which have to be carried out a the end of 
-% the \LaTeX\ run, so that data is available for the next run.
+% the LaTeX run, so that data is available for the next run.
 % 
 % First, all of the notes need to be added to the auxiliary file.
 % This ensures that the comparisons made in the next step make sense.
@@ -1821,12 +1739,11 @@ This work consists of the file  notes2bib.dtx
 \AtEndDocument { \niib_record_notes: }
 %    \end{macrocode}
 % 
-%\begin{macro}{\niib_check_rerun:}
 % The list of out-of-order notes from the current run needs to match
 % that from the previous run. If not, then there is a need to re-run
-% \LaTeX.
+% LaTeX.
 %    \begin{macrocode}
-\cs_new_nopar:Npn \niib_check_rerun: {
+\AtEndDocument {
   \clist_if_eq:NNTF \g_niib_all_before_clist 
     \g_niib_previous_before_clist 
     {
@@ -1836,9 +1753,6 @@ This work consists of the file  notes2bib.dtx
     }
     { \msg_info:nn { notes2bib } { rerun } }
 }
-\AtEndDocument {
-  \niib_check_rerun:
-}
 \msg_new:nnn { notes2bib } { rerun } {%
   To get notes in the correct order, please run:\\%
   1) LaTeX  \\%
@@ -1846,22 +1760,41 @@ This work consists of the file  notes2bib.dtx
   3) LaTeX
 }
 %    \end{macrocode}
+%  
+%\begin{macro}{\niib_write_note_file:}  
+%\begin{macro}{\g_niib_file_stream} 
+% The notes themselves are now written in one block: this avoids 
+% using up a stream for any longer than necessary.   
+%    \begin{macrocode}
+\AtEndDocument {
+  \if@filesw
+    \exp_after:wN \niib_write_note_file:
+  \fi:
+}
+\cs_new_protected_nopar:Npn \niib_write_note_file: {
+  \tl_if_empty:NF \g_niib_notes_tl {
+    \iow_open:Nn \g_niib_file_stream { \g_niib_filename_tl .bib }
+    \iow_now:Nx \g_niib_file_stream { \c_niib_file_message_tl }
+    \iow_now:Nx \g_niib_file_stream 
+      { \exp_not:V \g_niib_notes_tl }
+    \iow_close:N \g_niib_file_stream  
+  }
+}
+%    \end{macrocode}
+%\end{macro}
 %\end{macro}
 % 
-%\begin{macro}{\niib_write_total_notes:}
 % The total number of bibliography notes from the current run is
 % recorded to the \file{aux} file. This will then be picked up in the
 %    \begin{macrocode}
-\cs_new_nopar:Npn \niib_write_total_notes: {
+\AtEndDocument {
   \intexpr_compare:nT { \g_niib_note_int > \c_zero } 
     {
       \iow_now:Nx \@auxout 
         { \TotalNotes { \int_to_arabic:n { \g_niib_note_int } } }
     }
 }
-\AtEndDocument { \niib_write_total_notes: }
 %    \end{macrocode}
-%\end{macro} 
 %
 %\subsection{Tidying up}
 %
