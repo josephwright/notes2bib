@@ -1,0 +1,1820 @@
+% \iffalse meta-comment
+% !TeX program = pdflatex
+%<*internal>
+\iffalse
+%</internal>
+%<*readme>
+---------------------------------------------------------------
+notes2bib --- Integrating notes into the bibliography
+Maintained by Joseph Wright
+E-mail: joseph.wright@morningstar2.co.uk
+Released under the LaTeX Project Public License v1.3c or later
+See http://www.latex-project.org/lppl.txt
+---------------------------------------------------------------
+
+The notes2bib package defines a new type of note, bibnote,
+which will always be added to the bibliography.  The package
+allows footnotes and endnotes to be moved into the bibliography
+in the same way.  The package can be used with natbib and
+biblatex as well as plain LaTeX citations. Both sorted and
+unsorted bibliography styles are supported.
+
+notes2bib is written internally using LaTeX3 syntax. It 
+therefore requires the expl3 and xpackages packages. The e-TeX
+extensions are also required.
+%</readme>
+%<*internal>
+\fi
+\def\nameofplainTeX{plain}
+\ifx\fmtname\nameofplainTeX\else
+  \expandafter\begingroup
+\fi
+%</internal>
+%<*install>
+\input docstrip.tex
+\keepsilent
+\askforoverwritefalse
+\preamble
+---------------------------------------------------------------
+notes2bib --- Integrating notes into the bibliography
+Maintained by Joseph Wright
+E-mail: joseph.wright@morningstar2.co.uk
+Released under the LaTeX Project Public License v1.3c or later
+See http://www.latex-project.org/lppl.txt
+---------------------------------------------------------------
+
+\endpreamble
+\postamble
+
+Copyright (C) 2007-2009 by
+  Joseph Wright <joseph.wright@morningstar2.co.uk>
+
+It may be distributed and/or modified under the conditions of
+the LaTeX Project Public License (LPPL), either version 1.3c of
+this license or (at your option) any later version.  The latest
+version of this license is in the file:
+
+   http://www.latex-project.org/lppl.txt
+
+This work is "maintained" (as per LPPL maintenance status) by
+  Joseph Wright.
+
+This work consists of the file  notes2bib.dtx
+          and the derived files notes2bib.ins,
+                                notes2bib.pdf and
+                                notes2bib.sty.
+
+\endpostamble
+\usedir{tex/latex/notes2bib}
+\generate{
+  \file{\jobname.sty}{\from{\jobname.dtx}{package}}
+}
+%</install>
+%<install>\endbatchfile
+%<*internal>
+\usedir{source/latex/notes2bib}
+\generate{
+  \file{\jobname.ins}{\from{\jobname.dtx}{install}}
+}
+\nopreamble\nopostamble
+\usedir{doc/latex/notes2bib}
+\generate{
+  \file{README.txt}{\from{\jobname.dtx}{readme}}
+}
+\ifx\fmtname\nameofplainTeX
+  \expandafter\endbatchfile
+\else
+  \expandafter\endgroup
+\fi
+%</internal>
+%<*driver|package>
+\RequirePackage{xparse}
+%</driver|package>
+%<*driver>
+\documentclass[full]{l3doc}
+\usepackage{csquotes,helvet,notes2bib}
+\usepackage[final]{listings}
+\usepackage[osf]{mathpazo}
+\begin{document}
+  \DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+% 
+%\makeatletter 
+% 
+%^^A For creating examples with nice highlighting of code, and so
+%^^A on; based on the system used in the listings source (lstsample).
+%\lst@RequireAspects{writefile}
+%\newsavebox{\LaTeXdemo@box}
+%\lstnewenvironment{LaTeXdemo}[1][code and example]{^^A
+%  \global\let\lst@intname\@empty
+%  \expandafter\let\expandafter\LaTeXdemo@end
+%    \csname LaTeXdemo@#1@end\endcsname
+%  \@nameuse{LaTeXdemo@#1}^^A
+%}{^^A
+%  \LaTeXdemo@end
+%}
+%\newcommand*\LaTeXdemo@new[3]{^^A
+%  \expandafter\newcommand\expandafter*\expandafter
+%    {\csname LaTeXdemo@#1\endcsname}{#2}^^A
+%  \expandafter\newcommand\expandafter*\expandafter
+%    {\csname LaTeXdemo@#1@end\endcsname}{#3}^^A
+%}
+%\newcommand*\LaTeXdemo@common{^^A
+%  \setkeys{lst}{
+%    basicstyle   = \small\ttfamily,
+%    basewidth    = 0.51em,
+%    gobble       = 3,
+%    keywordstyle = \color{blue},
+%    language     = [LaTeX]{TeX},
+%    moretexcs    = {
+%      bibnote       ,
+%      bibnotemark   ,
+%      bibnotesetup  ,
+%      bibnotetext   ,
+%      printbibnotes
+%    }
+%  }^^A 
+%}
+%\newcommand*\LaTeXdemo@input{^^A
+%  \MakePercentComment
+%  \catcode`\^^M=10\relax
+%  \small
+%  \begingroup
+%    \setkeys{lst}{
+%      SelectCharTable=\lst@ReplaceInput{\^\^I}{\lst@ProcessTabulator}
+%    }^^A
+%    \leavevmode 
+%      \input{\jobname.tmp}^^A
+%  \endgroup
+%  \MakePercentIgnore
+%}
+%\LaTeXdemo@new{code and example}{^^A
+%  \setbox\LaTeXdemo@box=\hbox\bgroup
+%    \lst@BeginAlsoWriteFile{\jobname.tmp}^^A
+%    \LaTeXdemo@common
+%}{^^A
+%    \lst@EndWriteFile
+%  \egroup
+%  \begin{center}
+%    \ifdim\wd\LaTeXdemo@box>0.48\linewidth\relax
+%      \hbox to\linewidth{\box\LaTeXdemo@box\hss}^^A
+%        \begin{minipage}{\linewidth}
+%          \LaTeXdemo@input
+%        \end{minipage}
+%    \else
+%      \begin{minipage}{0.48\linewidth}
+%        \LaTeXdemo@input
+%      \end{minipage}
+%      \hfill
+%      \begin{minipage}{0.48\linewidth}
+%        \hbox to\linewidth{\box\LaTeXdemo@box\hss}^^A
+%      \end{minipage}
+%    \fi
+%  \end{center}
+%}
+%\LaTeXdemo@new{code only}{^^A
+%  \LaTeXdemo@common
+%}{^^A
+%}
+%
+%\providecommand*\opt[1]{\texttt{#1}}
+%
+%\makeatother
+% 
+%\GetFileInfo{\jobname.sty} 
+% 
+%\changes{v1.0}{2007/08/30}{Initial public release}
+%\changes{V2.0}{2009/09/24}{Second version of package using \pkg{expl3}
+% internally}
+%
+%\title{^^A
+%  \pkg{notes2bib} --- Integrating notes into the bibliography^^A
+%    \thanks{^^A
+%      This file describes version \fileversion, last revised 
+%      \filedate.^^A
+%    }^^A
+%}
+%\author{^^A
+%  Joseph Wright\thanks{E-mail: joseph.wright@morningstar2.co.uk}^^A
+%}
+%\date{Released \filedate}
+%
+%\maketitle
+%
+%\begin{abstract}
+% The \pkg{notes2bib} package defines a new type of note, \cs{bibnote}, 
+% which will always be added to the bibliography. The package allows
+% footnotes and endnotes to be moved into the bibliography in the same
+% way.  The package can be used with \pkg{natbib} and \pkg{biblatex} as
+% well as plain \LaTeX\ citations. Both sorted and unsorted bibliography 
+% styles are supported.
+%\end{abstract}
+%
+%\tableofcontents
+%
+%\begin{documentation}
+%
+%\section{Introduction}
+%
+% In most subject areas, bibliographic citations and notes are
+% separate entities. However, in some parts of the physical sciences
+% (chemistry and physics) it is usual for references to the
+% literature and notes to be given together in a \enquote{References and
+% Notes} section.  By default, this requires that \BibTeX\ users
+% create a notes database for each document that they write. This is
+% also true if complex references are needed, which cannot be handled
+% automatically.
+% 
+% The aim of the \pkg{notes2bib} package is to make integration of notes
+% into the bibliography easy.  Notes can be written as normal in the
+% \LaTeX\ source, and are automatically moved to the bibliography. The 
+% package is compatible with sorted and unsorted bibliography styles. 
+% The package has been designed for use with numerical citations, 
+% although it will work with other systems.
+% 
+%\section{Installation}
+%
+% The package is supplied in \file{dtx} format and as a pre-extracted
+% zip file, \file{\jobname.tds.zip}. The later is most convenient for
+% most users: simply unzip this in your local texmf directory and
+% run \texttt{texhash} to update the database of file locations. If
+% you want to unpack the \file{dtx} yourself, running 
+% \texttt{tex \jobname.dtx} will extract the package whereas
+% \texttt{latex \jobname.dtx} will extract it and also typeset the
+% documentation.
+%
+% The package requires \LaTeX3 support as provided in the 
+% \pkg{expl3} and \pkg{xpackages} bundles. Both of these are available
+% on \href{http://www.ctan.org}{\textsc{ctan}} as ready-to-install
+% zip files. Suitable versions are available in MiK\TeX\ 2.8 and
+% \TeX\ Live 2009.  The package also uses the \eTeX\ extensions: these
+% are available on all modern \TeX\ systems.
+%
+%\section{Using the package}
+%
+% The package should be loaded as normal in the preamble. The package 
+% recognises a number of options, which can also be used in teh document
+% body. These are described later in this document.
+%\begin{LaTeXdemo}[code only]
+%  \usepackage[<options>]{notes2bib}
+%\end{LaTeXdemo}
+%
+%\DescribeMacro \bibnote
+%\begin{syntax}
+%  \cs{bibnote} \oarg{name} \marg{text}
+%\end{syntax}
+% The basic function provided by \pkg{notes2bib} is the \cs{bibnote}
+% macro. This is used in exactly the same way as footnotes, taking
+% a mandatory argument, the \meta{text} of the note, and an optional 
+% argument, a \meta{name} for the note. The \meta{text} will be saved to
+% a \BibTeX\ database file for later inclusion in the bibliography, and
+% a reference will be placed in the body text at the position of the 
+% note.
+%\begin{LaTeXdemo}
+%  A very simple example of a bibliography note
+%  \bibnote{Note for the first example}.
+%\end{LaTeXdemo}
+% When used without the optional \meta{name} argument, each note is 
+% given an automatically-generated name. If notes need to be referred to
+% again in a document, the optional argument avoids the need to 
+% understand the detail of the automated system.
+%\begin{LaTeXdemo}
+%  An example of a named note \bibnote[labelled]{Note for the second 
+%  example}. The text can then continue and reference the note again 
+%  later \bibnotemark[labelled].
+%\end{LaTeXdemo}
+%
+% Verbatim text cannot be added directly to notes (in the same way that
+% it cannot be used in footnotes). This means that the normal care
+% will be needed with verbatim-like material. 
+%\begin{LaTeXdemo}
+%  The next note contains some awkward text
+%  \bibnote{Some \texttt{\textbackslash verb}-like output}.
+%\end{LaTeXdemo}
+%
+%\DescribeMacro \bibnotemark
+%\begin{syntax}
+%  \cs{bibnotemark} \oarg{name} 
+%\end{syntax} 
+%\DescribeMacro \bibnotetext
+%\begin{syntax}
+%  \cs{bibnotetext} \oarg{name} \marg{text}
+%\end{syntax} 
+% In common with \cs{footnote}, the basic \cs{bibnote} macro has
+% companion macros \cs{bibnotemark} and \cs{bibnotetext}. In contrast
+% to the \LaTeXe\ kernel \cs{footnote} macro, \cs{bibnote} is naturally
+% robust and so \cs{bibnotemark} and \cs{bibnotetext} should be needed
+% much more rarely than the \cs{footnote} versions.
+% 
+% As with the related \cs{footnote} functions, \cs{bibnotemark} can be
+% used alone or will recognise an optional argument giving the 
+% \meta{name} of the note. \cs{bibnotetext} also recognises the same 
+% optional \meta{name} argument as well as the mandatory \meta{text}.
+%\begin{LaTeXdemo}
+%  A note without a name \bibnotemark\ can be given with some
+%  text \bibnotetext{Text for the fourth example}. Note can also be
+%  given names \bibnotemark[named], which are then used for the
+%  text\bibnotetext[named]{More text for the fourth example}.
+%\end{LaTeXdemo}
+%
+% The \cs{bibnotemark} macro can also be used to cross-reference notes
+% given earlier in the document. This method is preferred for 
+% referencing notes over using the \cs{cite} macro as 
+% \cs{bibnotemark} will cope correctly with out-of-order notes
+% (see Section~\ref{out-of-order}).
+%\begin{LaTeXdemo}
+%  See notes \bibnotemark[labelled] and \bibnotemark[named].
+%\end{LaTeXdemo}
+%
+%\DescribeMacro \printbibnotes
+%\begin{syntax}
+%  \cs{printbibnotes}
+%\end{syntax}
+% In most cases, there will be both notes and references in a document.
+% The notes will be printed along with cited literature in the 
+% bibliography, produced using the \cs{bibliography} macro (or
+% \cs{printbibliography} when using \pkg{biblatex}). However, it is 
+% possible to print only the notes in a document using the
+% \cs{printbibnotes} macro.
+% \bibliographystyle{unsrt}
+%\begin{LaTeXdemo}
+%  \printbibnotes
+%\end{LaTeXdemo}
+%
+%\DescribeMacro \bibnotesetup
+%\begin{syntax}
+%  \cs{bibnotesetup} \marg{key--value list}
+%\end{syntax}
+% The behaviour of \pkg{notes2bib} can be altered by setting one or
+% more package options. These are given as arguments to the 
+% \cs{bibnotesetup} function, which takes a \meta{key--value list} and
+% uses this to set up the package. With the exception of the
+% \opt{file-name} option, all of the settings can be altered in the
+% preamble or the document body. The various package options are
+% described below.
+%
+%\subsection{Auto-generated note names}
+%
+%\DescribeOption {note-name}
+% When no explicit label is given for a note, one is generated 
+% automatically by the package. This consists of two parts, a name and
+% a number. The text of the name can be set up using the 
+% \opt{note-name} option. This should not contain any spaces, as 
+% \BibTeX\ does not support records with spaces in names. The numerical
+% part of the label is always generated automatically, and is the
+% number of the note. The standard setting for \opt{note-name} is
+% \opt{Note}.
+%
+%\subsection{Underlying citation system}
+%
+%\DescribeOption {cite-function}
+% \pkg{notes2bib} works by making the text of notes into citations.
+% To do this, each note has to be \enquote{cited} in the appropriate
+% place. \pkg{notes2bib} does not carry out any low-level citation 
+% itself: instead, a general citation macro is called. The nature of
+% the function is set up using the \opt{cite-function} option,
+% which should be set to a citation macro taking one mandatory
+% argument. The initial setting is \opt{cite-function = \cs{cite}}.
+%
+%\subsection{Controlling the temporary database}
+% 
+%\DescribeOption {file-name}
+% The file name used for the database of notes is set using the
+% \opt{file-name} option. The standard setting is to call the file
+% |notes2bib-\jobname|, which may not be appropriate (for example, file
+% names containing spaces may be problematic). Setting the 
+% \opt{file-name} option will alter the name of the file, with the 
+% file extension fixed as \file{bib}. In contrast to the other package
+% options, this value can only be set in the preamble.
+% 
+%\DescribeOption {record-type} 
+% Each note is written to the database as a standard \BibTeX\ record.
+% The type of record created is set using the \opt{record-type}
+% option. Usually, this will be set to \opt{misc}, but some \BibTeX\
+% styles have dedicated support for notes and so recognise the record
+% type \opt{note} (or indeed some other value).
+% 
+%\DescribeOption {note-field} 
+% The database field used to store the text of the note is available
+% for change \emph{via} the \opt{note-field} option. The standard 
+% setting is \opt{note}.
+%
+%\DescribeOption {keyword-entry} 
+% Some styles (most notably \pkg{biblatex}) recognise keywords in 
+% \BibTeX\ records, stored in a \texttt{keywords} field. To allow the 
+% selective printing of notes, \pkg{notes2bib} includes a keyword in
+% each note record. The keyword is set using the \opt{keyword-entry}
+% option: the standard setting is \opt{note}.
+%
+%\subsection{Ordering notes in relation to citations}
+%\label{out-of-order}
+%
+%\DescribeOption {placement}
+% The standard method used by \pkg{notes2bib} places notes into the
+% bibliography with no particular control of the relative position of
+% notes with respect to citations. For unsorted bibliography styles, 
+% this will result in the notes appearing mixed in with citations.
+% However, \pkg{notes2bib} can create notes so that they appear before
+% or after citations, with both sorted an unsorted bibliography styles.
+% This is controlled by the \opt{placement} option, which recognises
+% the values \opt{before}, \opt{after} and \opt{mixed}. Setting
+% \opt{placement = before} places notes before citations, with
+% the \opt{after} setting forcing notes to appear after citation.
+% The standard setting is \opt{placement = mixed}, which will result
+% in mixing of notes and citations.
+% 
+% When notes are placed in the bibliography without any change of order,
+% it is possible to cross-reference to them using the standard \cs{cite}
+% macro. However, when notes are out of the normal order this can lead
+% to problems. These can be avoided by using the \cs{bibnotemark} macro
+% to cross-reference notes. As this method will always work correctly,
+% it is the recommended method for referencing notes under all 
+% circumstances.
+% 
+%\DescribeOption {presort-before} 
+%\DescribeOption {presort-mixed} 
+%\DescribeOption {presort-after} 
+%\DescribeOption {sort-key-before} 
+%\DescribeOption {sort-key-mixed} 
+%\DescribeOption {sort-key-after} 
+% There are a number of different mechanisms used by \pkg{notes2bib} to
+% achieve the desired ordering. Most standard \BibTeX\ styles recognise
+% a \texttt{key} field, which can be used to override sorting by author
+% or title. This is used by \pkg{notes2bib}, with the note name prefixed
+% by a string to force the sort order. The appropriate strings are 
+% stored using the options \opt{sort-key-before}, \opt{sort-key-mixed}
+% and \opt{sort-key-after}. These have standard settings
+% \opt{aaa}, \opt{\meta{blank}} and \opt{zzz}, respectively. When the 
+% \pkg{biblatex} package is in use, a more powerful method is available
+% to control sorting: the \texttt{presort} field. Data to be written
+% to this field is set up using the \opt{presort-before}, 
+% \opt{presort-mixed} and \opt{presort-after} options. Here, the 
+% standard values are \opt{ml}, \opt{mm} and \opt{mn}, respectively.
+% These standard values will probably be appropriate in almost all 
+% cases.
+% 
+%\subsection{Converting footnotes and endnotes}
+%
+%\DescribeOption {convert-endnotes}
+%\DescribeOption {convert-footnotes}
+% It is possible to convert both \cs{footnote} and \cs{endnote}
+% entries in a file into \cs{bibnote} entries in a flexible manner.
+% This behaviour is controlled using the \opt{convert-endnotes} and
+% \opt{convert-footnotes} options; both recognise the values
+% \opt{true} and \opt{false}. The original definitions for the
+% appropriate macros are stored by \pkg{notes2bib}, and so it is 
+% possible to switch this behaviour on and off.
+% 
+%\DescribeMacro \thanks 
+% The package is designed so that converting footnotes to bibliographic
+% notes will not affect the \cs{thanks} macro. Thus the option
+% \opt{convert-footnotes = true} can be given before \cs{maketitle}
+% with no implication for and \cs{thanks}.
+% 
+%\subsection{Using author--date bibliography styles}
+%
+%\DescribeOption {use-sort-key}
+% Author--date bibliography styles may not work well with the settings
+% of the package as supplied. Some of the data written by 
+% \pkg{notes2bib} can be misunderstood by styles such as 
+% \file{unsrtnat}. To surpress creating a \texttt{key} field in the
+% database, the option \opt{use-sort-key} should be set to \opt{false}
+% with these problematic styles. At the same time, it may be necessary
+% to alter the \opt{note-name} option to a blank value.
+%\begin{LaTeXdemo}[code only]
+%  \bibnotesetup{
+%    note-name    = ,
+%    use-sort-key = false
+%  }
+%\end{LaTeXdemo} 
+% 
+%\section{Data written to the file}
+% 
+% \pkg{notes2bib} writes some information to the \file{aux} file, so
+% that it is available between runs. The functions added to the 
+% file are not needed directly by the user, but are documented here
+% for completeness. However, it may be necessary to worry about the
+% \file{aux} file when splitting bibliographies.
+% 
+%\DescribeMacro \recordnotes
+% \begin{syntax}
+%   \cs{recordnotes}
+% \end{syntax}
+% When notes are placed out-of-order in in a document (using 
+% \opt{placement = before} or \opt{placement = after}) \pkg{notes2bib}
+% has to record information in the current \file{aux} file. When using
+% multiple bibliographies, this will not necessarily happen totally
+% automatically. To force \pkg{notes2bib} to write the current 
+% out-of-order notes to the \file{aux} file, the macro
+% \cs{recordnotes} is available. It should be used immediately
+% before changing between auxiliary files.
+% 
+%\DescribeMacro \TotalNotes
+%\begin{syntax}
+%  \cs{TotalNotes} \marg{number}
+%\end{syntax}
+% Records the total number of auto-numbered notes in a run. This 
+% information is needed to check if zero-filling is needed for the
+% numbers used.
+% 
+%\DescribeMacro \NotesAfterCitations
+% \begin{syntax}
+%   \cs{NotesAfterCitations} \marg{note-list}
+% \end{syntax}
+%\DescribeMacro \NotesBeforeCitations
+% \begin{syntax}
+%   \cs{NotesBeforeCitations} \marg{note-list}
+% \end{syntax}
+% These functions record the notes which have been placed outside of
+% the normal order by the package. This information is used to check
+% for changes in note order between \LaTeX\ runs, so that the need for
+% re-running \LaTeX\ and \BibTeX\ can be detected.
+% 
+%\section{Notes for upgrading from version one}
+%
+% Documents which compile with version one of \pkg{notes2bib} should
+% work equally well with version two. The package recognises the
+% older options and user functions (for example \cs{niibsetup}). These
+% are not documented here as all new documents should use the improved
+% structures provided here. As some auxiliary file functions have been
+% altered, it may be necessary to delete \file{aux} files for documents
+% processed initially with older versions of \pkg{notes2bib}. 
+%
+%\end{documentation}
+%
+%\begin{implementation}
+%
+%\section{Code documentation}
+%
+%\subsection{Variables and constants}
+%
+%\begin{variable}{\c_niib_file_message_tl}
+% Text written at the start of the auto-generated \file{bib} file:
+% can be altered for translations, \emph{etc}.
+%\end{variable}
+%
+%\begin{variable}{
+%  \g_niib_after_clist  |
+%  \g_niib_before_clist
+%}
+% Lists of notes which are out-of-order, either before or after
+% citations. 
+%\end{variable}
+%
+%\begin{variable}{
+%  \g_niib_all_after_clist  |
+%  \g_niib_all_before_clist
+%}
+% A second list is needed for out-of-order citations so that comparisons
+% work correctly even if some notes have been flushed.
+%\end{variable}
+%
+%\begin{variable}{\g_niib_document_hook_tl}
+% A token list hook added to the \cs{document} macro so that additional
+% tasks can be carried out with the \file{aux} file open but before the
+% document starts.
+%\end{variable}
+%
+%\begin{variable}{\g_niib_previous_notes_int}
+% The number of notes from the previous run is stored here. It is used
+% to check if padding is needed for note numbers when using 
+% auto-generated names.
+%\end{variable}
+%
+%\begin{variable}{\g_niib_file_stream}
+% The file stream used to manage the notes database.
+%\end{variable}
+%
+%\begin{variable}{\g_niib_note_int}
+% Auto-numbered notes use this value for the note number: it is not
+% implemented for notes with given names.
+%\end{variable}
+%
+%\begin{variable}{\l_niib_presort_tl}
+% The current value to be written to the \texttt{presort} field to
+% enable correct ordering of notes.
+%\end{variable}
+%
+%\begin{variable}{
+%  \g_niib_previous_after_clist  |
+%  \g_niib_previous_before_clist
+%}
+% Out-of-order notes from the previous run need to be recorded for 
+% comparison with those from the current run. This is used to flag up
+% the need to re-run compilation.
+%\end{variable}
+%
+%\begin{variable}{\g_niib_previous_notes_int}
+% The number of notes from the previous run is stored here. It is used
+% to check if padding is needed for note numbers when using 
+% auto-generated names.
+%\end{variable}
+%
+%\begin{variable}{\l_niib_sortkey_tl}
+% The current value to be written to the \texttt{key} or 
+% \texttt{sortkey} field as a prefix to the note name; used to ensure
+% correct ordering of notes.
+%\end{variable}
+%
+%\begin{variable}{\l_niib_sortkey_field_tl}
+% The name of the field for the sorting key varies: it can be 
+% \texttt{key} or \texttt{sortkey}. The appropriate setting is saved
+% here.
+%\end{variable}
+%
+%\begin{variable}{\g_niib_total_notes_int}
+% Every note adds one to the count here: needed to check if any notes
+% are present in the document.
+%\end{variable}
+%
+%\subsection{Storage for options}
+%
+%\begin{function}{\niib_cite:w}
+% \begin{syntax}
+%   "\niib_cite:w" \marg{note-name}
+% \end{syntax}
+% The function used by \pkg{notes2bib} to store the citation command
+% needed to cite notes. This will be a \LaTeXe\ user function, and so
+% the input syntax will require one mandatory argument.
+%\end{function}
+%
+%\begin{variable}{\g_niib_filename_tl}
+% The name of the file used for the auto-generated database.
+%\end{variable}
+%
+%\begin{variable}{\l_niib_keyword_tl}
+% The keyword used to indicate records which are notes.
+%\end{variable}
+%
+%\begin{variable}{\l_niib_note_field_tl}
+% The field in the database to use for note text.
+%\end{variable}
+%
+%\begin{variable}{\l_niib_note_name_tl}
+% The prefix used when making note names automatically: will always
+% be followed by number.
+%\end{variable}
+%
+%\begin{variable}{
+%  \l_niib_presort_after_tl  |
+%  \l_niib_presort_before_tl |
+%  \l_niib_presort_mixed_tl  |
+%}
+% Sorting string to be written to the \texttt{presort} field, for notes
+% after, before and mixed with citations.
+%\end{variable}
+%
+%\begin{variable}{\l_niib_record_type_tl}
+% The database record type for notes.
+%\end{variable}
+%
+%\begin{variable}{
+%  \l_niib_sortkey_after_tl  |
+%  \l_niib_sortkey_before_tl |
+%  \l_niib_sortkey_mixed_tl  |
+%}
+% Sorting string to be written to the \texttt{key} or \texttt{sortkey} 
+% field, for notes after, before and mixed with citations.
+%\end{variable}
+%
+%\begin{variable}{\l_niib_write_sortkey_bool}
+% Flag to indicate whether \texttt{key} (or \texttt{sortkey}) field
+% should be written to database.
+%\end{variable}
+%
+%\subsection{Internal functions}
+%
+%\begin{function}{\niib_attach_bibliography:}
+% \begin{syntax}
+%   "\niib_attach_bibliography:"
+% \end{syntax}
+% Carries out task of ensuring that note database will be included in
+% those scanned for entries by \BibTeX\ (or \pkg{biber}).
+%\end{function}
+%
+%\begin{function}{\niib_aux_hook:}
+% \begin{syntax}
+%   "\niib_aux_hook:" 
+% \end{syntax}
+% Hook for sorting out file switch when \pkg{cite} package is loaded
+% (uses \cs{@restore@auxhandle}).
+%\end{function}
+%
+%\begin{function}{\niib_bibliography:n}
+% \begin{syntax}
+%   "\niib_bibliography:n" \marg{databases}
+% \end{syntax}
+% Saved copy of \cs{bibliography} macro as defined before 
+% \pkg{notes2bib} was loaded.
+%\end{function}
+%
+%\begin{function}{
+%  \niib_bibnote:nn |
+%  \niib_bibnote:xn
+%}
+% \begin{syntax}
+%   "\niib_bibnote:nn" \marg{note-name} \marg{text}
+% \end{syntax}
+% Creates a bibliography note called <note-name> and printing
+% <text>.
+%\end{function}
+%
+%\begin{function}{\niib_check_cite:}
+% \begin{syntax}
+%   "\niib_check_cite:" 
+% \end{syntax}
+% Checks and makes changes appropriate if the \pkg{cite} package is
+% loaded.
+%\end{function}
+%
+%\begin{function}{\niib_check_rerun:}
+% \begin{syntax}
+%   "\niib_check_rerun:" 
+% \end{syntax}
+% Checks if additional \LaTeX\ runs are required.
+%\end{function}
+%
+%\begin{function}{\niib_create_print_notes:}
+% \begin{syntax}
+%   "\niib_create_print_notes:"
+% \end{syntax}
+% Creates the appropriate \cs{niib_print_notes:} function at the 
+% start of the document.
+%\end{function}
+%
+%\begin{function}{
+%  \niib_endnote:w     |
+%  \niib_endnotemark:w |
+%  \niib_endnotetext:w 
+%}
+% \begin{syntax}
+%   "\niib_endnote:w" 
+% \end{syntax}
+% Saved definitions for endnote functions, as available before
+% \pkg{notes2bib} is loaded.
+%\end{function}
+%
+%\begin{function}{\niib_filesw:}
+% \begin{syntax}
+%   "\niib_filesw:"
+% \end{syntax}
+% A copy of \LaTeXe's \cs{if@filesw}.
+%\end{function}
+%
+%\begin{function}{ \niib_flush_after_notes: }
+% \begin{syntax}
+%   "\niib_record_notes:"
+% \end{syntax}
+% Clears stack of notes to appear after citations by marking them in
+% the text and writing details to the \file{aux} file.
+%\end{function}
+%
+%\begin{function}{
+%  \niib_footnote:w     |
+%  \niib_footnotemark:w |
+%  \niib_footnotetext:w 
+%}
+% \begin{syntax}
+%   "\niib_footnote:w" 
+% \end{syntax}
+% Saved definitions for footnote functions, as available before
+% \pkg{notes2bib} is loaded.
+%\end{function}
+%
+%\begin{function}{
+%  \niib_mark_note:n |
+%  \niib_mark_note:x 
+%}
+% \begin{syntax}
+%   "\niib_mark_note:n" \marg{note-name}
+% \end{syntax}
+% Marks the position of <note-name> in the text.
+%\end{function}
+%
+%\begin{function}{
+%  \niib_mark_note_after:n  |
+%  \niib_mark_note_before:n |
+%  \niib_mark_note_mixed:n  |
+%}
+% \begin{syntax}
+%   "\niib_mark_note_after:n" \marg{note-name}
+% \end{syntax}
+% Marks the position of <note-name> in the text, with appropriate 
+% control of note positioning in bibliography.
+%\end{function}
+%
+%\begin{function}{\niib_note_name:}
+% \begin{syntax}
+%   "\niib_note_name:"
+% \end{syntax}
+% Prints the name of a note using the current automatic note number
+% and prefix text.
+%\end{function}
+%
+%\begin{function}{\niib_print_notes:}
+% \begin{syntax}
+%   "\niib_print_notes:"
+% \end{syntax}
+% Prints all bibliography notes currently defined.
+%\end{function}
+%
+%\begin{function}{
+%  \niib_save_endnote:  |
+%  \niib_save_footnote:
+%}  
+% \begin{syntax}
+%   "\niib_save_endnote:"
+% \end{syntax}
+% Saves current definitions for endnote and footnote functions for 
+% later recovery.
+%\end{function}
+%
+%\begin{function}{\niib_set_cite_after:}
+% \begin{syntax}
+%   "\niib_set_cite_after:" 
+% \end{syntax}
+% Sets up function for including notes after citations, appropriate to 
+% the other packages loaded.
+%\end{function}
+%
+%\begin{function}{\niib_set_sortkey_name:}
+% \begin{syntax}
+%   "\niib_set_sortkey_name:" 
+% \end{syntax}
+% Sets up name for sort key, appropriate to the other packages loaded.
+%\end{function}
+%
+%\begin{function}{\niib_stream_check:}
+% \begin{syntax}
+%   "\niib_stream_check:"
+% \end{syntax}
+% Checks that a stream is open to write notes into: one is opened if
+% not. 
+%\end{function}
+%
+%\begin{function}{
+%  \niib_to_bibnote:n |
+%  \niib_from_bibnote:n 
+%}
+% \begin{syntax}
+%   "\niib_to_bibnote:n" \marg{note-type}
+% \end{syntax}
+% Convert notes of <note-type> to and from bibliography notes.
+%\end{function}
+%
+%\begin{function}{
+%  \niib_write_field:nn |
+%  \niib_write_field:Vn
+%}
+% \begin{syntax}
+%   "\niib_write_field:nn" \marg{field} \marg{text}
+% \end{syntax}
+% Sets up formatting to write <text> to database <field>.
+%\end{function}
+%
+%\begin{function}{
+%  \niib_write_note:nn |
+%  \niib_write_note:xn
+%}
+% \begin{syntax}
+%   "\niib_write_note:nn" \marg{note-name} \marg{text}
+% \end{syntax}
+% Writes <text> of <note-name> to database.
+%\end{function}
+%
+%\begin{function}{\niib_write_total_notes:}
+% \begin{syntax}
+%   "\niib_write_total_notes:"
+% \end{syntax}
+% Records total number of auto-numbered notes to the \texttt{aux} file.
+%\end{function}
+%
+%\section{Implementation}
+%
+%    \begin{macrocode}
+%<*package>
+%    \end{macrocode}
+%
+% Version data to start with.
+%    \begin{macrocode}
+\ProvidesExplPackage
+  {notes2bib} {2009/09/28} {2.0}
+  {Integrating notes into the bibliography}
+\RequirePackage{l3keys2e}
+%    \end{macrocode} 
+%    
+%\subsection{Variables and constants}
+%
+%\begin{macro}{\c_niib_file_message_tl}
+% A short piece of text that is added to the top of an auto-generated
+% file. Setting this up as a constant means that it can be changed
+% (for example for translation) if necessary.
+%    \begin{macrocode}
+\tl_new:Nn \c_niib_file_message_tl {
+  This~is~an~auxiliary~file~used~by~the~`notes2bib'~package.
+    \iow_newline:
+  This~file~may~safely~be~deleted.
+    \iow_newline:
+  It~will~be~recreated~as~required.
+    \iow_newline:
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\g_niib_after_clist}
+%\begin{macro}{\g_niib_before_clist}
+% Notes to be placed either before or after citations need to be tracked
+% by the module. Simple comma lists will achieve this.
+%    \begin{macrocode}
+\clist_new:N \g_niib_after_clist
+\clist_new:N \g_niib_before_clist
+%    \end{macrocode}
+%\end{macro}
+%\end{macro}
+%
+%\begin{macro}{\g_niib_all_after_clist}
+%\begin{macro}{\g_niib_all_before_clist}
+% As notes after citations can be flushed, there is a need for a second
+% list which is never emptied.
+%    \begin{macrocode}
+\clist_new:N \g_niib_all_after_clist
+\clist_new:N \g_niib_all_before_clist
+%    \end{macrocode}
+%\end{macro}
+%\end{macro}
+%
+%\begin{macro}{\g_niib_note_int}
+% A counter for the automatically-created notes is needed. This is a
+% global value (life will get very complicated if not).
+%    \begin{macrocode}
+\int_new:N \g_niib_note_int
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\l_niib_presort_tl}
+%\begin{macro}{\l_niib_sortkey_tl}
+% The text used for sorting citations is stored here: it is never set
+% directly, as it depends on the type of sorting taking place.
+%    \begin{macrocode}
+\tl_new:N \l_niib_presort_tl
+\tl_new:N \l_niib_sortkey_tl
+%    \end{macrocode}
+%\end{macro}
+%\end{macro}
+%
+%\begin{macro}{\g_niib_previous_after_clist}
+%\begin{macro}{\g_niib_previous_before_clist}
+% For comparison purposes, the lists of out-of-order notes from the
+% previous \LaTeX\ run are needed.
+%    \begin{macrocode}
+\clist_new:N \g_niib_previous_after_clist
+\clist_new:N \g_niib_previous_before_clist
+%    \end{macrocode}
+%\end{macro}
+%\end{macro}
+%
+%\begin{macro}{\g_niib_previous_notes_int}
+% The total number of notes created is needed, as this is used to see
+% if any zero-padding is required for the numbers. Of course, for this
+% to work there has to be a second \LaTeX\ run.
+%    \begin{macrocode}
+\int_new:N \g_niib_previous_notes_int
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\l_niib_sortkey_field_tl}
+% The key for sorting is called \texttt{key} by standard \BibTeX\ and
+% \texttt{sortkey} by \pkg{biblatex}. It keeps everything clearer if
+% the appropriate name is stored in a token list. The value itself is
+% set up later.
+%    \begin{macrocode}
+\tl_new:N \l_niib_sortkey_field_tl
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\g_niib_total_notes_int}
+% Tracks the total number of notes created, so that the module can tell
+% if any have been used.
+%    \begin{macrocode}
+\int_new:N \g_niib_total_notes_int
+%    \end{macrocode}
+%\end{macro}
+%
+%\subsection{Control options}
+%
+%\begin{macro}{\niib_cite:w}
+% The underlying function for citation starts off with no value:
+% this is then set up by the key--value settings given next.
+%    \begin{macrocode}
+\cs_new_nopar:Nn \niib_cite:w { }
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\g_niib_filename_tl}
+%\begin{macro}{\l_niib_keyword_tl}
+%\begin{macro}{\l_niib_note_field_tl}
+%\begin{macro}{\l_niib_note_name_tl}
+%\begin{macro}{\l_niib_presort_after_tl}
+%\begin{macro}{\l_niib_presort_before_tl}
+%\begin{macro}{\l_niib_presort_mixed_tl}
+%\begin{macro}{\l_niib_record_type_tl}
+%\begin{macro}{\l_niib_sortkey_after_tl}
+%\begin{macro}{\l_niib_sortkey_before_tl}
+%\begin{macro}{\l_niib_sortkey_mixed_tl}
+%\begin{macro}{\l_niib_write_sortkey_bool}
+% The various package options are created.
+%    \begin{macrocode}
+\keys_define:nn { notes2bib } {
+  cite-function     .code:n      = {
+    \AtBeginDocument { \cs_set_eq:NN \niib_cite:w #1 }
+  } ,
+  file-name         .tl_gset_x:N = \g_niib_filename_tl       ,
+  convert-endnotes  .choice:                                 ,
+  convert-endnotes / false .code:n = {
+    \AtBeginDocument { \niib_from_bibnote:n { endnote } }
+  },
+  convert-endnotes / true .code:n  = { 
+    \AtBeginDocument { \niib_to_bibnote:n { endnote } }
+  },
+  convert-footnotes .choice:                                 ,
+  convert-footnotes / false .code:n = {
+    \AtBeginDocument { \niib_from_bibnote:n { footnote } }
+  },
+  convert-footnotes / true .code:n = {
+    \AtBeginDocument { \niib_to_bibnote:n { footnote } }
+  },
+  keyword-entry     .tl_set:N    = \l_niib_keyword_tl        ,
+  note-field        .tl_set:N    = \l_niib_note_field_tl     ,
+  note-name         .tl_set:N    = \l_niib_note_name_tl      ,
+  placement         .choice:                                 ,
+  placement / after .code:n      = {
+    \cs_set_eq:NN \niib_mark_note:n \niib_mark_note_after:n
+    \tl_set_eq:NN \l_niib_presort_tl \l_niib_presort_after_tl
+    \tl_set_eq:NN \l_niib_sortkey_tl \l_niib_sortkey_after_tl
+  } ,
+  placement / before .code:n     = {
+    \cs_set_eq:NN \niib_mark_note:n \niib_mark_note_before:n
+    \tl_set_eq:NN \l_niib_presort_tl \l_niib_presort_before_tl
+    \tl_set_eq:NN \l_niib_sortkey_tl \l_niib_sortkey_before_tl
+  },
+  placement / mixed .code:n      = {
+    \cs_set_eq:NN \niib_mark_note:n \niib_mark_note_mixed:n
+    \tl_set_eq:NN \l_niib_presort_tl \l_niib_presort_mixed_tl
+    \tl_set_eq:NN \l_niib_sortkey_tl \l_niib_sortkey_mixed_tl
+  },
+  presort-after     .tl_set:N    = \l_niib_presort_after_tl  ,
+  presort-before    .tl_set:N    = \l_niib_presort_before_tl ,
+  presort-mixed     .tl_set:N    = \l_niib_presort_mixed_tl  ,
+  record-type       .tl_set:N    = \l_niib_record_type_tl    ,
+  sort-key-after    .tl_set:N    = \l_niib_sortkey_before_tl ,
+  sort-key-before   .tl_set:N    = \l_niib_sortkey_after_tl  ,
+  sort-key-mixed    .tl_set:N    = \l_niib_sortkey_mixed_tl  ,
+  use-sort-key      .bool_set:N  = \l_niib_write_sortkey_bool,
+}
+%    \end{macrocode}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%
+% Default values for the keys are set up. Many of these probably never
+% change, but done in this way the package is much more flexible.
+%    \begin{macrocode}
+\keys_set:nn { notes2bib } {
+  cite-function   = \cite              ,
+  file-name       = notes2bib-\jobname ,
+  keyword-entry   = note               ,
+  note-field      = note               ,
+  note-name       = Note               ,
+  presort-after   = mn                 ,
+  presort-before  = ml                 ,
+  presort-mixed   = mm                 ,
+  record-type     = misc               ,
+  sort-key-after  = zzz                ,
+  sort-key-before = aaa                ,
+  use-sort-key    = true               
+}
+%    \end{macrocode}
+%    
+% A few options need to be altered or deactivated at the start of
+% the document.
+%    \begin{macrocode}
+\cs_set_nopar:Nn \niib_options_redefine: {
+  \keys_define:nn { notes2bib } {
+    cite-function     .code:n      = {
+      \cs_set_eq:NN \niib_cite:w ##1 
+    } ,
+    file-name .code:n = { 
+      \msg_info:nnn { notes2bib } { preamble-only } { file-name }
+    } ,
+    convert-endnotes / false .code:n = {
+      \niib_from_bibnote:n { endnote } 
+    },
+    convert-endnotes / true .code:n  = { 
+      \niib_to_bibnote:n { endnote }
+    },
+    convert-footnotes / false .code:n = {
+      \niib_from_bibnote:n { footnote }
+    },
+    convert-footnotes / true .code:n = {
+      \niib_to_bibnote:n { footnote }
+    },
+  }
+}
+\msg_new:nnn { notes2bib } { preamble-only } {%
+  The option `#1' can only be used in the preamble.%
+}
+\AtBeginDocument { \niib_options_redefine: }
+%    \end{macrocode}
+%    
+%\subsection{Options from version one}
+%
+% The new option names are preferred, but the old ones still need to 
+% work correctly.
+%    \begin{macrocode}
+\keys_define:nn { notes2bib } {
+  cite        .meta:x = { cite-function     = \exp_not:c {#1} } ,
+  debug       .code:n = { }                                     ,
+  endnotes    .meta:n = { convert-footnotes = #1 }              ,
+  etex        .code:n = { }                                     ,
+  field       .meta:n = { note-field        = #1 }              ,
+  footnotes   .meta:n = { convert-footnotes = #1 }              ,
+  head        .meta:n = { placement         = before }          ,
+  keyhead     .meta:n = { sort-key-before   = #1 }              ,
+  keytail     .meta:n = { sort-key-after    = #1 }              ,
+  keynone     .meta:n = { sort-key-mixed    = #1 }              ,
+  keyword     .meta:n = { keyword-entry     = #1 }              ,
+  log         .meta:n = { }                                     ,
+  name        .meta:n = { note-name         = #1 }              ,
+  prefix      .meta:n = { file-name         = #1 \jobname }     ,
+  presorthead .meta:n = { presort-before    = #1 }              ,
+  presorttail .meta:n = { presort-after     = #1 }              ,
+  presortnone .meta:n = { presort-mixed     = #1 }              ,
+  record      .meta:n = { record-type       = #1 }              ,
+  sort        .choice:                                          ,
+  sort / head .meta:n = { placement         = before }          ,
+  sort / none .meta:n = { placement         = after }           ,
+  sort / tail .meta:n = { placement         = mixed }           ,
+  tail        .meta:n = { placement         = after }           ,
+  writekey    .meta:n = { use-sort-key      = #1 }
+}
+%    \end{macrocode}
+%    
+%\subsection{Utility functions}
+%    
+%\begin{macro}{\niib_note_name:}
+% When note citations are generated automatically, the text to indicate
+% a note plus the number of the current note needs to be turned into
+% something printable. The value tests here mean that if there are more
+% than nine notes, notes 1--9 have the number padded to get proper 
+% sorting. This needs two passes, as the total number of notes is only
+% available at the end of the \LaTeX\ run.
+%    \begin{macrocode}
+\cs_new_nopar:Nn \niib_note_name: {
+  \tl_use:N \l_niib_note_name_tl
+  \intexpr_compare:nT { \g_niib_previous_notes_int > \c_nine } {
+    \intexpr_compare:nT { \g_niib_note_int < \c_ten } {
+      0
+    }
+  }
+  \int_to_arabic:n { \g_niib_note_int }
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\niib_filesw:}
+% Making sorting work means messing about with \cs{if@filesw}. The 
+% function created here is used to store the current status of the
+% flag.
+%    \begin{macrocode}
+\cs_new_nopar:Nn \niib_filesw: { }
+%    \end{macrocode}
+%\end{macro}
+%
+%\subsection{Marking notes in the text}
+%
+%\begin{macro}{\niib_mark_note:n}
+%\begin{macro}{\niib_mark_note:x}
+% The function to mark note positions is initially declared with no
+% expansion. The real meaning will be set by the key--value setting, 
+% and depends on the placement of notes compared with real citations.
+%    \begin{macrocode}
+\cs_new:Nn \niib_mark_note:n { }
+\cs_generate_variant:Nn \niib_mark_note:n { x }
+%    \end{macrocode}
+%\end{macro}
+%\end{macro}
+%
+%\begin{macro}{\niib_mark_note_after:n}
+%\begin{macro}[aux]{\niib_mark_note_after_aux:n}
+% For notes which come after citations, the entry is recorded and an
+% auxiliary is called. The nature of the second function is dependent
+% on the other packages loaded.
+%    \begin{macrocode}
+\cs_new:Nn \niib_mark_note_after:n {
+  \int_gincr:N \g_niib_total_notes_int
+  \clist_gput_right:Nx \g_niib_after_clist {#1}
+  \niib_mark_note_after_aux:n {#1}
+}
+\cs_new:Nn \niib_mark_note_after_aux:n { }
+%    \end{macrocode}
+%\end{macro}
+%\end{macro}
+%
+%\begin{macro}{\niib_mark_note_before:n}
+% Notes to appear before all citations are simple recorded, as they will
+% be set up on the next \LaTeX\ run.
+%    \begin{macrocode}
+\cs_new:Nn \niib_mark_note_before:n {
+  \int_gincr:N \g_niib_total_notes_int
+  \clist_gput_right:Nx \g_niib_before_clist {#1}
+  \niib_cite:w {#1}
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\niib_mark_note_mixed:n}
+% Mixed citations are very easy to handle: just use whatever cite
+% command is current.
+%    \begin{macrocode}
+\cs_new:Nn \niib_mark_note_mixed:n {
+  \int_gincr:N \g_niib_total_notes_int
+  \niib_cite:w {#1}
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\subsection{Writing note text to the database}
+%
+%\begin{macro}{\niib_stream_check:}
+%\begin{macro}{\g_niib_file_stream}
+% All notes are written to a temporary file. This is only opened if
+% necessary, as this means that \pkg{notes2bib} can be loaded 
+% \enquote{silently} in classes, \emph{etc}. The file name
+% is variable, but the extension is always \file{.bib}. 
+%    \begin{macrocode}
+\cs_new_nopar:Nn \niib_stream_check: {
+  \cs_if_free:NT \g_niib_file_stream {
+    \iow_new:N \g_niib_file_stream
+    \iow_open:Nn \g_niib_file_stream { \g_niib_filename_tl .bib }
+    \iow_now:Nx \g_niib_file_stream { \c_niib_file_message_tl }
+  }
+}
+%    \end{macrocode}
+%\end{macro}
+%\end{macro}
+%    
+%\begin{macro}{\niib_write_field:nn}
+%\begin{macro}{\niib_write_field:Vn}
+% To keep the auto-generated database readable, there needs to be some
+% formatting. This is provided by using a dedicated function to 
+% write the various fields to it. Although the \texttt{V} variant is
+% not technically needed (writing expands everything), it helps to keep
+% the intention of the code here clearer.
+%    \begin{macrocode}
+\cs_new:Nn \niib_write_field:nn {
+  \iow_space: \iow_space: #1 \iow_space: = \iow_space: {#2} , 
+  \iow_newline:
+}
+\cs_generate_variant:Nn \niib_write_field:nn { V }
+%    \end{macrocode}
+%\end{macro}
+%\end{macro}
+%    
+%\begin{macro}{\niib_write_note:nn}
+%\begin{macro}[aux]{\niib_write_note_aux:nn}
+%\begin{macro}{\niib_write_note:xn}
+% The writing function takes two arguments: the name of the note, and
+% the text itself. There is a need to check on the \LaTeXe\ system to
+% turn off writing, with a hand-over so there is no problem with 
+% balancing ifs.
+%    \begin{macrocode}
+\cs_new_nopar:Npn \niib_write_note:nn {
+  \if@filesw
+    \exp_after:wN \niib_write_note_aux:nn
+  \fi:
+}
+\cs_new:Nn \niib_write_note_aux:nn {
+  \niib_stream_check:
+  \iow_now:Nx \g_niib_file_stream {
+    @ \l_niib_record_type_tl {
+      #1 , \iow_newline:
+      \niib_write_field:Vn \l_niib_note_field_tl { \exp_not:n {#2} }
+      \bool_if:NT \l_niib_write_sortkey_bool {
+        \niib_write_field:Vn \l_niib_sortkey_field_tl  
+          { \l_niib_sortkey_tl #1 }
+      }
+      \niib_write_field:nn { keywords } { \l_niib_keyword_tl }
+      \niib_write_field:nn { presort } { \l_niib_presort_tl }
+    }
+  }
+}
+\cs_generate_variant:Nn \niib_write_note:nn { x }
+%    \end{macrocode}
+%\end{macro}    
+%\end{macro}
+%\end{macro} 
+%
+%\subsection{Handling out of order notes}
+%
+%\begin{macro}{\niib_record_notes:}
+%\begin{macro}[aux]{\niib_flush_notes_aux:}
+% Notes after citations are not written to the \file{aux} file when 
+% given, but are held in a queue. This is flushed here, which means
+% actually doing the citation and also recording the notes so they
+% are available in the next \LaTeX\ run. The list is also transferred
+% to a secondary one, which is used for comparison purposes right at the
+% end of the document.
+%    \begin{macrocode}
+\cs_new_nopar:Nn \niib_record_notes: {
+  \if@filesw
+    \exp_after:wN \niib_flush_notes_aux:
+  \fi
+}
+\cs_new_nopar:Nn \niib_flush_notes_aux: {
+  \clist_if_empty:NF \g_niib_before_clist {
+    \iow_now:Nx \@auxout {
+      \NotesBeforeCitations { \exp_not:V \g_niib_before_clist }
+    }
+    \clist_gput_right:NV \g_niib_all_before_clist \g_niib_before_clist
+    \clist_gclear:N \g_niib_before_clist
+  }
+  \clist_if_empty:NF \g_niib_after_clist {
+    \iow_now:Nx \@auxout {
+      \NotesAfterCitations { \exp_not:V \g_niib_after_clist }
+    }
+    \exp_args:NV \nocite \g_niib_after_clist
+    \clist_gput_right:NV \g_niib_all_after_clist \g_niib_after_clist
+    \clist_gclear:N \g_niib_after_clist
+  }
+}
+%    \end{macrocode}
+%\end{macro}
+%\end{macro}
+%
+%\subsection{Interchanging note types}
+%
+%\begin{macro}{\niib_to_bibnote:n}
+% Converting other notes to bibliography notes is simple: just set
+% them equal.
+%    \begin{macrocode}
+\cs_new_nopar:Nn \niib_to_bibnote:n {
+  \cs_set_eq:cN {#1}        \bibnote
+  \cs_set_eq:cN { #1 mark } \bibnotemark
+  \cs_set_eq:cN { #1 text } \bibnotetext
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\niib_from_bibnote:n}
+% The reverse process needs the original definitions, which are saved
+% by the module for later recovery.
+%    \begin{macrocode}
+\cs_new_nopar:Nn \niib_from_bibnote:n {
+  \cs_set_eq:cc {#1}        { niib_ #1 :w }
+  \cs_set_eq:cc { #1 mark } { niib_ #1 mark:w }
+  \cs_set_eq:cc { #1 text } { niib_ #1 text:w }
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\niib_save_endnote:}
+%\begin{macro}{\niib_endnote:w}
+%\begin{macro}{\niib_endnotemark:w}
+%\begin{macro}{\niib_endnotetext:w}
+%\begin{macro}{\niib_save_footnote:}
+%\begin{macro}{\niib_footnote:w}
+%\begin{macro}{\niib_footnotemark:w}
+%\begin{macro}{\niib_footnotetext:w}
+% At the start of the document, the definitions for endnotes and 
+% footnotes are saved so that footnotes and endnotes can be turned into
+% bibliography notes and back again.
+%    \begin{macrocode}
+\cs_new_nopar:Nn \niib_save_endnote: {
+  \cs_set_eq:NN \niib_endnote:w     \endnote     
+  \cs_set_eq:NN \niib_endnotemark:w \endnotemark 
+  \cs_set_eq:NN \niib_endnotetext:w \endnotetext
+}
+\cs_new_nopar:Nn \niib_save_footnote: {
+  \cs_set_eq:NN \niib_footnote:w     \footnote     
+  \cs_set_eq:NN \niib_footnotemark:w \footnotemark 
+  \cs_set_eq:NN \niib_footnotetext:w \footnotetext
+}
+\AtBeginDocument {
+  \niib_save_endnote:
+  \niib_save_footnote:
+}
+%    \end{macrocode}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%
+%\subsection{Package-dependent code}
+%
+%\begin{macro}{\niib_create_print_notes:}
+%\begin{macro}[aux]{\niib_create_print_notes_aux:}
+%\begin{macro}{\niib_print_notes:}
+% The method for printing notes depends on whether \pkg{biblatex} is
+% in use. If it is, then a selective call to \cs{printbibliography} is
+% made. Otherwise, the original \cs{bibliography} function is called,
+% and passed the name of the notes file.
+%    \begin{macrocode}
+\cs_new_nopar:Nn \niib_create_print_notes: {
+  \@ifpackageloaded { biblatex } {
+    \cs_new_nopar:Nn \niib_print_notes: {
+      \cs_set:Nx \niib_create_print_notes_aux: {
+        \printbibliography [ keyword = \exp_not:V \l_niib_keyword_tl ] 
+      }
+      \niib_create_print_notes_aux:
+    }
+  }{
+    \cs_new_nopar:Nn \niib_print_notes: {
+      \exp_args:NV \niib_bibliography:n \g_niib_filename_tl
+    }
+  }
+}
+\cs_new:Nn \niib_create_print_notes_aux: { }
+\AtBeginDocument { \niib_create_print_notes: }
+%    \end{macrocode}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%
+%\begin{macro}{\niib_attach_bibliography:}
+%\begin{macro}{\bibliography}
+%\begin{macro}{\niib_bibliography:n}
+% Getting the database created here to be scanned by \BibTeX\ is
+% dependant on whether \pkg{biblatex} is being used. If it is, and it is
+% already loaded, then the data can be added now. On the other hand, if
+% it is not already loaded a check is made at the end of the preamble.
+% The \cs{bibliography} function has to be patched if \pkg{biblatex} is
+% not in use.
+%    \begin{macrocode}
+\cs_new_nopar:Nn \niib_attach_bibliography: {
+  \@ifpackageloaded { biblatex } {
+    \exp_args:NV \bibliography \g_niib_filename_tl
+  }{
+    \cs_new_eq:NN \niib_bibliography:n \bibliography
+    \RenewDocumentCommand \bibliography { m } {
+      \intexpr_compare:nTF { \g_niib_total_notes_int = \c_zero } {
+        \niib_bibliography:n {##1}
+      }{
+        \cs_set_nopar:Nx \niib_attach_bibliography: {
+          \exp_not:N \niib_bibliography:n { 
+            \exp_not:n {##1} , \exp_not:V \g_niib_filename_tl
+          }
+        }
+        \niib_attach_bibliography:
+      }
+    }
+  }
+}
+\@ifpackageloaded { biblatex } {
+  \exp_args:NV \bibliography \g_niib_filename_tl
+  \cs_gundefine:N \niib_attach_bibliography:
+}{
+  \AtBeginDocument { \niib_attach_bibliography: }
+}
+%    \end{macrocode}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%
+%\begin{macro}{\niib_set_sortkey_name:}
+% \pkg{biblatex} uses the name \texttt{sortkey} for a key to sort by,
+% whereas other style call the same concept \texttt{key}.
+%    \begin{macrocode}
+\cs_new_nopar:Nn \niib_set_sortkey_name: {
+  \@ifpackageloaded { biblatex } {
+    \tl_set:Nn \l_niib_sortkey_field_tl { sortkey }
+  }{
+    \tl_set:Nn \l_niib_sortkey_field_tl { key }
+  }
+  \cs_gundefine:N \niib_set_sortkey_name:
+}
+\AtBeginDocument { \niib_set_sortkey_name: }
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\niib_set_mark_note_after:}
+% To get the correct ordering for notes, writing to the \file{aux} file
+% needs to be turned on and off. With \pkg{biblatex}, there is a 
+% convenient hook for this. Otherwise, everything has to happen after
+% the citation command.
+%    \begin{macrocode}
+\cs_new_nopar:Nn \niib_set_mark_note_after: {
+  \@ifpackageloaded { biblatex } {
+    \cs_set:Nn \niib_mark_note_after_aux:n {
+      \AtNextCite { \@fileswfalse }
+      \niib_cite:w {##1}
+    }
+  }{
+    \cs_set:Nn \niib_mark_note_after_aux:n {
+      \cs_set_eq:NN \niib_filesw: \if@filesw
+      \@fileswfalse
+      \niib_cite:w {##1}
+      \cs_set_eq:NN \if@filesw \niib_filesw:
+    }    
+  }
+}
+\AtBeginDocument { \niib_set_mark_note_after: }
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\niib_check_cite:}
+%\begin{macro}{\niib_aux_hook:}
+% If the \pkg{cite} package is loaded, then there is a hook to
+% reset the \file{aux} file after the citation. This means that moving
+% punctuation will still work under these circumstances.  However, the
+% way \pkg{cite} sets things up is a little complicated. The link needs
+% to be made at the end of the \cs{document} macro.
+%    \begin{macrocode}
+\cs_new_nopar:Nn \niib_check_cite: {
+  \@ifpackageloaded { cite } {
+    \cs_set:Nn \niib_mark_note_after_aux:n {
+      \cs_set_eq:NN \niib_filesw: \if@filesw
+      \@fileswfalse
+      \cs_set_nopar:Nn \niib_aux_hook: {
+        \cs_set_eq:NN \if@filesw \niib_filesw:
+        \cs_set_nopar:Nn \niib_aux_hook: { }
+      }
+      \niib_cite:w {##1}
+    }
+    \cs_new_nopar:Nn \niib_aux_hook: { }
+    \tl_gput_right:Nn \g_niib_document_hook_tl {
+      \cs_if_exist:NF \@restore@auxhandle {
+        \tl_new:N \@restore@auxhandle
+      }
+      \tl_put_right:Nn \@restore@auxhandle { \niib_aux_hook: }
+    }
+  } { }
+}
+\AtBeginDocument { \niib_check_cite: }
+%    \end{macrocode}
+%\end{macro}
+%\end{macro}
+%
+%\subsection{User functions}
+%
+%\begin{macro}{\bibnote}
+%\begin{macro}{\niib_bibnote:nn}
+%\begin{macro}{\niib_bibnote:xn}
+% Creating a not from scratch is a multi-step operation. First, check
+% if a label was given by the user. If it was not, then one is created
+% by incrementing the automatic number and fully expanding 
+% \cs{niib_note_name:}. The second phase is to create the note. The text
+% is dealt with first as this leaves the note-marking code at the end
+% of the function (needed if punctuation is to be moved).
+%    \begin{macrocode}
+\NewDocumentCommand \bibnote { o +m } {
+  \IfNoValueTF {#1} {
+    \int_gincr:N \g_niib_note_int
+    \niib_bibnote:xn { \niib_note_name: } {#2}
+  }{
+    \niib_bibnote:nn {#1} {#2}
+  }
+}
+\cs_new:Nn \niib_bibnote:nn {
+  \niib_write_note:nn {#1} {#2}
+  \niib_mark_note:n {#1}
+}
+\cs_generate_variant:Nn \niib_bibnote:nn { x }
+%    \end{macrocode}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%
+%\begin{macro}{\bibnotemark}
+% Simply marking a note has similar requirements, but as there is only
+% a single internal function to call the code is less complex.
+%    \begin{macrocode}
+\NewDocumentCommand \bibnotemark { o } {
+  \IfNoValueTF {#1} {
+    \int_gincr:N \g_niib_note_int
+    \niib_mark_note:x { \niib_note_name: }
+  }{
+    \niib_mark_note:n {#1}
+  }
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\bibnotetext}
+% As text for a note uses the same number as the preceeding mark,
+% things are slightly less complex here. The basic \texttt{o} argument
+% type is used as this means that full expansion of the note name can
+% take place \enquote{early}.
+%    \begin{macrocode}
+\NewDocumentCommand \bibnotetext { o +m } {
+  \IfNoValueTF {#1} {
+    \niib_write_note:xn { \niib_note_name: } {#2}
+  }{
+    \niib_write_note:nn {#1} {#2}
+  }
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\recordnotes}
+% A direct call to the internal function: no arguments are needed.
+%    \begin{macrocode}
+\NewDocumentCommand \recordnotes { } {
+  \niib_record_notes:
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\bibnotesetup}
+% A user set up function.
+%    \begin{macrocode}
+\NewDocumentCommand \bibnotesetup { m } {
+  \keys_set:nn { notes2bib } {#1}
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\printbibnotes}
+% A direct translation for the internal function.
+%    \begin{macrocode}
+\NewDocumentCommand \printbibnotes { } {
+  \niib_print_notes:
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\citenote}
+%\changes{v2.0}{2009/09/25}{Depreciated in favour of \cs{bibnotemark}}
+%\begin{macro}{\flushnotestack}
+%\changes{v2.0}{2009/09/28}{Depreciated in favour of 
+%  \cs{recordnotes}}
+%\begin{macro}{\niibsetup}
+%\changes{v2.0}{2009/09/25}{Depreciated in favour of \cs{bibnotesetup}}
+% A few functions which are depreciated in version two.
+%    \begin{macrocode}
+\NewDocumentCommand \citenote { m } { 
+  \niib_mark_note:n {#1}
+}
+\cs_new_eq:NN \flushnotestack \recordnotes
+\cs_new_eq:NN \niibsetup      \bibnotesetup
+%    \end{macrocode}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%
+%\subsection{Auxiliary file functions}
+%
+% \pkg{notes2bib} needs to write information to the \file{aux} file
+% for carrying information between runs. Rather than give them cryptic
+% names, they have long design-level ones. They are also declared
+% as protected functions so that writing to the \file{aux} file is 
+% easier.
+%
+%\begin{macro}{\NotesAfterCitations}
+%\begin{macro}{\NotesBeforeCitations}
+% The functions to pass information on out-of-order notes from one
+% run to another both add the information to the appropriate lists.
+% For notes before citations, there is also a need to put the 
+% \cs{citation} calls into the \file{aux} file at the correct stage.
+%    \begin{macrocode}
+\NewDocumentCommand \NotesAfterCitations { m } {
+  \clist_gput_right:Nn \g_niib_previous_after_clist {#1}
+}
+\NewDocumentCommand \NotesBeforeCitations { m } {
+  \clist_gput_right:Nn \g_niib_previous_after_clist {#1}
+  \tl_gput_right:Nn \g_niib_document_hook_tl {
+    \nocite {#1}
+  }
+}
+%    \end{macrocode}
+%\end{macro}
+%\end{macro}
+% 
+%\begin{macro}{\TotalNotes}
+% This function allows the total number of bibliography notes to be
+% carried forward from one run to the next.
+%    \begin{macrocode}
+\NewDocumentCommand \TotalNotes { m } {
+  \int_gset:Nn \g_niib_previous_notes_int {#1}
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\subsection{Code at the start of the document}
+%
+%\begin{macro}{\g_niib_document_hook_tl}
+% \pkg{notes2bib} needs to be able to carry out a few tasks right at the
+% beginning of the document. To do that, a hook is added to the
+% \cs{document} macro, which can be treated as a token list variable
+% as it has no arguments.
+%    \begin{macrocode}
+\tl_gput_right:Nn \document { \g_niib_document_hook_tl }
+\tl_new:N \g_niib_document_hook_tl
+%    \end{macrocode}
+%\end{macro}
+%
+%\subsection{Code at end of the document}
+%
+% There are a few tasks which have to be carried out a the end of 
+% the \LaTeX\ run, so that data is available for the next run.
+% 
+% First, all of the notes need to be added to the auxiliary file.
+% This ensures that the comparisons made in the next step make sense.
+%    \begin{macrocode}
+\AtEndDocument { \niib_record_notes: }
+%    \end{macrocode}
+% 
+%\begin{macro}{\niib_check_rerun:}
+% The list of out-of-order notes from the current run needs to match
+% that from the previous run. If not, then there is a need to re-run
+% \LaTeX.
+%    \begin{macrocode}
+\cs_new_nopar:Nn \niib_check_rerun: {
+  \clist_if_eq:NNTF \g_niib_all_before_clist 
+    \g_niib_previous_before_clist {
+    \clist_if_eq:NNF \g_niib_all_after_clist 
+      \g_niib_previous_after_clist {
+      \msg_info:nn { notes2bib } { rerun }
+    }
+  }{
+    \msg_info:nn { notes2bib } { rerun }
+  }
+}
+\AtEndDocument {
+  \niib_check_rerun:
+}
+\msg_new:nnn { notes2bib } { rerun } {%
+  To get notes in the correct order, please run:\\%
+  1) LaTeX  \\%
+  2) BibTeX \\%
+  3) LaTeX
+}
+%    \end{macrocode}
+%\end{macro}
+% 
+%\begin{macro}{\niib_write_total_notes:}
+% The total number of bibliography notes from the current run is
+% recorded to the \file{aux} file. This will then be picked up in the
+%    \begin{macrocode}
+\cs_new_nopar:Nn \niib_write_total_notes: {
+  \intexpr_compare:nT { \g_niib_note_int > \c_zero } {
+    \iow_now:Nx \@auxout {
+      \TotalNotes { \int_to_arabic:n { \g_niib_note_int } }
+    }  
+  }
+}
+\AtEndDocument { \niib_write_total_notes: }
+%    \end{macrocode}
+%\end{macro} 
+%
+%\subsection{Tidying up}
+%
+%\begin{macro}{\thanks}
+% The \cs{thanks} macro has to be replaced by one that uses the original 
+% \cs{footnotemark} and \cs{footnotetext} under all circumstances. This
+% is the kernel definition modified: if an alternative version is in use
+% things may go wrong.
+%    \begin{macrocode}
+\cs_set:Npn \thanks #1 {
+  \niib_footnotemark:w
+  \protected@xdef \@thanks {
+    \@thanks
+    \protect \niib_footnotetext:w [ \the \c@footnote ] {#1}
+  }
+}
+%    \end{macrocode}
+%\end{macro}    
+%
+% The final job is to set note placement: this is done here as various
+% parts of the module need to be in place for this to work correctly.    
+%    \begin{macrocode}
+\keys_set:nn { notes2bib } { placement = mixed }
+%    \end{macrocode}
+%    
+% Any load time options are processed.    
+%    \begin{macrocode}
+\ProcessKeysOptions { notes2bib }
+%    \end{macrocode}
+%    
+%    \begin{macrocode}
+%</package>
+%    \end{macrocode}
+%
+%\end{implementation}
+%
+%\PrintChanges
+%\PrintIndex
