@@ -935,10 +935,13 @@ This work consists of the file  notes2bib.dtx
 %    \begin{macrocode}
 \tl_new:N \c_niib_file_message_tl
 \tl_set:Nn \c_niib_file_message_tl {
+  \iow_char:N \% ~
   This~is~an~auxiliary~file~used~by~the~'notes2bib'~package.
     \iow_newline:
+  \iow_char:N \% ~
   This~file~may~safely~be~deleted.
     \iow_newline:
+  \iow_char:N \% ~
   It~will~be~recreated~as~required.
     \iow_newline:
 }
