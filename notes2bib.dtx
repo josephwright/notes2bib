@@ -1458,13 +1458,13 @@ This work consists of the file  notes2bib.dtx
       \RenewDocumentCommand \bibliography { m } 
         {
           \intexpr_compare:nTF { \g_niib_total_notes_int = \c_zero } 
-            { \niib_bibliography:n {##1} }
+            { \niib_bibliography:n {#1} }
             {
               \cs_new_nopar:Npx \niib_attach_bibliography: 
                 {
                   \exp_not:N \niib_bibliography:n 
                     { 
-                      \exp_not:n {##1} , \exp_not:V \g_niib_filename_tl 
+                      \exp_not:n {#1} , \exp_not:V \g_niib_filename_tl 
                     }
                 }
               \niib_attach_bibliography:
