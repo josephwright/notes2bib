@@ -1124,6 +1124,22 @@ This work consists of the file  notes2bib.dtx
 % the document.
 %    \begin{macrocode}
 \AtBeginDocument {
+  \@ifpackageloaded { biblatex }
+    {
+      \@ifpackagelater { biblatex } { 2011/01/08 }
+        {
+          \keys_define:nn { notes2bib } 
+            { record-type = bibnote }
+          \DeclareBibliographyDriver { bibnote }
+            {
+              \usebibmacro { begentry }
+              \printfield  { note }
+              \usebibmacro { finentry }
+            }
+        }
+        { }
+    }
+    { }
   \keys_define:nn { notes2bib } 
     {
       cite-function     .code:n      = 
@@ -1452,7 +1468,11 @@ This work consists of the file  notes2bib.dtx
 %    \begin{macrocode}
 \cs_new_nopar:Npn \niib_attach_bibliography: {
   \@ifpackageloaded { biblatex } 
-    { \exp_args:NV \bibliography \g_niib_filename_tl }
+    {
+      \@ifpackagelater { biblatex } { 2011/01/08 }
+        { \exp_args:NNV \bibliography * \g_niib_filename_tl }
+        { \exp_args:NV \bibliography \g_niib_filename_tl }
+    }
     {
       \cs_new_eq:NN \niib_bibliography:n \bibliography
       \RenewDocumentCommand \bibliography { m } 
@@ -1474,7 +1494,9 @@ This work consists of the file  notes2bib.dtx
 }
 \@ifpackageloaded { biblatex } 
   {
-    \exp_args:NV \bibliography \g_niib_filename_tl
+    \@ifpackagelater { biblatex } { 2011/01/08 }
+      { \exp_args:NNV \bibliography * \g_niib_filename_tl }
+      { \exp_args:NV \bibliography \g_niib_filename_tl }
     \cs_gundefine:N \niib_attach_bibliography:
   }
   { \AtBeginDocument { \niib_attach_bibliography: } }
