@@ -323,6 +323,10 @@ This work consists of the file  notes2bib.dtx
 %  example}. The text can then continue and reference the note again 
 %  later \bibnotemark[labelled].
 %\end{LaTeXdemo}
+% Explicit note labels, used for cross-referencing, must be unique
+% within a document. This applies even when using \pkg{biblatex}'s
+% \texttt{refsection} system, as a single note database is used for the
+% entire document. 
 %
 % Verbatim text cannot be added directly to notes (in the same way that
 % it cannot be used in footnotes). This means that the normal care
