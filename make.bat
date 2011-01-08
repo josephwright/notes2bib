@@ -2,7 +2,7 @@
 
 setlocal
 
-set AUXFILES=aux bbl blg cmds dvi glo gls hd idx ilg ind ist log los out tmp toc
+set AUXFILES=aux bbl bcf blg cmds dvi glo gls hd idx ilg ind ist log los out tmp toc xml
 set CLEAN=bib bst cls eps gz ins cfg pdf sty tex txt zip
 set PACKAGE=notes2bib
 set PDF=%PACKAGE%

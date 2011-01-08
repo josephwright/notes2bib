@@ -57,6 +57,7 @@ UNPACK   = $(DTX)
 
 AUXFILES = \
 	aux  \
+	bcf  \
 	blg  \
 	cmds \
 	glo  \
@@ -68,7 +69,8 @@ AUXFILES = \
 	log  \
 	out  \
 	tmp  \
-	toc  
+	toc  \
+	xml
 		
 CLEAN = \
 	bbl \
