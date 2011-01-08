@@ -274,8 +274,8 @@ This work consists of the file  notes2bib.dtx
 % The package requires LaTeX3 support as provided in the 
 % \pkg{expl3} and \pkg{xpackages} bundles. Both of these are available
 % on \href{http://www.ctan.org}{\textsc{ctan}} as ready-to-install
-% zip files. Suitable versions are available in MiKTeX 2.8 and
-% TeX Live 2009 (updating the relevant packages online may be
+% zip files. Suitable versions are available in MiKTeX 2.9 and
+% TeX Live 2010 (updating the relevant packages online may be
 % necessary). LaTeX3, and so \pkg{notes2bib}, requires the e-TeX 
 % extensions: these are available on all modern \TeX\ systems.
 % 
@@ -323,10 +323,6 @@ This work consists of the file  notes2bib.dtx
 %  example}. The text can then continue and reference the note again 
 %  later \bibnotemark[labelled].
 %\end{LaTeXdemo}
-% Explicit note labels, used for cross-referencing, must be unique
-% within a document. This applies even when using \pkg{biblatex}'s
-% \texttt{refsection} system, as a single note database is used for the
-% entire document. 
 %
 % Verbatim text cannot be added directly to notes (in the same way that
 % it cannot be used in footnotes). This means that the normal care
@@ -408,6 +404,18 @@ This work consists of the file  notes2bib.dtx
 % part of the label is always generated automatically, and is the
 % number of the note. The standard setting for \opt{note-name} is
 % \opt{Note}.
+% 
+%\DescribeOption {refsection-name} 
+%\DescribeOption {refsection-separator} 
+% When using \pkg{biblatex}'s \texttt{refsection} system, additional
+% information is added to all labels from the second \texttt{refsection}
+% onward (\emph{i.e.}~to all except \texttt{refsection} 0). This
+% additional text is added before the note name, and always includes the
+% \texttt{refsection} number. The settings \opt{refsection-name} and
+% \opt{refsection-separator} determine the exact text added: 
+% \opt{refsection-name} comes before the \texttt{refsection} number and
+% has default \opt{Refsection}, while \opt{refsection-separator} comes
+% after it and has default value \opt{-}.
 %
 %\subsection{Underlying citation system}
 %
@@ -1041,6 +1049,9 @@ This work consists of the file  notes2bib.dtx
 %\begin{macro}{\l_niib_presort_before_tl}
 %\begin{macro}{\l_niib_presort_mixed_tl}
 %\begin{macro}{\l_niib_record_type_tl}
+%\begin{macro}{\l_niib_refsection_name_tl}
+%\begin{macro}{\l_niib_refsection_sep_tl}
+%\begin{macro}{\l_niib_record_type_tl}
 %\begin{macro}{\l_niib_sortkey_after_tl}
 %\begin{macro}{\l_niib_sortkey_before_tl}
 %\begin{macro}{\l_niib_sortkey_mixed_tl}
@@ -1050,49 +1061,60 @@ This work consists of the file  notes2bib.dtx
 \keys_define:nn { notes2bib } {
   cite-function     .code:n      = 
     { \AtBeginDocument { \cs_set_eq:NN \niib_cite:w #1 } }     ,
-  file-name         .tl_gset_x:N = \g_niib_filename_tl         ,
-  convert-endnotes  .choice:                                   ,
-  convert-endnotes / false .code:n = 
+  file-name            .tl_gset_x:N = \g_niib_filename_tl         ,
+  convert-endnotes     .choice:                                   ,
+  convert-endnotes 
+    / false .code:n = 
     { \AtBeginDocument { \niib_from_bibnote:n { endnote } } }  ,
-  convert-endnotes / true .code:n  = 
+  convert-endnotes 
+    / true .code:n  = 
     { \AtBeginDocument { \niib_to_bibnote:n { endnote } } }    ,
-  convert-footnotes .choice:                                   ,
-  convert-footnotes / false .code:n = 
+  convert-footnotes    .choice:                                   ,
+  convert-footnotes 
+    / false .code:n = 
     { \AtBeginDocument { \niib_from_bibnote:n { footnote } } } ,
-  convert-footnotes / true .code:n = 
+  convert-footnotes 
+    / true .code:n = 
     { \AtBeginDocument { \niib_to_bibnote:n { footnote } } }   ,
-  keyword-entry     .tl_set:N    = \l_niib_keyword_tl          ,
-  note-field        .tl_set:N    = \l_niib_note_field_tl       ,
-  note-name         .tl_set:N    = \l_niib_note_name_tl        ,
-  placement         .choice:                                   ,
-  placement / after .code:n      = 
+  keyword-entry        .tl_set:N    = \l_niib_keyword_tl          ,
+  note-field           .tl_set:N    = \l_niib_note_field_tl       ,
+  note-name            .tl_set:N    = \l_niib_note_name_tl        ,
+  placement            .choice:                                   ,
+  placement 
+    / after    .code:n      = 
     {
       \cs_set_eq:NN \niib_mark_note:n \niib_mark_note_after:n
       \tl_set_eq:NN \l_niib_presort_tl \l_niib_presort_after_tl
       \tl_set_eq:NN \l_niib_sortkey_tl \l_niib_sortkey_after_tl
     },
-  placement / before .code:n     = 
+  placement 
+    / before    .code:n     = 
     {
       \cs_set_eq:NN \niib_mark_note:n \niib_mark_note_before:n
       \tl_set_eq:NN \l_niib_presort_tl \l_niib_presort_before_tl
       \tl_set_eq:NN \l_niib_sortkey_tl \l_niib_sortkey_before_tl
     },
-  placement / mixed .code:n      = 
+  placement 
+    / mixed    .code:n      = 
     {
       \cs_set_eq:NN \niib_mark_note:n \niib_mark_note_mixed:n
       \tl_set_eq:NN \l_niib_presort_tl \l_niib_presort_mixed_tl
       \tl_set_eq:NN \l_niib_sortkey_tl \l_niib_sortkey_mixed_tl
     },
-  presort-after     .tl_set:N    = \l_niib_presort_after_tl    ,
-  presort-before    .tl_set:N    = \l_niib_presort_before_tl   ,
-  presort-mixed     .tl_set:N    = \l_niib_presort_mixed_tl    ,
-  record-type       .tl_set:N    = \l_niib_record_type_tl      ,
-  sort-key-after    .tl_set:N    = \l_niib_sortkey_before_tl   ,
-  sort-key-before   .tl_set:N    = \l_niib_sortkey_after_tl    ,
-  sort-key-mixed    .tl_set:N    = \l_niib_sortkey_mixed_tl    ,
-  use-sort-key      .bool_set:N  = \l_niib_write_sortkey_bool  ,
+  presort-after        .tl_set:N    = \l_niib_presort_after_tl    ,
+  presort-before       .tl_set:N    = \l_niib_presort_before_tl   ,
+  presort-mixed        .tl_set:N    = \l_niib_presort_mixed_tl    ,
+  record-type          .tl_set:N    = \l_niib_record_type_tl      ,
+  refsection-name      .tl_set:N    = \l_niib_refsection_name_tl  ,
+  refsection-separator .tl_set:N    = \l_niib_refsection_sep_tl   ,
+  sort-key-after       .tl_set:N    = \l_niib_sortkey_before_tl   ,
+  sort-key-before      .tl_set:N    = \l_niib_sortkey_after_tl    ,
+  sort-key-mixed       .tl_set:N    = \l_niib_sortkey_mixed_tl    ,
+  use-sort-key         .bool_set:N  = \l_niib_write_sortkey_bool  ,
 }
 %    \end{macrocode}
+%\end{macro}
+%\end{macro}
 %\end{macro}
 %\end{macro}
 %\end{macro}
@@ -1110,18 +1132,20 @@ This work consists of the file  notes2bib.dtx
 % change, but done in this way the package is much more flexible.
 %    \begin{macrocode}
 \keys_set:nn { notes2bib } {
-  cite-function   = \cite              ,
-  file-name       = notes2bib-\jobname ,
-  keyword-entry   = note               ,
-  note-field      = note               ,
-  note-name       = Note               ,
-  presort-after   = mn                 ,
-  presort-before  = ml                 ,
-  presort-mixed   = mm                 ,
-  record-type     = misc               ,
-  sort-key-after  = zzz                ,
-  sort-key-before = aaa                ,
-  use-sort-key    = true               
+  cite-function        = \cite              ,
+  file-name            = notes2bib-\jobname ,
+  keyword-entry        = note               ,
+  note-field           = note               ,
+  note-name            = Note               ,
+  presort-after        = mn                 ,
+  presort-before       = ml                 ,
+  presort-mixed        = mm                 ,
+  record-type          = misc               ,
+  refsection-name      = Refsection         ,
+  refsection-separator = -                  ,
+  sort-key-after       = zzz                ,
+  sort-key-before      = aaa                ,
+  use-sort-key         = true               
 }
 %    \end{macrocode}
 %    
@@ -1167,6 +1191,33 @@ This work consists of the file  notes2bib.dtx
   { The~option~'#1'~can~only~be~used~in~the~preamble. }
 %    \end{macrocode}
 %    
+%\subsection{Support for \pkg{biblatex} \texttt{refsection} system}
+%
+%\begin{macro}{\niib_insert_refsection:}
+%\changes{v2.0d}{2011/01/08}{Added support for refsections}
+% When using \pkg{biblatex}, it's possible that \texttt{refsection}s are
+% in use. If so, to ensure that labels are always unique the
+% \texttt{refsection} number is added to the label.
+%    \begin{macrocode}
+\cs_new_nopar:Npn \niib_insert_refsection: { }
+\AtBeginDocument {
+  \@ifpackageloaded { biblatex }
+    {
+      \cs_set_nopar:Npn \niib_insert_refsection:
+        {
+          \int_compare:nNnT { \value { refsection } } > { 0 }
+            { 
+              \tl_use:N \l_niib_refsection_name_tl
+              \arabic { refsection }
+              \tl_use:N \l_niib_refsection_sep_tl
+            }
+        }
+    }
+    { }
+}
+%    \end{macrocode}
+%\end{macro}
+%    
 %\subsection{Options from version one}
 %
 % The new option names are preferred, but the old ones still need to 
@@ -1211,6 +1262,7 @@ This work consists of the file  notes2bib.dtx
 % available at the end of the LaTeX run.
 %    \begin{macrocode}
 \cs_new_nopar:Npn \niib_note_name: {
+  \niib_insert_refsection:
   \tl_use:N \l_niib_note_name_tl
   \intexpr_compare:nT { \g_niib_previous_notes_int > \c_nine } 
     { \intexpr_compare:nT { \g_niib_note_int < \c_ten } { 0 } }
@@ -1602,7 +1654,7 @@ This work consists of the file  notes2bib.dtx
       \int_gincr:N \g_niib_note_int
       \niib_bibnote:xn { \niib_note_name: } {#2}
     }
-    { \niib_bibnote:nn {#1} {#2} }
+    { \niib_bibnote:xn { \niib_insert_refsection: #1 } {#2} }
 }
 \cs_new_protected:Npn \niib_bibnote:nn #1#2 {
   \niib_write_note:nn {#1} {#2}
@@ -1624,7 +1676,7 @@ This work consists of the file  notes2bib.dtx
       \int_gincr:N \g_niib_note_int
       \niib_mark_note:x { \niib_note_name: }
     }
-    { \niib_mark_note:n {#1} }
+    { \niib_mark_note:x { \niib_insert_refsection: #1 } }
 }
 %    \end{macrocode}
 %\end{macro}
@@ -1638,7 +1690,7 @@ This work consists of the file  notes2bib.dtx
 \NewDocumentCommand \bibnotetext { o +m } {
   \IfNoValueTF {#1} 
     { \niib_write_note:xn { \niib_note_name: } {#2} }
-    { \niib_write_note:nn {#1} {#2} }
+    { \niib_write_note:xn { \niib_insert_refsection: #1 } {#2} }
 }
 %    \end{macrocode}
 %\end{macro}
