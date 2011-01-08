@@ -430,9 +430,10 @@ This work consists of the file  notes2bib.dtx
 %\DescribeOption {record-type} 
 % Each note is written to the database as a standard \BibTeX\ record.
 % The type of record created is set using the \opt{record-type}
-% option. Usually, this will be set to \opt{misc}, but some \BibTeX\
-% styles have dedicated support for notes and so recognise the record
-% type \opt{note} (or indeed some other value).
+% option. Usually, this will be set to \opt{misc}; \pkg{biblatex} v1.1a
+% upwards provides the \opt{bibnote} record type, and this is used if
+% available. Some \BibTeX\ styles have dedicated support for notes: if
+% so, the appropriate value should be set for this option.
 % 
 %\DescribeOption {note-field} 
 % The database field used to store the text of the note is available
