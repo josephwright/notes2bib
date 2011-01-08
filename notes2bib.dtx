@@ -1440,9 +1440,9 @@ This work consists of the file  notes2bib.dtx
 %\end{macro}
 %\end{macro}
 %
+%\begin{macro}{\niib_attach_bibliography:}
 %\begin{macro}{\bibliography}
 %\begin{macro}{\niib_bibliography:n}
-%\begin{macro}{\niib_attach_bibliography:}
 % Getting the database created here to be scanned by \BibTeX\ is
 % dependant on whether \pkg{biblatex} is being used. If it is, and it is
 % already loaded, then the data can be added now. On the other hand, if
@@ -1450,7 +1450,7 @@ This work consists of the file  notes2bib.dtx
 % The \cs{bibliography} function has to be patched if \pkg{biblatex} is
 % not in use.
 %    \begin{macrocode}
-\AtBeginDocument {
+\cs_new_nopar:Npn \niib_attach_bibliography: {
   \@ifpackageloaded { biblatex } 
     { \exp_args:NV \bibliography \g_niib_filename_tl }
     {
@@ -1460,7 +1460,7 @@ This work consists of the file  notes2bib.dtx
           \intexpr_compare:nTF { \g_niib_total_notes_int = \c_zero } 
             { \niib_bibliography:n {##1} }
             {
-              \cs_new_nopar:Npx \niib_attach_bibliography: 
+              \cs_set_nopar:Npx \niib_attach_bibliography: 
                 {
                   \exp_not:N \niib_bibliography:n 
                     { 
@@ -1472,6 +1472,12 @@ This work consists of the file  notes2bib.dtx
         }
     }
 }
+\@ifpackageloaded { biblatex } 
+  {
+    \exp_args:NV \bibliography \g_niib_filename_tl
+    \cs_gundefine:N \niib_attach_bibliography:
+  }
+  { \AtBeginDocument { \niib_attach_bibliography: } }
 %    \end{macrocode}
 %\end{macro}
 %\end{macro}
