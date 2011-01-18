@@ -917,7 +917,7 @@ This work consists of the file  notes2bib.dtx
 % Version data to start with.
 %    \begin{macrocode}
 \ProvidesExplPackage
-  {notes2bib} {2011/01/08} {2.0d}
+  {notes2bib} {2011/01/18} {2.0e}
   {Integrating notes into the bibliography}
 \RequirePackage{l3keys2e}
 %    \end{macrocode} 
@@ -1152,6 +1152,7 @@ This work consists of the file  notes2bib.dtx
 %    
 %\changes{v2.0d}{2011/01/08}{Use new \cs{bibnote} record type with
 %  \pkg{biblatex} v1.1a or later}
+%\changes{v2.0e}{2011/01/18}{Add back references to bibnotes}
 % A few options need to be altered or deactivated at the start of
 % the document.
 %    \begin{macrocode}
@@ -1166,6 +1167,9 @@ This work consists of the file  notes2bib.dtx
             {
               \usebibmacro { begentry }
               \printfield  { note }
+              \setunit { \bibpagerefpunct }
+              \newblock
+              \usebibmacro { pageref }
               \usebibmacro { finentry }
             }
         }
