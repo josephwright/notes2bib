@@ -1540,7 +1540,11 @@ This work consists of the file  notes2bib.dtx
       \@ifpackagelater { biblatex } { 2011/01/08 }
         { 
           \@ifpackagelater { biblatex } { 2011/02/12 }
-            { \exp_args:NV \addglobalbib \g_niib_filename_tl }
+            { 
+              
+              \exp_args:No \addglobalbib 
+                { \g_niib_filename_tl .bib }
+            }
             { \exp_args:NNV \bibliography * \g_niib_filename_tl }
         }
         { \exp_args:NV \bibliography \g_niib_filename_tl }
