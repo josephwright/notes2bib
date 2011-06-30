@@ -600,297 +600,6 @@ This work consists of the file  notes2bib.dtx
 %
 %\begin{implementation}
 %
-%\section{Code documentation}
-%
-%\subsection{Variables and constants}
-%
-%\begin{variable}{\c_niib_file_message_tl}
-% Text written at the start of the auto-generated \file{bib} file:
-% can be altered for translations, \emph{etc}.
-%\end{variable}
-%
-%\begin{variable}{
-%  \g_niib_after_clist  |
-%  \g_niib_before_clist
-%}
-% Lists of notes which are out-of-order, either before or after
-% citations. 
-%\end{variable}
-%
-%\begin{variable}{
-%  \g_niib_all_after_clist  |
-%  \g_niib_all_before_clist
-%}
-% A second list is needed for out-of-order citations so that comparisons
-% work correctly even if some notes have been flushed.
-%\end{variable}
-%
-%\begin{variable}{\g_niib_document_hook_tl}
-% A token list hook added to the \cs{document} macro so that additional
-% tasks can be carried out with the \file{aux} file open but before the
-% document starts.
-%\end{variable}
-%
-%\begin{variable}{\g_niib_previous_notes_int}
-% The number of notes from the previous run is stored here. It is used
-% to check if padding is needed for note numbers when using 
-% auto-generated names.
-%\end{variable}
-%
-%\begin{variable}{\g_niib_file_stream}
-% The file stream used to manage the notes database.
-%\end{variable}
-%
-%\begin{variable}{\g_niib_note_int}
-% Auto-numbered notes use this value for the note number: it is not
-% implemented for notes with given names.
-%\end{variable}
-%
-%\begin{variable}{\l_niib_presort_tl}
-% The current value to be written to the \texttt{presort} field to
-% enable correct ordering of notes.
-%\end{variable}
-%
-%\begin{variable}{
-%  \g_niib_previous_after_clist  |
-%  \g_niib_previous_before_clist
-%}
-% Out-of-order notes from the previous run need to be recorded for 
-% comparison with those from the current run. This is used to flag up
-% the need to re-run compilation.
-%\end{variable}
-%
-%\begin{variable}{\g_niib_previous_notes_int}
-% The number of notes from the previous run is stored here. It is used
-% to check if padding is needed for note numbers when using 
-% auto-generated names.
-%\end{variable}
-%
-%\begin{variable}{\l_niib_sortkey_tl}
-% The current value to be written to the \texttt{key} or 
-% \texttt{sortkey} field as a prefix to the note name; used to ensure
-% correct ordering of notes.
-%\end{variable}
-%
-%\begin{variable}{\l_niib_sortkey_field_tl}
-% The name of the field for the sorting key varies: it can be 
-% \texttt{key} or \texttt{sortkey}. The appropriate setting is saved
-% here.
-%\end{variable}
-%
-%\begin{variable}{\g_niib_total_notes_int}
-% Every note adds one to the count here: needed to check if any notes
-% are present in the document.
-%\end{variable}
-%
-%\subsection{Storage for options}
-%
-%\begin{function}{\niib_cite:w}
-% \begin{syntax}
-%   "\niib_cite:w" \marg{note-name}
-% \end{syntax}
-% The function used by \pkg{notes2bib} to store the citation command
-% needed to cite notes. This will be a LaTeX2e user function, and so
-% the input syntax will require one mandatory argument.
-%\end{function}
-%
-%\begin{variable}{\g_niib_filename_tl}
-% The name of the file used for the auto-generated database.
-%\end{variable}
-%
-%\begin{variable}{\l_niib_keyword_tl}
-% The keyword used to indicate records which are notes.
-%\end{variable}
-%
-%\begin{variable}{\l_niib_note_field_tl}
-% The field in the database to use for note text.
-%\end{variable}
-%
-%\begin{variable}{\l_niib_note_name_tl}
-% The prefix used when making note names automatically: will always
-% be followed by number.
-%\end{variable}
-%
-%\begin{variable}{
-%  \l_niib_presort_after_tl  |
-%  \l_niib_presort_before_tl |
-%  \l_niib_presort_mixed_tl  |
-%}
-% Sorting string to be written to the \texttt{presort} field, for notes
-% after, before and mixed with citations.
-%\end{variable}
-%
-%\begin{variable}{\l_niib_record_type_tl}
-% The database record type for notes.
-%\end{variable}
-%
-%\begin{variable}{
-%  \l_niib_sortkey_after_tl  |
-%  \l_niib_sortkey_before_tl |
-%  \l_niib_sortkey_mixed_tl  |
-%}
-% Sorting string to be written to the \texttt{key} or \texttt{sortkey} 
-% field, for notes after, before and mixed with citations.
-%\end{variable}
-%
-%\begin{variable}{\l_niib_write_sortkey_bool}
-% Flag to indicate whether \texttt{key} (or \texttt{sortkey}) field
-% should be written to database.
-%\end{variable}
-%
-%\subsection{Internal functions}
-%
-%\begin{function}{\niib_attach_bibliography:}
-% \begin{syntax}
-%   "\niib_attach_bibliography:"
-% \end{syntax}
-% Carries out task of ensuring that note database will be included in
-% those scanned for entries by \BibTeX\ (or \pkg{biber}).
-%\end{function}
-%
-%\begin{function}{\niib_aux_hook:}
-% \begin{syntax}
-%   "\niib_aux_hook:" 
-% \end{syntax}
-% Hook for sorting out file switch when \pkg{cite} package is loaded
-% (uses \cs{@restore@auxhandle}).
-%\end{function}
-%
-%\begin{function}{\niib_bibliography:n}
-% \begin{syntax}
-%   "\niib_bibliography:n" \marg{databases}
-% \end{syntax}
-% Saved copy of \cs{bibliography} macro as defined before 
-% \pkg{notes2bib} was loaded.
-%\end{function}
-%
-%\begin{function}{
-%  \niib_bibnote:nn |
-%  \niib_bibnote:xn
-%}
-% \begin{syntax}
-%   "\niib_bibnote:nn" \marg{note-name} \marg{text}
-% \end{syntax}
-% Creates a bibliography note called <note-name> and printing
-% <text>.
-%\end{function}
-%
-%\begin{function}{\niib_create_print_notes:}
-% \begin{syntax}
-%   "\niib_create_print_notes:"
-% \end{syntax}
-% Creates the \cs{niib_print_notes:} function when using
-% \pkg{biblatex}.
-%\end{function}
-%
-%\begin{function}{
-%  \niib_endnote:w     |
-%  \niib_endnotemark:w |
-%  \niib_endnotetext:w 
-%}
-% \begin{syntax}
-%   "\niib_endnote:w" 
-% \end{syntax}
-% Saved definitions for endnote functions, as available before
-% \pkg{notes2bib} is loaded.
-%\end{function}
-%
-%\begin{function}{\niib_filesw:}
-% \begin{syntax}
-%   "\niib_filesw:"
-% \end{syntax}
-% A copy of LaTeXe's \cs{if@filesw}.
-%\end{function}
-%
-%\begin{function}{\niib_record_notes:}
-%\changes{v2.0b}{2010/01/09}{Documentation change from erroneous
-%  \cs{niib_flush_after_notes:}}
-% \begin{syntax}
-%   "\niib_record_notes:"
-% \end{syntax}
-% Clears stack of notes to appear after citations by marking them in
-% the text and writing details to the \file{aux} file.
-%\end{function}
-%
-%\begin{function}{
-%  \niib_footnote:w     |
-%  \niib_footnotemark:w |
-%  \niib_footnotetext:w 
-%}
-% \begin{syntax}
-%   "\niib_footnote:w" 
-% \end{syntax}
-% Saved definitions for footnote functions, as available before
-% \pkg{notes2bib} is loaded.
-%\end{function}
-%
-%\begin{function}{
-%  \niib_mark_note:n |
-%  \niib_mark_note:x 
-%}
-% \begin{syntax}
-%   "\niib_mark_note:n" \marg{note-name}
-% \end{syntax}
-% Marks the position of <note-name> in the text.
-%\end{function}
-%
-%\begin{function}{
-%  \niib_mark_note_after:n  |
-%  \niib_mark_note_before:n |
-%  \niib_mark_note_mixed:n  |
-%}
-% \begin{syntax}
-%   "\niib_mark_note_after:n" \marg{note-name}
-% \end{syntax}
-% Marks the position of <note-name> in the text, with appropriate 
-% control of note positioning in bibliography.
-%\end{function}
-%
-%\begin{function}{\niib_note_name:}
-% \begin{syntax}
-%   "\niib_note_name:"
-% \end{syntax}
-% Prints the name of a note using the current automatic note number
-% and prefix text.
-%\end{function}
-%
-%\begin{function}{\niib_print_notes:}
-% \begin{syntax}
-%   "\niib_print_notes:"
-% \end{syntax}
-% Prints all bibliography notes currently defined.
-%\end{function}
-%
-%\begin{function}{
-%  \niib_to_bibnote:n   |
-%  \niib_from_bibnote:n 
-%}
-% \begin{syntax}
-%   "\niib_to_bibnote:n" \marg{note-type}
-% \end{syntax}
-% Convert notes of <note-type> to and from bibliography notes.
-%\end{function}
-%
-%\begin{function}{
-%  \niib_write_field:nn |
-%  \niib_write_field:Vn
-%}
-% \begin{syntax}
-%   "\niib_write_field:nn" \marg{field} \marg{text}
-% \end{syntax}
-% Sets up formatting to write <text> to database <field>.
-%\end{function}
-%
-%\begin{function}{
-%  \niib_write_note:nn |
-%  \niib_write_note:xn
-%}
-% \begin{syntax}
-%   "\niib_write_note:nn" \marg{note-name} \marg{text}
-% \end{syntax}
-% Writes <text> of <note-name> to database.
-%\end{function}
-%
 %\section{Implementation}
 %
 %\changes{v2.0a}{2009/11/01}{Changed all \cs{cs_set:Nn}, \emph{etc}.\
@@ -909,6 +618,8 @@ This work consists of the file  notes2bib.dtx
 %\changes{v2.0c}{2010/03/30}{Make internal functions protected}
 %\changes{v2.0c}{2010/03/30}{Change token registers to token list
 %  variables}
+%\changes{v2.0g}{2011/06/30}{Switch from \cs{intexpr_\ldots} to 
+%  \cs{int_\ldots} functions}
 %
 %    \begin{macrocode}
 %<*package>
@@ -1269,8 +980,8 @@ This work consists of the file  notes2bib.dtx
 \cs_new_nopar:Npn \niib_note_name: {
   \niib_insert_refsection:
   \tl_use:N \l_niib_note_name_tl
-  \intexpr_compare:nT { \g_niib_previous_notes_int > \c_nine } 
-    { \intexpr_compare:nT { \g_niib_note_int < \c_ten } { 0 } }
+  \int_compare:nNnT \g_niib_previous_notes_int > \c_nine
+    { \int_compare:nNnT \g_niib_note_int < \c_ten { 0 } }
   \int_to_arabic:n { \g_niib_note_int }
 }
 %    \end{macrocode}
@@ -1553,7 +1264,7 @@ This work consists of the file  notes2bib.dtx
       \cs_new_eq:NN \niib_bibliography:n \bibliography
       \RenewDocumentCommand \bibliography { m } 
         {
-          \intexpr_compare:nTF { \g_niib_total_notes_int = \c_zero } 
+          \int_compare:nNnTF \g_niib_total_notes_int = \c_zero
             { \niib_bibliography:n {##1} }
             {
               \cs_set_nopar:Npx \niib_attach_bibliography: 
@@ -1871,7 +1582,7 @@ This work consists of the file  notes2bib.dtx
 % recorded to the \file{aux} file. This will then be picked up in the
 %    \begin{macrocode}
 \AtEndDocument {
-  \intexpr_compare:nT { \g_niib_note_int > \c_zero } 
+  \int_compare:nNnT \g_niib_note_int > \c_zero
     {
       \iow_now:Nx \@auxout 
         { \TotalNotes { \int_to_arabic:n { \g_niib_note_int } } }
