@@ -100,8 +100,8 @@ PDFSETTINGS = \
 	echo "Typesetting $$NAME" ; \
 	pdflatex -draftmode -interaction=nonstopmode "$(PDFSETTINGS) \input $<" &> /dev/null ; \
 	if [ $$? = 0 ] ; then  \
-	  makeindex -s gind.ist -o $$NAME.ind $$NAME.idx &> /dev/null ; \
-	  makeindex -s gglo.ist -o $$NAME.gls $$NAME.glo &> /dev/null ; \
+	  makeindex -q -s gind.ist -o $$NAME.ind $$NAME.idx &> /dev/null ; \
+	  makeindex -q -s gglo.ist -o $$NAME.gls $$NAME.glo &> /dev/null ; \
 	  bibtex8 --wolfgang $$NAME &> /dev/null ; \
 	  pdflatex -interaction=nonstopmode "$(PDFSETTINGS) \input $<" &> /dev/null ; \
 	  pdflatex -interaction=nonstopmode "$(PDFSETTINGS) \input $<" &> /dev/null ; \
