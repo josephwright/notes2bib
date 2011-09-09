@@ -1282,9 +1282,16 @@ This work consists of the file  notes2bib.dtx
 \@ifpackageloaded { biblatex } 
   {
     \@ifpackagelater { biblatex } { 2011/01/08 }
-      { \exp_args:NNV \bibliography * \g_niib_filename_tl }
+      { 
+        \@ifpackagelater { biblatex } { 2011/02/12 }
+          { 
+            
+            \exp_args:No \addglobalbib 
+              { \g_niib_filename_tl .bib }
+          }
+          { \exp_args:NNV \bibliography * \g_niib_filename_tl }
+      }
       { \exp_args:NV \bibliography \g_niib_filename_tl }
-    \cs_undefine:N \niib_attach_bibliography:
   }
   { \AtBeginDocument { \niib_attach_bibliography: } }
 %    \end{macrocode}
