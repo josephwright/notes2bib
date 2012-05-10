@@ -1547,11 +1547,9 @@ This work consists of the file  notes2bib.dtx
 % LaTeX.
 %    \begin{macrocode}
 \AtEndDocument {
-  \clist_if_eq:NNTF \g_niib_all_before_clist 
-    \g_niib_previous_before_clist 
+  \tl_if_eq:NNTF \g_niib_all_before_clist \g_niib_previous_before_clist 
     {
-      \clist_if_eq:NNF \g_niib_all_after_clist 
-        \g_niib_previous_after_clist 
+      \tl_if_eq:NNF \g_niib_all_after_clist \g_niib_previous_after_clist 
         { \msg_info:nn { notes2bib } { rerun } }
     }
     { \msg_info:nn { notes2bib } { rerun } }
