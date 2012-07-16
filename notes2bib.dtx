@@ -628,7 +628,7 @@ This work consists of the file  notes2bib.dtx
 % Version data to start with.
 %    \begin{macrocode}
 \ProvidesExplPackage
-  {notes2bib} {2011/09/09} {2.0h}
+  {notes2bib} {2012/07/16} {2.0i}
   {Integrating notes into the bibliography}
 \RequirePackage{l3keys2e}
 %    \end{macrocode} 
@@ -1563,7 +1563,8 @@ This work consists of the file  notes2bib.dtx
 %    \end{macrocode}
 %  
 %\begin{macro}{\niib_write_note_file:}  
-%\begin{macro}{\g_niib_file_stream} 
+%\begin{macro}{\g_niib_file_iow} 
+%  \changes{v2.0i}{2012/07/16}{Define stream in all cases}
 % The notes themselves are now written in one block: this avoids 
 % using up a stream for any longer than necessary.   
 %    \begin{macrocode}
@@ -1574,13 +1575,14 @@ This work consists of the file  notes2bib.dtx
 }
 \cs_new_protected_nopar:Npn \niib_write_note_file: {
   \tl_if_empty:NF \g_niib_notes_tl {
-    \iow_open:Nn \g_niib_file_stream { \g_niib_filename_tl .bib }
-    \iow_now:Nx \g_niib_file_stream { \c_niib_file_message_tl }
-    \iow_now:Nx \g_niib_file_stream 
+    \iow_open:Nn \g_niib_file_iow { \g_niib_filename_tl .bib }
+    \iow_now:Nx \g_niib_file_iow { \c_niib_file_message_tl }
+    \iow_now:Nx \g_niib_file_iow 
       { \exp_not:V \g_niib_notes_tl }
-    \iow_close:N \g_niib_file_stream  
+    \iow_close:N \g_niib_file_iow  
   }
 }
+\iow_new:N \g_niib_file_iow
 %    \end{macrocode}
 %\end{macro}
 %\end{macro}
