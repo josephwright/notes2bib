@@ -1,5 +1,5 @@
-notes2bib --- Integrating notes into the bibliography
-=====================================================
+notes2bib - Integrating notes into the bibliography
+===================================================
 
 The `notes2bib` package defines a new type of note, bibnote,
 which will always be added to the bibliography. The package
