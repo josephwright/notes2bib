@@ -941,7 +941,8 @@ This work consists of the file  notes2bib.dtx
 % work correctly.
 %    \begin{macrocode}
 \keys_define:nn { notes2bib } {
-  cite        .meta:x = { cite-function     = \exp_not:c {#1} } ,
+  cite        .code:n =
+    { \use:x { \keys_set:nn { cite-function = \exp_not:c {#1} } } } ,
   debug       .code:n = { }                                     ,
   endnotes    .meta:n = { convert-footnotes = #1 }              ,
   etex        .code:n = { }                                     ,
