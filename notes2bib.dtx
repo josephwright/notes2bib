@@ -594,29 +594,9 @@ This work consists of the file  notes2bib.dtx
 %
 %\end{documentation}
 %
-%\begin{implementation}
+% \begin{implementation}
 %
-%\section{Implementation}
-%
-%\changes{v2.0a}{2009/11/01}{Changed all \cs{cs_set:Nn}, \emph{etc}.\
-%  to \cs{cs_set:Npn}, \emph{etc}.\ to match \pkg{expl3} changes}
-%\changes{v2.0b}{2010/01/09}{A few missed \cs{cs_set:Nn}, \cs{cs_set:Nx}, 
-%  \emph{etc}.\ changed}
-%\changes{v2.0b}{2010/01/09}{Reformatted code to reflect style settled
-%  on by LaTeX3 Project}
-%\changes{v2.0c}{2010/02/09}{Switch from \cs{iow_space:} to
-%  \cs{c_space_tl}}
-%\changes{v2.0c}{2010/02/09}{Collect all notes into a token register
-%  and write in one go to file (using a pooled stream)}
-%\changes{v2.0c}{2010/02/09}{Items \cs{AtBeginDocument} and
-%  \cs{AtEndDocument} now set up directly (no functions needed) 
-%  unless the function is required for other reasons}
-%\changes{v2.0c}{2010/03/30}{Make internal functions protected}
-%\changes{v2.0c}{2010/03/30}{Change token registers to token list
-%  variables}
-%\changes{v2.0g}{2011/06/30}{Switch from \cs{intexpr_\ldots} to 
-%  \cs{int_\ldots} functions}
-%\changes{v2.0j}{2012/11/07}{Change internal prefix}
+% \section{Implementation}
 %
 %    \begin{macrocode}
 %<*package>
@@ -634,7 +614,7 @@ This work consists of the file  notes2bib.dtx
 \RequirePackage{l3keys2e}
 %    \end{macrocode} 
 %    
-%\subsection{Variables and constants}
+% \subsection{Variables and constants}
 %
 % \begin{macro}{\c_@@_file_message_tl}
 %   A short piece of text that is added to the top of an auto-generated
@@ -748,19 +728,19 @@ This work consists of the file  notes2bib.dtx
 % \begin{macro}{\g_@@_filename_tl}
 % \begin{macro}
 %   {
-%     \l_@@_keyword_tl,
-%     \l_@@_note_field_tl,
-%     \l_@@_note_name_tl,
-%     \l_@@_presort_after_tl,
-%     \l_@@_presort_before_tl,
-%     \l_@@_presort_mixed_tl,
-%     \l_@@_record_type_tl,
+%     \l_@@_keyword_tl        ,
+%     \l_@@_note_field_tl     ,
+%     \l_@@_note_name_tl      ,
+%     \l_@@_presort_after_tl  ,
+%     \l_@@_presort_before_tl ,
+%     \l_@@_presort_mixed_tl  ,
+%     \l_@@_record_type_tl    ,
 %     \l_@@_refsection_name_tl,
-%     \l_@@_refsection_sep_tl,
-%     \l_@@_record_type_tl,
-%     \l_@@_sortkey_after_tl,
-%     \l_@@_sortkey_before_tl,
-%     \l_@@_sortkey_mixed_tl,
+%     \l_@@_refsection_sep_tl ,
+%     \l_@@_record_type_tl    ,
+%     \l_@@_sortkey_after_tl  ,
+%     \l_@@_sortkey_before_tl ,
+%     \l_@@_sortkey_mixed_tl  ,
 %     \l_@@_write_sortkey_bool
 %  }
 %   The various package options are created.
@@ -844,9 +824,6 @@ This work consists of the file  notes2bib.dtx
 }
 %    \end{macrocode}
 %    
-% \changes{v2.0d}{2011/01/08}{Use new \cs{bibnote} record type with
-%   \pkg{biblatex} v1.1a or later}
-% \changes{v2.0e}{2011/01/18}{Add back references to bibnotes}
 % A few options need to be altered or deactivated at the start of
 % the document.
 %    \begin{macrocode}
@@ -893,10 +870,9 @@ This work consists of the file  notes2bib.dtx
 % \subsection{Support for \pkg{biblatex} \texttt{refsection} system}
 %
 % \begin{macro}{\@@_insert_refsection:}
-%   \changes{v2.0d}{2011/01/08}{Added support for refsections}
 %   When using \pkg{biblatex}, it's possible that \texttt{refsection}s are
 %   in use. If so, to ensure that labels are always unique the
-% \texttt{refsection} number is added to the label.
+%   \texttt{refsection} number is added to the label.
 %    \begin{macrocode}
 \cs_new_nopar:Npn \@@_insert_refsection: { }
 \AtBeginDocument {
@@ -919,7 +895,6 @@ This work consists of the file  notes2bib.dtx
 %    
 % \subsection{Options from version one}
 %
-% \changes{v2.0k}{2013/07/11}{Drop use of \texttt{.meta:x} key property}
 % The new option names are preferred, but the old ones still need to 
 % work correctly.
 %    \begin{macrocode}
@@ -1052,11 +1027,8 @@ This work consists of the file  notes2bib.dtx
 %    \end{macrocode}
 % \end{macro}
 %    
-% \begin{macro}{\@@_write_note:nn}
-%   \changes{v2.0b}{2010/01/09}{Add \cs{else:} branch to handle case
-%     where \cs{if@filesw} is false}
+% \begin{macro}{\@@_write_note:nn, \@@_write_note:xn}
 % \begin{macro}[aux]{\@@_write_note_aux:nn}
-% \begin{macro}{\@@_write_note:xn}
 %    The writing function takes two arguments: the name of the note, and
 %    the text itself. There is a need to check on the \LaTeXe{} system to
 %    turn off writing, with a hand-over so there is no problem with 
@@ -1090,7 +1062,7 @@ This work consists of the file  notes2bib.dtx
 }
 \cs_generate_variant:Nn \@@_write_note:nn { x }
 %    \end{macrocode}
-% \end{macro}    
+  
 % \end{macro}
 % \end{macro} 
 %
@@ -1157,12 +1129,15 @@ This work consists of the file  notes2bib.dtx
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\@@_endnote:w}
-% \begin{macro}{\@@_endnotemark:w}
-% \begin{macro}{\@@_endnotetext:w}
-% \begin{macro}{\@@_footnote:w}
-% \begin{macro}{\@@_footnotemark:w}
-% \begin{macro}{\@@_footnotetext:w}
+% \begin{macro}
+%   {
+%     \@@_endnote:w     , 
+%     \@@_endnotemark:w ,
+%     \@@_endnotetext:w ,
+%     \@@_footnote:w    ,
+%     \@@_footnotemark:w,
+%     \@@_footnotetext:w
+%   }
 %   At the start of the document, the definitions for endnotes and 
 %   footnotes are saved so that footnotes and endnotes can be turned into
 %   bibliography notes and back again.
@@ -1177,16 +1152,10 @@ This work consists of the file  notes2bib.dtx
 }
 %    \end{macrocode}
 % \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
 %
 % \subsection{Package-dependent code}
 %
-% \begin{macro}{\@@_create_print_notes:}
-% \begin{macro}{\@@_print_notes:}
+% \begin{macro}{\@@_create_print_notes:, \@@_print_notes:}
 %   The method for printing notes depends on whether \pkg{biblatex} is
 %   in use. If it is, then a selective call to \cs{printbibliography} is
 %   made. Otherwise, the original \cs{bibliography} function is called,
@@ -1213,15 +1182,8 @@ This work consists of the file  notes2bib.dtx
 \cs_new_nopar:Npn \@@_create_print_notes: { }
 %    \end{macrocode}
 % \end{macro}
-% \end{macro}
 %
 % \begin{macro}{\@@_attach_bibliography:}
-% \changes{v2.0d}{2011/01/08}{Use new \cs{bibliography*} function with
-%   \pkg{biblatex} v1.1a or later}
-% \changes{v2.0f}{2011/02/23}{Use new \cs{addglobalbib} function with
-%   \pkg{biblatex} v1.2 or later}
-% \changes{v2.0h}{2011/09/09}{Use \cs{addglobalbib} function irrespective
-%   of load order}
 % \begin{macro}{\bibliography}
 % \begin{macro}{\@@_bibliography:n}
 %   Getting the database created here to be scanned by \BibTeX\ is
@@ -1322,11 +1284,11 @@ This work consists of the file  notes2bib.dtx
 %    \end{macrocode}
 %
 % \begin{macro}{\@@_aux_hook:}
-%  If the \pkg{cite} package is loaded, then there is a hook to
-%  reset the \file{aux} file after the citation. This means that moving
-%  punctuation will still work under these circumstances.  However, the
-%  way \pkg{cite} sets things up is a little complicated. The link needs
-%  to be made at the end of the \cs{document} macro.
+%   If the \pkg{cite} package is loaded, then there is a hook to
+%   reset the \file{aux} file after the citation. This means that moving
+%   punctuation will still work under these circumstances.  However, the
+%   way \pkg{cite} sets things up is a little complicated. The link needs
+%   to be made at the end of the \cs{document} macro.
 %    \begin{macrocode}
 \AtBeginDocument {
   \@ifpackageloaded { cite } 
@@ -1358,8 +1320,7 @@ This work consists of the file  notes2bib.dtx
 %\subsection{User functions}
 %
 % \begin{macro}{\bibnote}
-% \begin{macro}{\@@_bibnote:nn}
-% \begin{macro}{\@@_bibnote:xn}
+% \begin{macro}{\@@_bibnote:nn, \@@_bibnote:xn}
 %   Creating a not from scratch is a multi-step operation. First, check
 %   if a label was given by the user. If it was not, then one is created
 %   by incrementing the automatic number and fully expanding 
@@ -1381,7 +1342,6 @@ This work consists of the file  notes2bib.dtx
 }
 \cs_generate_variant:Nn \@@_bibnote:nn { x }
 %    \end{macrocode}
-% \end{macro}
 % \end{macro}
 % \end{macro}
 %
@@ -1442,12 +1402,8 @@ This work consists of the file  notes2bib.dtx
 % \end{macro}
 %
 % \begin{macro}{\citenote}
-% \changes{v2.0}{2009/09/25}{Depreciated in favour of \cs{bibnotemark}}
 % \begin{macro}{\flushnotestack}
-% \changes{v2.0}{2009/09/28}{Depreciated in favour of 
-%  \cs{recordnotes}}
 % \begin{macro}{\niibsetup}
-% \changes{v2.0}{2009/09/25}{Depreciated in favour of \cs{bibnotesetup}}
 %   A few functions which are depreciated in version two.
 %    \begin{macrocode}
 \NewDocumentCommand \citenote { m } { 
@@ -1469,11 +1425,7 @@ This work consists of the file  notes2bib.dtx
 % easier.
 %
 % \begin{macro}{\NotesAfterCitations}
-% \changes{v2.0b}{2009/01/09}{Define using 
-%   \cs{cs_new_protected_nopar:Npn}}
 % \begin{macro}{\NotesBeforeCitations}
-% \changes{v2.0b}{2009/01/09}{Define using 
-%   \cs{cs_new_protected_nopar:Npn}}
 %   The functions to pass information on out-of-order notes from one
 %   run to another both add the information to the appropriate lists.
 %   For notes before citations, there is also a need to put the 
@@ -1491,8 +1443,6 @@ This work consists of the file  notes2bib.dtx
 % \end{macro}
 % 
 % \begin{macro}{\TotalNotes}
-% \changes{v2.0b}{2009/01/09}{Define using 
-%   \cs{cs_new_protected_nopar:Npn}}
 %   This function allows the total number of bibliography notes to be
 %   carried forward from one run to the next.
 %    \begin{macrocode}
@@ -1548,7 +1498,6 @@ This work consists of the file  notes2bib.dtx
 %  
 % \begin{macro}{\@@_write_note_file:}  
 % \begin{macro}{\g_@@_file_iow} 
-%  \changes{v2.0i}{2012/07/16}{Define stream in all cases}
 % The notes themselves are now written in one block: this avoids 
 % using up a stream for any longer than necessary.   
 %    \begin{macrocode}
