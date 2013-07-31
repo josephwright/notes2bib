@@ -1160,11 +1160,11 @@ This work consists of the file  notes2bib.dtx
 %    \begin{macrocode}
 \AtBeginDocument
   {
-    \cs_new_eq:NN \@@_endnote:w     \endnote
-    \cs_new_eq:NN \@@_endnotemark:w \endnotemark
+    \cs_new_eq:NN \@@_endnote:w     \endnote     
+    \cs_new_eq:NN \@@_endnotemark:w \endnotemark 
     \cs_new_eq:NN \@@_endnotetext:w \endnotetext
-    \cs_new_eq:NN \@@_footnote:w     \footnote
-    \cs_new_eq:NN \@@_footnotemark:w \footnotemark
+    \cs_new_eq:NN \@@_footnote:w     \footnote     
+    \cs_new_eq:NN \@@_footnotemark:w \footnotemark 
     \cs_new_eq:NN \@@_footnotetext:w \footnotetext
   }
 %    \end{macrocode}
@@ -1245,11 +1245,7 @@ This work consists of the file  notes2bib.dtx
     \@ifpackagelater { biblatex } { 2011/01/08 }
       { 
         \@ifpackagelater { biblatex } { 2011/02/12 }
-          { 
-            
-            \exp_args:No \addglobalbib 
-              { \g_@@_filename_tl .bib }
-          }
+          { \exp_args:No \addglobalbib { \g_@@_filename_tl .bib } }
           { \exp_args:NNV \bibliography * \g_@@_filename_tl }
       }
       { \exp_args:NV \bibliography \g_@@_filename_tl }
@@ -1280,14 +1276,14 @@ This work consists of the file  notes2bib.dtx
   {
     \@ifpackageloaded { biblatex } 
       {
-        \cs_set_protected:Npn \@@_mark_note_after_aux:n #1
+        \cs_set_protected:Npn \@@_mark_note_after_aux:n #1 
           {
             \AtNextCite { \@fileswfalse }
             \@@_cite:w {#1}
           }
       }
       {
-        \cs_set_protected:Npn \@@_mark_note_after_aux:n #1
+        \cs_set_protected:Npn \@@_mark_note_after_aux:n #1 
           {
             \cs_set_eq:NN \@@_filesw: \if@filesw
             \@fileswfalse
@@ -1309,7 +1305,7 @@ This work consists of the file  notes2bib.dtx
   {
     \@ifpackageloaded { cite } 
       {
-        \cs_set_protected:Npn \@@_mark_note_after_aux:n #1
+        \cs_set_protected:Npn \@@_mark_note_after_aux:n #1 
           {
             \cs_set_eq:NN \@@_filesw: \if@filesw
             \@fileswfalse
@@ -1546,7 +1542,7 @@ This work consists of the file  notes2bib.dtx
   {
     \int_compare:nNnT \g_@@_note_int > \c_zero
       {
-        \iow_now:Nx \@auxout
+        \iow_now:Nx \@auxout 
           { \TotalNotes { \int_to_arabic:n { \g_@@_note_int } } }
       }
   }
