@@ -641,18 +641,18 @@ This work consists of the file  notes2bib.dtx
 % file. Setting this up as a constant means that it can be changed
 % (for example for translation) if necessary.
 %    \begin{macrocode}
-\tl_new:N \c_@@_file_message_tl
-\tl_set:Nn \c_@@_file_message_tl {
-  \iow_char:N \% ~
-  This~is~an~auxiliary~file~used~by~the~'notes2bib'~package.
-    \iow_newline:
-  \iow_char:N \% ~
-  This~file~may~safely~be~deleted.
-    \iow_newline:
-  \iow_char:N \% ~
-  It~will~be~recreated~as~required.
-    \iow_newline:
-}
+\tl_const:Nn \c_@@_file_message_tl 
+  {
+    \iow_char:N \% ~
+    This~is~an~auxiliary~file~used~by~the~'notes2bib'~package.
+      \iow_newline:
+    \iow_char:N \% ~
+    This~file~may~safely~be~deleted.
+      \iow_newline:
+    \iow_char:N \% ~
+    It~will~be~recreated~as~required.
+      \iow_newline:
+  }
 %    \end{macrocode}
 %\end{macro}
 %
