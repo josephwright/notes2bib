@@ -1123,7 +1123,7 @@ This work consists of the file  notes2bib.dtx
 %   Converting other notes to bibliography notes is simple: just set
 %   them equal.
 %    \begin{macrocode}
-\cs_new_protected_nopar:Npn \@@_to_bibnote:n #1
+\cs_new_protected:Npn \@@_to_bibnote:n #1
   {
     \cs_set_eq:cN {#1}        \bibnote
     \cs_set_eq:cN { #1 mark } \bibnotemark
@@ -1136,7 +1136,7 @@ This work consists of the file  notes2bib.dtx
 %   The reverse process needs the original definitions, which are saved
 %   by the module for later recovery.
 %    \begin{macrocode}
-\cs_new_protected_nopar:Npn \@@_from_bibnote:n #1
+\cs_new_protected:Npn \@@_from_bibnote:n #1
   {
     \cs_set_eq:cc {#1}        { @@_ #1 :w }
     \cs_set_eq:cc { #1 mark } { @@_ #1 mark:w }
