@@ -972,7 +972,7 @@ This work consists of the file  notes2bib.dtx
 %   expansion. The real meaning will be set by the key--value setting, 
 %   and depends on the placement of notes compared with real citations.
 %    \begin{macrocode}
-\cs_new:Npn \@@_mark_note:n #1 { }
+\cs_new_protected:Npn \@@_mark_note:n #1 { }
 \cs_generate_variant:Nn \@@_mark_note:n { x }
 %    \end{macrocode}
 % \end{macro}
@@ -989,7 +989,7 @@ This work consists of the file  notes2bib.dtx
     \clist_gput_right:Nx \g_@@_after_clist {#1}
     \@@_mark_note_after_aux:n {#1}
   }
-\cs_new:Npn \@@_mark_note_after_aux:n #1 { }
+\cs_new_protected:Npn \@@_mark_note_after_aux:n #1 { }
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -1197,7 +1197,7 @@ This work consists of the file  notes2bib.dtx
           { \exp_args:NV \@@_bibliography:n \g_@@_filename_tl }
       }
   }
-\cs_new_nopar:Npn \@@_create_print_notes: { }
+\cs_new_protected_nopar:Npn \@@_create_print_notes: { }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1211,7 +1211,7 @@ This work consists of the file  notes2bib.dtx
 %   The \cs{bibliography} function has to be patched if \pkg{biblatex} is
 %   not in use.
 %    \begin{macrocode}
-\cs_new_nopar:Npn \@@_attach_bibliography:
+\cs_new_protected_nopar:Npn \@@_attach_bibliography:
   {
     \@ifpackageloaded { biblatex } 
       {
@@ -1280,14 +1280,14 @@ This work consists of the file  notes2bib.dtx
   {
     \@ifpackageloaded { biblatex } 
       {
-        \cs_set:Npn \@@_mark_note_after_aux:n #1 
+        \cs_set_protected:Npn \@@_mark_note_after_aux:n #1
           {
             \AtNextCite { \@fileswfalse }
             \@@_cite:w {#1}
-        }
+          }
       }
       {
-        \cs_set:Npn \@@_mark_note_after_aux:n #1 
+        \cs_set_protected:Npn \@@_mark_note_after_aux:n #1
           {
             \cs_set_eq:NN \@@_filesw: \if@filesw
             \@fileswfalse
@@ -1309,7 +1309,7 @@ This work consists of the file  notes2bib.dtx
   {
     \@ifpackageloaded { cite } 
       {
-        \cs_set:Npn \@@_mark_note_after_aux:n #1 
+        \cs_set_protected:Npn \@@_mark_note_after_aux:n #1
           {
             \cs_set_eq:NN \@@_filesw: \if@filesw
             \@fileswfalse
