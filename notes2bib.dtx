@@ -958,9 +958,10 @@ This work consists of the file  notes2bib.dtx
 % \begin{macro}{\@@_filesw:}
 %   Making sorting work means messing about with \cs{if@filesw}. The 
 %   function created here is used to store the current status of the
-%   flag.
+%   flag. As this is needed for saving \TeX{} true/false status, it's
+%   best to set it up from the start as a conditional.
 %    \begin{macrocode}
-\cs_new_nopar:Npn \@@_filesw: { }
+\cs_new_eq:NN \@@_filesw: \tex_iftrue:D
 %    \end{macrocode}
 % \end{macro}
 %
