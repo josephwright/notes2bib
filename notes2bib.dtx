@@ -745,60 +745,61 @@ This work consists of the file  notes2bib.dtx
 %  }
 %   The various package options are created.
 %    \begin{macrocode}
-\keys_define:nn { notes2bib } {
-  cite-function     .code:n      = 
-    { \AtBeginDocument { \cs_set_eq:NN \@@_cite:w #1 } }     ,
-  file-name            .tl_gset_x:N = \g_@@_filename_tl         ,
-  convert-endnotes     .choice:                                   ,
-  convert-endnotes 
-    / false .code:n = 
-    { \AtBeginDocument { \@@_from_bibnote:n { endnote } } }  ,
-  convert-endnotes 
-    / true .code:n  = 
-    { \AtBeginDocument { \@@_to_bibnote:n { endnote } } }    ,
-  convert-footnotes    .choice:                                   ,
-  convert-footnotes 
-    / false .code:n = 
-    { \AtBeginDocument { \@@_from_bibnote:n { footnote } } } ,
-  convert-footnotes 
-    / true .code:n = 
-    { \AtBeginDocument { \@@_to_bibnote:n { footnote } } }   ,
-  keyword-entry        .tl_set:N    = \l_@@_keyword_tl          ,
-  note-field           .tl_set:N    = \l_@@_note_field_tl       ,
-  note-name            .tl_set:N    = \l_@@_note_name_tl        ,
-  placement            .choice:                                   ,
-  placement 
-    / after    .code:n      = 
-    {
-      \cs_set_eq:NN \@@_mark_note:n \@@_mark_note_after:n
-      \tl_set_eq:NN \l_@@_presort_tl \l_@@_presort_after_tl
-      \tl_set_eq:NN \l_@@_sortkey_tl \l_@@_sortkey_after_tl
-    },
-  placement 
-    / before    .code:n     = 
-    {
-      \cs_set_eq:NN \@@_mark_note:n \@@_mark_note_before:n
-      \tl_set_eq:NN \l_@@_presort_tl \l_@@_presort_before_tl
-      \tl_set_eq:NN \l_@@_sortkey_tl \l_@@_sortkey_before_tl
-    },
-  placement 
-    / mixed    .code:n      = 
-    {
-      \cs_set_eq:NN \@@_mark_note:n \@@_mark_note_mixed:n
-      \tl_set_eq:NN \l_@@_presort_tl \l_@@_presort_mixed_tl
-      \tl_set_eq:NN \l_@@_sortkey_tl \l_@@_sortkey_mixed_tl
-    },
-  presort-after        .tl_set:N    = \l_@@_presort_after_tl    ,
-  presort-before       .tl_set:N    = \l_@@_presort_before_tl   ,
-  presort-mixed        .tl_set:N    = \l_@@_presort_mixed_tl    ,
-  record-type          .tl_set:N    = \l_@@_record_type_tl      ,
-  refsection-name      .tl_set:N    = \l_@@_refsection_name_tl  ,
-  refsection-separator .tl_set:N    = \l_@@_refsection_sep_tl   ,
-  sort-key-after       .tl_set:N    = \l_@@_sortkey_before_tl   ,
-  sort-key-before      .tl_set:N    = \l_@@_sortkey_after_tl    ,
-  sort-key-mixed       .tl_set:N    = \l_@@_sortkey_mixed_tl    ,
-  use-sort-key         .bool_set:N  = \l_@@_write_sortkey_bool  ,
-}
+\keys_define:nn { notes2bib }
+  {
+    cite-function     .code:n      = 
+      { \AtBeginDocument { \cs_set_eq:NN \@@_cite:w #1 } }     ,
+    file-name            .tl_gset_x:N = \g_@@_filename_tl      ,
+    convert-endnotes     .choice:                              ,
+    convert-endnotes 
+      / false .code:n = 
+      { \AtBeginDocument { \@@_from_bibnote:n { endnote } } }  ,
+    convert-endnotes 
+      / true .code:n  = 
+      { \AtBeginDocument { \@@_to_bibnote:n { endnote } } }    ,
+    convert-footnotes    .choice:                              ,
+    convert-footnotes 
+      / false .code:n = 
+      { \AtBeginDocument { \@@_from_bibnote:n { footnote } } }  ,
+    convert-footnotes 
+      / true .code:n = 
+      { \AtBeginDocument { \@@_to_bibnote:n { footnote } } }    ,
+    keyword-entry        .tl_set:N    = \l_@@_keyword_tl        ,
+    note-field           .tl_set:N    = \l_@@_note_field_tl     ,
+    note-name            .tl_set:N    = \l_@@_note_name_tl      ,
+    placement            .choice:                               ,
+    placement 
+      / after    .code:n      = 
+      {
+        \cs_set_eq:NN \@@_mark_note:n \@@_mark_note_after:n
+        \tl_set_eq:NN \l_@@_presort_tl \l_@@_presort_after_tl
+        \tl_set_eq:NN \l_@@_sortkey_tl \l_@@_sortkey_after_tl
+      },
+    placement 
+      / before    .code:n     = 
+      {
+        \cs_set_eq:NN \@@_mark_note:n \@@_mark_note_before:n
+        \tl_set_eq:NN \l_@@_presort_tl \l_@@_presort_before_tl
+        \tl_set_eq:NN \l_@@_sortkey_tl \l_@@_sortkey_before_tl
+      },
+    placement 
+      / mixed    .code:n      = 
+      {
+        \cs_set_eq:NN \@@_mark_note:n \@@_mark_note_mixed:n
+        \tl_set_eq:NN \l_@@_presort_tl \l_@@_presort_mixed_tl
+        \tl_set_eq:NN \l_@@_sortkey_tl \l_@@_sortkey_mixed_tl
+      },
+    presort-after        .tl_set:N    = \l_@@_presort_after_tl   , 
+    presort-before       .tl_set:N    = \l_@@_presort_before_tl  ,
+    presort-mixed        .tl_set:N    = \l_@@_presort_mixed_tl   ,
+    record-type          .tl_set:N    = \l_@@_record_type_tl     ,
+    refsection-name      .tl_set:N    = \l_@@_refsection_name_tl ,
+    refsection-separator .tl_set:N    = \l_@@_refsection_sep_tl  ,
+    sort-key-after       .tl_set:N    = \l_@@_sortkey_before_tl  ,
+    sort-key-before      .tl_set:N    = \l_@@_sortkey_after_tl   ,
+    sort-key-mixed       .tl_set:N    = \l_@@_sortkey_mixed_tl   ,
+    use-sort-key         .bool_set:N  = \l_@@_write_sortkey_bool
+  }
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -806,63 +807,64 @@ This work consists of the file  notes2bib.dtx
 % Default values for the keys are set up. Many of these probably never
 % change, but done in this way the package is much more flexible.
 %    \begin{macrocode}
-\keys_set:nn { notes2bib } {
-  cite-function        = \cite              ,
-  file-name            = notes2bib-\jobname ,
-  keyword-entry        = note               ,
-  note-field           = note               ,
-  note-name            = Note               ,
-  presort-after        = mn                 ,
-  presort-before       = ml                 ,
-  presort-mixed        = mm                 ,
-  record-type          = misc               ,
-  refsection-name      = Refsection         ,
-  refsection-separator = -                  ,
-  sort-key-after       = zzz                ,
-  sort-key-before      = aaa                ,
-  use-sort-key         = true               
+\keys_set:nn { notes2bib }
+  {
+    cite-function        = \cite              ,
+    file-name            = notes2bib-\jobname ,
+    keyword-entry        = note               ,
+    note-field           = note               ,
+    note-name            = Note               ,
+    presort-after        = mn                 ,
+    presort-before       = ml                 ,
+    presort-mixed        = mm                 ,
+    record-type          = misc               ,
+    refsection-name      = Refsection         ,
+    refsection-separator = -                  ,
+    sort-key-after       = zzz                ,
+    sort-key-before      = aaa                ,
+    use-sort-key         = true               
 }
 %    \end{macrocode}
 %    
 % A few options need to be altered or deactivated at the start of
 % the document.
 %    \begin{macrocode}
-\AtBeginDocument {
-  \@ifpackageloaded { biblatex }
-    {
-      \@ifpackagelater { biblatex } { 2011/01/08 }
-        {
-          \keys_set:nn { notes2bib } 
-            { record-type = bibnote }
-          \DeclareBibliographyDriver { bibnote }
-            {
-              \usebibmacro { begentry }
-              \printfield  { note }
-              \setunit { \bibpagerefpunct }
-              \newblock
-              \usebibmacro { pageref }
-              \usebibmacro { finentry }
-            }
-        }
-        { }
-    }
-    { }
-  \keys_define:nn { notes2bib } 
-    {
-      cite-function     .code:n      = 
-        { \cs_set_eq:NN \@@_cite:w #1 }                              ,
-      file-name .code:n = 
-        { \msg_info:nnn { notes2bib } { preamble-only } { file-name } },
-      convert-endnotes / false .code:n = 
-        { \@@_from_bibnote:n { endnote } }                           ,
-      convert-endnotes / true .code:n  = 
-        { \@@_to_bibnote:n { endnote } }                             ,
-      convert-footnotes / false .code:n = 
-        { \@@_from_bibnote:n { footnote } }                          ,
-      convert-footnotes / true .code:n = 
-        { \@@_to_bibnote:n { footnote } }                            ,
-    }
-}
+\AtBeginDocument
+  {
+    \@ifpackageloaded { biblatex }
+      {
+        \@ifpackagelater { biblatex } { 2011/01/08 }
+          {
+            \keys_set:nn { notes2bib } { record-type = bibnote }
+            \DeclareBibliographyDriver { bibnote }
+              {
+                \usebibmacro { begentry }
+                \printfield  { note }
+                \setunit { \bibpagerefpunct }
+                \newblock
+                \usebibmacro { pageref }
+                \usebibmacro { finentry }
+              }
+          }
+          { }
+      }
+      { }
+    \keys_define:nn { notes2bib } 
+      {
+        cite-function     .code:n      = 
+          { \cs_set_eq:NN \@@_cite:w #1 }                                 ,
+        file-name .code:n = 
+          { \msg_info:nnn { notes2bib } { preamble-only } { file-name } } ,
+        convert-endnotes / false .code:n = 
+          { \@@_from_bibnote:n { endnote } }                              ,
+        convert-endnotes / true .code:n  = 
+          { \@@_to_bibnote:n { endnote } }                                ,
+        convert-footnotes / false .code:n = 
+          { \@@_from_bibnote:n { footnote } }                             ,
+        convert-footnotes / true .code:n = 
+          { \@@_to_bibnote:n { footnote } }
+      }
+  }
 \msg_new:nnn { notes2bib } { preamble-only } 
   { The~option~'#1'~can~only~be~used~in~the~preamble. }
 %    \end{macrocode}
@@ -875,21 +877,22 @@ This work consists of the file  notes2bib.dtx
 %   \texttt{refsection} number is added to the label.
 %    \begin{macrocode}
 \cs_new_nopar:Npn \@@_insert_refsection: { }
-\AtBeginDocument {
-  \@ifpackageloaded { biblatex }
-    {
-      \cs_set_nopar:Npn \@@_insert_refsection:
-        {
-          \int_compare:nNnT { \value { refsection } } > { 0 }
-            { 
-              \tl_use:N \l_@@_refsection_name_tl
-              \arabic { refsection }
-              \tl_use:N \l_@@_refsection_sep_tl
+\AtBeginDocument
+  {
+    \@ifpackageloaded { biblatex }
+      {
+        \cs_set_nopar:Npn \@@_insert_refsection:
+          {
+            \int_compare:nNnT { \value { refsection } } > { 0 }
+              { 
+                \tl_use:N \l_@@_refsection_name_tl
+                \arabic { refsection }
+                \tl_use:N \l_@@_refsection_sep_tl
             }
-        }
-    }
-    { }
-}
+          }
+      }
+      { }
+  }
 %    \end{macrocode}
 % \end{macro}
 %    
@@ -898,36 +901,37 @@ This work consists of the file  notes2bib.dtx
 % The new option names are preferred, but the old ones still need to 
 % work correctly.
 %    \begin{macrocode}
-\keys_define:nn { notes2bib } {
-  cite        .code:n =
-    {
-      \use:x
-        { \keys_set:nn { notes2bib } { cite-function = \exp_not:c {#1} } } 
-    } ,
-  debug       .code:n = { }                                     ,
-  endnotes    .meta:n = { convert-footnotes = #1 }              ,
-  etex        .code:n = { }                                     ,
-  field       .meta:n = { note-field        = #1 }              ,
-  footnotes   .meta:n = { convert-footnotes = #1 }              ,
-  head        .meta:n = { placement         = before }          ,
-  keyhead     .meta:n = { sort-key-before   = #1 }              ,
-  keytail     .meta:n = { sort-key-after    = #1 }              ,
-  keynone     .meta:n = { sort-key-mixed    = #1 }              ,
-  keyword     .meta:n = { keyword-entry     = #1 }              ,
-  log         .meta:n = { }                                     ,
-  name        .meta:n = { note-name         = #1 }              ,
-  prefix      .meta:n = { file-name         = #1 \jobname }     ,
-  presorthead .meta:n = { presort-before    = #1 }              ,
-  presorttail .meta:n = { presort-after     = #1 }              ,
-  presortnone .meta:n = { presort-mixed     = #1 }              ,
-  record      .meta:n = { record-type       = #1 }              ,
-  sort        .choice:                                          ,
-  sort / head .meta:n = { placement         = before }          ,
-  sort / none .meta:n = { placement         = after }           ,
-  sort / tail .meta:n = { placement         = mixed }           ,
-  tail        .meta:n = { placement         = after }           ,
-  writekey    .meta:n = { use-sort-key      = #1 }
-}
+\keys_define:nn { notes2bib }
+  {
+    cite        .code:n =
+      {
+        \use:x
+          { \keys_set:nn { notes2bib } { cite-function = \exp_not:c {#1} } } 
+      } ,
+    debug       .code:n = { }                                 ,
+    endnotes    .meta:n = { convert-footnotes = #1 }          ,
+    etex        .code:n = { }                                 ,
+    field       .meta:n = { note-field        = #1 }          ,
+    footnotes   .meta:n = { convert-footnotes = #1 }          ,
+    head        .meta:n = { placement         = before }      ,
+    keyhead     .meta:n = { sort-key-before   = #1 }          ,
+    keytail     .meta:n = { sort-key-after    = #1 }          ,
+    keynone     .meta:n = { sort-key-mixed    = #1 }          ,
+    keyword     .meta:n = { keyword-entry     = #1 }          ,
+    log         .meta:n = { }                                 ,
+    name        .meta:n = { note-name         = #1 }          ,
+    prefix      .meta:n = { file-name         = #1 \jobname } ,
+    presorthead .meta:n = { presort-before    = #1 }          ,
+    presorttail .meta:n = { presort-after     = #1 }          ,
+    presortnone .meta:n = { presort-mixed     = #1 }          ,
+    record      .meta:n = { record-type       = #1 }          ,
+    sort        .choice:                                      ,
+    sort / head .meta:n = { placement         = before }      ,
+    sort / none .meta:n = { placement         = after }       ,
+    sort / tail .meta:n = { placement         = mixed }       ,
+    tail        .meta:n = { placement         = after }       ,
+    writekey    .meta:n = { use-sort-key      = #1 }
+  }
 %    \end{macrocode}
 %    
 % \subsection{Utility functions}
@@ -940,13 +944,14 @@ This work consists of the file  notes2bib.dtx
 %   sorting. This needs two passes, as the total number of notes is only
 %   available at the end of the LaTeX run.
 %    \begin{macrocode}
-\cs_new_nopar:Npn \@@_note_name: {
-  \@@_insert_refsection:
-  \tl_use:N \l_@@_note_name_tl
-  \int_compare:nNnT \g_@@_previous_notes_int > \c_nine
-    { \int_compare:nNnT \g_@@_note_int < \c_ten { 0 } }
-  \int_to_arabic:n { \g_@@_note_int }
-}
+\cs_new_nopar:Npn \@@_note_name:
+  {
+    \@@_insert_refsection:
+    \tl_use:N \l_@@_note_name_tl
+    \int_compare:nNnT \g_@@_previous_notes_int > \c_nine
+      { \int_compare:nNnT \g_@@_note_int < \c_ten { 0 } }
+    \int_to_arabic:n { \g_@@_note_int }
+  }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -977,11 +982,12 @@ This work consists of the file  notes2bib.dtx
 %   auxiliary is called. The nature of the second function is dependent
 %   on the other packages loaded.
 %    \begin{macrocode}
-\cs_new_protected:Npn \@@_mark_note_after:n #1 {
-  \int_gincr:N \g_@@_total_notes_int
-  \clist_gput_right:Nx \g_@@_after_clist {#1}
-  \@@_mark_note_after_aux:n {#1}
-}
+\cs_new_protected:Npn \@@_mark_note_after:n #1
+  {
+    \int_gincr:N \g_@@_total_notes_int
+    \clist_gput_right:Nx \g_@@_after_clist {#1}
+    \@@_mark_note_after_aux:n {#1}
+  }
 \cs_new:Npn \@@_mark_note_after_aux:n #1 { }
 %    \end{macrocode}
 % \end{macro}
@@ -991,11 +997,12 @@ This work consists of the file  notes2bib.dtx
 %   Notes to appear before all citations are simple recorded, as they will
 %   be set up on the next \LaTeX{} run.
 %    \begin{macrocode}
-\cs_new_protected:Npn \@@_mark_note_before:n #1 {
-  \int_gincr:N \g_@@_total_notes_int
-  \clist_gput_right:Nx \g_@@_before_clist {#1}
-  \@@_cite:w {#1}
-}
+\cs_new_protected:Npn \@@_mark_note_before:n #1
+  {
+    \int_gincr:N \g_@@_total_notes_int
+    \clist_gput_right:Nx \g_@@_before_clist {#1}
+    \@@_cite:w {#1}
+  }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1003,10 +1010,11 @@ This work consists of the file  notes2bib.dtx
 %   Mixed citations are very easy to handle: just use whatever cite
 %   command is current.
 %    \begin{macrocode}
-\cs_new_protected:Npn \@@_mark_note_mixed:n #1 {
-  \int_gincr:N \g_@@_total_notes_int
-  \@@_cite:w {#1}
-}
+\cs_new_protected:Npn \@@_mark_note_mixed:n #1
+  {
+    \int_gincr:N \g_@@_total_notes_int
+    \@@_cite:w {#1}
+  }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1019,10 +1027,11 @@ This work consists of the file  notes2bib.dtx
 %   not technically needed (writing expands everything), it helps to keep
 %   the intention of the code here clearer.
 %    \begin{macrocode}
-\cs_new:Npn \@@_write_field:nn #1#2 {
-  \c_space_tl \c_space_tl #1 \c_space_tl = \c_space_tl {#2} , 
-  \iow_newline:
-}
+\cs_new:Npn \@@_write_field:nn #1#2
+  {
+    \c_space_tl \c_space_tl #1 \c_space_tl = \c_space_tl {#2} , 
+    \iow_newline:
+  }
 \cs_generate_variant:Nn \@@_write_field:nn { V }
 %    \end{macrocode}
 % \end{macro}
@@ -1034,32 +1043,34 @@ This work consists of the file  notes2bib.dtx
 %    turn off writing, with a hand-over so there is no problem with 
 %    balancing ifs.
 %    \begin{macrocode}
-\cs_new_protected_nopar:Npn \@@_write_note:nn {
-  \if@filesw
-    \exp_after:wN \@@_write_note_aux:nn
-  \else:
-    \exp_after:wN \use_none:nn  
-  \fi:
-}
-\cs_new_protected:Npn \@@_write_note_aux:nn #1#2 {
-  \tl_gput_right:Nx \g_@@_notes_tl
-    {
-      @ \l_@@_record_type_tl 
-        {
-          #1 , \iow_newline:
-          \@@_write_field:Vn \l_@@_note_field_tl { \exp_not:n {#2} }
-          \bool_if:NT \l_@@_write_sortkey_bool 
-            {
-              \@@_write_field:Vn \l_@@_sortkey_field_tl  
-                { \l_@@_sortkey_tl #1 }
-            }
-          \@@_write_field:nn { keywords } { \l_@@_keyword_tl }
-          \@@_write_field:nn { presort } { \l_@@_presort_tl }
-        }
-      \iow_newline:
-      \iow_newline:  
-    }
-}
+\cs_new_protected_nopar:Npn \@@_write_note:nn
+  {
+    \if@filesw
+      \exp_after:wN \@@_write_note_aux:nn
+    \else:
+      \exp_after:wN \use_none:nn  
+    \fi:
+  }
+\cs_new_protected:Npn \@@_write_note_aux:nn #1#2
+  {
+    \tl_gput_right:Nx \g_@@_notes_tl
+      {
+        @ \l_@@_record_type_tl 
+          {
+            #1 , \iow_newline:
+            \@@_write_field:Vn \l_@@_note_field_tl { \exp_not:n {#2} }
+            \bool_if:NT \l_@@_write_sortkey_bool 
+              {
+                \@@_write_field:Vn \l_@@_sortkey_field_tl  
+                  { \l_@@_sortkey_tl #1 }
+              }
+            \@@_write_field:nn { keywords } { \l_@@_keyword_tl }
+            \@@_write_field:nn { presort } { \l_@@_presort_tl }
+          }
+        \iow_newline:
+        \iow_newline:  
+      }
+  }
 \cs_generate_variant:Nn \@@_write_note:nn { x }
 %    \end{macrocode}
   
@@ -1077,28 +1088,30 @@ This work consists of the file  notes2bib.dtx
 %   to a secondary one, which is used for comparison purposes right at the
 %   end of the document.
 %    \begin{macrocode}
-\cs_new_protected_nopar:Npn \@@_record_notes: {
-  \if@filesw
-    \exp_after:wN \@@_flush_notes_aux:
-  \fi
-}
-\cs_new_protected_nopar:Npn \@@_flush_notes_aux: {
-  \clist_if_empty:NF \g_@@_before_clist 
-    {
-      \iow_now:Nx \@auxout 
-        { \NotesBeforeCitations { \exp_not:V \g_@@_before_clist } }
-      \clist_gput_right:NV \g_@@_all_before_clist \g_@@_before_clist
-      \clist_gclear:N \g_@@_before_clist
-    }
-  \clist_if_empty:NF \g_@@_after_clist 
-    {
-      \iow_now:Nx \@auxout
-        { \NotesAfterCitations { \exp_not:V \g_@@_after_clist } }
-      \exp_args:NV \nocite \g_@@_after_clist
-      \clist_gput_right:NV \g_@@_all_after_clist \g_@@_after_clist
-      \clist_gclear:N \g_@@_after_clist
-    }
-}
+\cs_new_protected_nopar:Npn \@@_record_notes:
+  {
+    \if@filesw
+      \exp_after:wN \@@_flush_notes_aux:
+    \fi
+  }
+\cs_new_protected_nopar:Npn \@@_flush_notes_aux:
+  {
+    \clist_if_empty:NF \g_@@_before_clist 
+      {
+        \iow_now:Nx \@auxout 
+          { \NotesBeforeCitations { \exp_not:V \g_@@_before_clist } }
+        \clist_gput_right:NV \g_@@_all_before_clist \g_@@_before_clist
+        \clist_gclear:N \g_@@_before_clist
+      }
+    \clist_if_empty:NF \g_@@_after_clist 
+      {
+        \iow_now:Nx \@auxout
+          { \NotesAfterCitations { \exp_not:V \g_@@_after_clist } }
+        \exp_args:NV \nocite \g_@@_after_clist
+        \clist_gput_right:NV \g_@@_all_after_clist \g_@@_after_clist
+        \clist_gclear:N \g_@@_after_clist
+      }
+  }
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -1109,11 +1122,12 @@ This work consists of the file  notes2bib.dtx
 %   Converting other notes to bibliography notes is simple: just set
 %   them equal.
 %    \begin{macrocode}
-\cs_new_protected_nopar:Npn \@@_to_bibnote:n #1 {
-  \cs_set_eq:cN {#1}        \bibnote
-  \cs_set_eq:cN { #1 mark } \bibnotemark
-  \cs_set_eq:cN { #1 text } \bibnotetext
-}
+\cs_new_protected_nopar:Npn \@@_to_bibnote:n #1
+  {
+    \cs_set_eq:cN {#1}        \bibnote
+    \cs_set_eq:cN { #1 mark } \bibnotemark
+    \cs_set_eq:cN { #1 text } \bibnotetext
+  }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1121,11 +1135,12 @@ This work consists of the file  notes2bib.dtx
 %   The reverse process needs the original definitions, which are saved
 %   by the module for later recovery.
 %    \begin{macrocode}
-\cs_new_protected_nopar:Npn \@@_from_bibnote:n #1 {
-  \cs_set_eq:cc {#1}        { @@_ #1 :w }
-  \cs_set_eq:cc { #1 mark } { @@_ #1 mark:w }
-  \cs_set_eq:cc { #1 text } { @@_ #1 text:w }
-}
+\cs_new_protected_nopar:Npn \@@_from_bibnote:n #1
+  {
+    \cs_set_eq:cc {#1}        { @@_ #1 :w }
+    \cs_set_eq:cc { #1 mark } { @@_ #1 mark:w }
+    \cs_set_eq:cc { #1 text } { @@_ #1 text:w }
+  }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1142,14 +1157,15 @@ This work consists of the file  notes2bib.dtx
 %   footnotes are saved so that footnotes and endnotes can be turned into
 %   bibliography notes and back again.
 %    \begin{macrocode}
-\AtBeginDocument {
-  \cs_set_eq:NN \@@_endnote:w     \endnote     
-  \cs_set_eq:NN \@@_endnotemark:w \endnotemark 
-  \cs_set_eq:NN \@@_endnotetext:w \endnotetext
-  \cs_set_eq:NN \@@_footnote:w     \footnote     
-  \cs_set_eq:NN \@@_footnotemark:w \footnotemark 
-  \cs_set_eq:NN \@@_footnotetext:w \footnotetext
-}
+\AtBeginDocument
+  {
+    \cs_set_eq:NN \@@_endnote:w     \endnote     
+    \cs_set_eq:NN \@@_endnotemark:w \endnotemark 
+    \cs_set_eq:NN \@@_endnotetext:w \endnotetext
+    \cs_set_eq:NN \@@_footnote:w     \footnote     
+    \cs_set_eq:NN \@@_footnotemark:w \footnotemark 
+    \cs_set_eq:NN \@@_footnotetext:w \footnotetext
+  }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1161,24 +1177,25 @@ This work consists of the file  notes2bib.dtx
 %   made. Otherwise, the original \cs{bibliography} function is called,
 %   and passed the name of the notes file.
 %    \begin{macrocode}
-\AtBeginDocument {
-  \@ifpackageloaded { biblatex } 
-    {
-      \cs_new_protected_nopar:Npn \@@_print_notes: 
-        {
-          \cs_set_nopar:Npx \@@_create_print_notes: 
-            {
-              \printbibliography 
-                [ keyword = \exp_not:V \l_@@_keyword_tl ] 
-            }
-            \@@_create_print_notes:
-        }
-    }
-    {
-      \cs_new_protected_nopar:Npn \@@_print_notes: 
-        { \exp_args:NV \@@_bibliography:n \g_@@_filename_tl }
-    }
-}
+\AtBeginDocument
+  {
+    \@ifpackageloaded { biblatex } 
+      {
+        \cs_new_protected_nopar:Npn \@@_print_notes: 
+          {
+            \cs_set_nopar:Npx \@@_create_print_notes: 
+              {
+                \printbibliography 
+                  [ keyword = \exp_not:V \l_@@_keyword_tl ] 
+              }
+              \@@_create_print_notes:
+          }
+      }
+      {
+        \cs_new_protected_nopar:Npn \@@_print_notes: 
+          { \exp_args:NV \@@_bibliography:n \g_@@_filename_tl }
+      }
+  }
 \cs_new_nopar:Npn \@@_create_print_notes: { }
 %    \end{macrocode}
 % \end{macro}
@@ -1193,40 +1210,35 @@ This work consists of the file  notes2bib.dtx
 %   The \cs{bibliography} function has to be patched if \pkg{biblatex} is
 %   not in use.
 %    \begin{macrocode}
-\cs_new_nopar:Npn \@@_attach_bibliography: {
-  \@ifpackageloaded { biblatex } 
-    {
-      \@ifpackagelater { biblatex } { 2011/01/08 }
-        { 
-          \@ifpackagelater { biblatex } { 2011/02/12 }
-            { 
-              
-              \exp_args:No \addglobalbib 
-                { \g_@@_filename_tl .bib }
-            }
-            { \exp_args:NNV \bibliography * \g_@@_filename_tl }
-        }
-        { \exp_args:NV \bibliography \g_@@_filename_tl }
-    }
-    {
-      \cs_new_eq:NN \@@_bibliography:n \bibliography
-      \RenewDocumentCommand \bibliography { m } 
-        {
-          \int_compare:nNnTF \g_@@_total_notes_int = \c_zero
-            { \@@_bibliography:n {##1} }
-            {
-              \cs_set_nopar:Npx \@@_attach_bibliography: 
-                {
-                  \exp_not:N \@@_bibliography:n 
-                    { 
-                      \exp_not:n {##1} , \exp_not:V \g_@@_filename_tl 
-                    }
-                }
-              \@@_attach_bibliography:
-            }
-        }
-    }
-}
+\cs_new_nopar:Npn \@@_attach_bibliography:
+  {
+    \@ifpackageloaded { biblatex } 
+      {
+        \@ifpackagelater { biblatex } { 2011/01/08 }
+          { 
+            \@ifpackagelater { biblatex } { 2011/02/12 }
+              { \exp_args:No \addglobalbib { \g_@@_filename_tl .bib } }
+              { \exp_args:NNV \bibliography * \g_@@_filename_tl }
+          }
+          { \exp_args:NV \bibliography \g_@@_filename_tl }
+      }
+      {
+        \cs_new_eq:NN \@@_bibliography:n \bibliography
+        \RenewDocumentCommand \bibliography { m } 
+          {
+            \int_compare:nNnTF \g_@@_total_notes_int = \c_zero
+              { \@@_bibliography:n {##1} }
+              {
+                \cs_set_nopar:Npx \@@_attach_bibliography: 
+                  {
+                    \exp_not:N \@@_bibliography:n 
+                      { \exp_not:n {##1} , \exp_not:V \g_@@_filename_tl }
+                  }
+                \@@_attach_bibliography:
+              }
+          }
+      }
+  }
 \@ifpackageloaded { biblatex } 
   {
     \@ifpackagelater { biblatex } { 2011/01/08 }
@@ -1250,11 +1262,12 @@ This work consists of the file  notes2bib.dtx
 % \pkg{biblatex} uses the name \texttt{sortkey} for a key to sort by,
 % whereas other style call the same concept \texttt{key}.
 %    \begin{macrocode}
-\AtBeginDocument {
-  \@ifpackageloaded { biblatex } 
-    { \tl_set:Nn \l_@@_sortkey_field_tl { sortkey } }
-    { \tl_set:Nn \l_@@_sortkey_field_tl { key } }
-}
+\AtBeginDocument
+  {
+    \@ifpackageloaded { biblatex } 
+      { \tl_set:Nn \l_@@_sortkey_field_tl { sortkey } }
+      { \tl_set:Nn \l_@@_sortkey_field_tl { key } }
+  }
 %    \end{macrocode}
 %
 % To get the correct ordering for notes, writing to the \file{aux} file
@@ -1262,25 +1275,26 @@ This work consists of the file  notes2bib.dtx
 % convenient hook for this. Otherwise, everything has to happen after
 % the citation command.
 %    \begin{macrocode}
-\AtBeginDocument {
-  \@ifpackageloaded { biblatex } 
-    {
-      \cs_set:Npn \@@_mark_note_after_aux:n #1 
-        {
-          \AtNextCite { \@fileswfalse }
-          \@@_cite:w {#1}
+\AtBeginDocument
+  {
+    \@ifpackageloaded { biblatex } 
+      {
+        \cs_set:Npn \@@_mark_note_after_aux:n #1 
+          {
+            \AtNextCite { \@fileswfalse }
+            \@@_cite:w {#1}
         }
-    }
-    {
-      \cs_set:Npn \@@_mark_note_after_aux:n #1 
-        {
-          \cs_set_eq:NN \@@_filesw: \if@filesw
-          \@fileswfalse
-          \@@_cite:w {#1}
-          \cs_set_eq:NN \if@filesw \@@_filesw:
-        }    
-    }
-}
+      }
+      {
+        \cs_set:Npn \@@_mark_note_after_aux:n #1 
+          {
+            \cs_set_eq:NN \@@_filesw: \if@filesw
+            \@fileswfalse
+            \@@_cite:w {#1}
+            \cs_set_eq:NN \if@filesw \@@_filesw:
+          }    
+      }
+  }
 %    \end{macrocode}
 %
 % \begin{macro}{\@@_aux_hook:}
@@ -1290,30 +1304,31 @@ This work consists of the file  notes2bib.dtx
 %   way \pkg{cite} sets things up is a little complicated. The link needs
 %   to be made at the end of the \cs{document} macro.
 %    \begin{macrocode}
-\AtBeginDocument {
-  \@ifpackageloaded { cite } 
-    {
-      \cs_set:Npn \@@_mark_note_after_aux:n #1 
-        {
-          \cs_set_eq:NN \@@_filesw: \if@filesw
-          \@fileswfalse
-          \cs_set_nopar:Npn \@@_aux_hook: 
-            {
-              \cs_set_eq:NN \if@filesw \@@_filesw:
-              \cs_set_nopar:Npn \@@_aux_hook: { }
-            }
-          \@@_cite:w {#1}
-        }
-      \cs_new_nopar:Npn \@@_aux_hook: { }
-      \tl_gput_right:Nn \g_@@_document_hook_tl 
-        {
-          \cs_if_exist:NF \@restore@auxhandle 
-            { \tl_new:N \@restore@auxhandle }
-          \tl_put_right:Nn \@restore@auxhandle { \@@_aux_hook: }
-        }
-    } 
-    { }
-}
+\AtBeginDocument
+  {
+    \@ifpackageloaded { cite } 
+      {
+        \cs_set:Npn \@@_mark_note_after_aux:n #1 
+          {
+            \cs_set_eq:NN \@@_filesw: \if@filesw
+            \@fileswfalse
+            \cs_set_nopar:Npn \@@_aux_hook: 
+              {
+                \cs_set_eq:NN \if@filesw \@@_filesw:
+                \cs_set_nopar:Npn \@@_aux_hook: { }
+              }
+            \@@_cite:w {#1}
+          }
+        \cs_new_nopar:Npn \@@_aux_hook: { }
+        \tl_gput_right:Nn \g_@@_document_hook_tl 
+          {
+            \cs_if_exist:NF \@restore@auxhandle 
+              { \tl_new:N \@restore@auxhandle }
+            \tl_put_right:Nn \@restore@auxhandle { \@@_aux_hook: }
+          }
+      } 
+      { }
+  }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1328,18 +1343,20 @@ This work consists of the file  notes2bib.dtx
 %   is dealt with first as this leaves the note-marking code at the end
 %   of the function (needed if punctuation is to be moved).
 %    \begin{macrocode}
-\NewDocumentCommand \bibnote { o +m } {
-  \IfNoValueTF {#1} 
-    {
-      \int_gincr:N \g_@@_note_int
-      \@@_bibnote:xn { \@@_note_name: } {#2}
-    }
-    { \@@_bibnote:xn { \@@_insert_refsection: #1 } {#2} }
-}
-\cs_new_protected:Npn \@@_bibnote:nn #1#2 {
-  \@@_write_note:nn {#1} {#2}
-  \@@_mark_note:n {#1}
-}
+\NewDocumentCommand \bibnote { o +m }
+  {
+    \IfNoValueTF {#1} 
+      {
+        \int_gincr:N \g_@@_note_int
+        \@@_bibnote:xn { \@@_note_name: } {#2}
+      }
+      { \@@_bibnote:xn { \@@_insert_refsection: #1 } {#2} }
+  }
+\cs_new_protected:Npn \@@_bibnote:nn #1#2
+  {
+    \@@_write_note:nn {#1} {#2}
+    \@@_mark_note:n {#1}
+  }
 \cs_generate_variant:Nn \@@_bibnote:nn { x }
 %    \end{macrocode}
 % \end{macro}
@@ -1349,14 +1366,15 @@ This work consists of the file  notes2bib.dtx
 %   Simply marking a note has similar requirements, but as there is only
 %   a single internal function to call the code is less complex.
 %    \begin{macrocode}
-\NewDocumentCommand \bibnotemark { o } {
-  \IfNoValueTF {#1} 
-    {
-      \int_gincr:N \g_@@_note_int
-      \@@_mark_note:x { \@@_note_name: }
-    }
-    { \@@_mark_note:x { \@@_insert_refsection: #1 } }
-}
+\NewDocumentCommand \bibnotemark { o }
+  {
+    \IfNoValueTF {#1} 
+      {
+        \int_gincr:N \g_@@_note_int
+        \@@_mark_note:x { \@@_note_name: }
+      }
+      { \@@_mark_note:x { \@@_insert_refsection: #1 } }
+  }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1366,38 +1384,36 @@ This work consists of the file  notes2bib.dtx
 %   type is used as this means that full expansion of the note name can
 %   take place \enquote{early}.
 %    \begin{macrocode}
-\NewDocumentCommand \bibnotetext { o +m } {
-  \IfNoValueTF {#1} 
-    { \@@_write_note:xn { \@@_note_name: } {#2} }
-    { \@@_write_note:xn { \@@_insert_refsection: #1 } {#2} }
-}
+\NewDocumentCommand \bibnotetext { o +m }
+  {
+    \IfNoValueTF {#1} 
+      { \@@_write_note:xn { \@@_note_name: } {#2} }
+      { \@@_write_note:xn { \@@_insert_refsection: #1 } {#2} }
+  }
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\recordnotes}
 %   A direct call to the internal function: no arguments are needed.
 %    \begin{macrocode}
-\NewDocumentCommand \recordnotes { } {
-  \@@_record_notes:
-}
+\NewDocumentCommand \recordnotes { }
+  { \@@_record_notes: }
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\bibnotesetup}
 % A user set up function.
 %    \begin{macrocode}
-\NewDocumentCommand \bibnotesetup { m } {
-  \keys_set:nn { notes2bib } {#1}
-}
+\NewDocumentCommand \bibnotesetup { m }
+  { \keys_set:nn { notes2bib } {#1} }
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\printbibnotes}
 %   A direct translation for the internal function.
 %    \begin{macrocode}
-\NewDocumentCommand \printbibnotes { } {
-  \@@_print_notes:
-}
+\NewDocumentCommand \printbibnotes { }
+  { \@@_print_notes: }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1406,9 +1422,8 @@ This work consists of the file  notes2bib.dtx
 % \begin{macro}{\niibsetup}
 %   A few functions which are depreciated in version two.
 %    \begin{macrocode}
-\NewDocumentCommand \citenote { m } { 
-  \@@_mark_note:n {#1}
-}
+\NewDocumentCommand \citenote { m }
+  { \@@_mark_note:n {#1} }
 \cs_new_eq:NN \flushnotestack \recordnotes
 \cs_new_eq:NN \niibsetup      \bibnotesetup
 %    \end{macrocode}
@@ -1431,13 +1446,13 @@ This work consists of the file  notes2bib.dtx
 %   For notes before citations, there is also a need to put the 
 %   \cs{citation} calls into the \file{aux} file at the correct stage.
 %    \begin{macrocode}
-\cs_new_protected_nopar:Npn \NotesAfterCitations #1 {
-  \clist_gput_right:Nn \g_@@_previous_after_clist {#1}
-}
-\cs_new_protected_nopar:Npn \NotesBeforeCitations #1 {
-  \clist_gput_right:Nn \g_@@_previous_after_clist {#1}
-  \tl_gput_right:Nn \g_@@_document_hook_tl { \nocite {#1} }
-}
+\cs_new_protected_nopar:Npn \NotesAfterCitations #1
+  { \clist_gput_right:Nn \g_@@_previous_after_clist {#1} }
+\cs_new_protected_nopar:Npn \NotesBeforeCitations #1
+  {
+    \clist_gput_right:Nn \g_@@_previous_after_clist {#1}
+    \tl_gput_right:Nn \g_@@_document_hook_tl { \nocite {#1} }
+  }
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -1446,9 +1461,8 @@ This work consists of the file  notes2bib.dtx
 %   This function allows the total number of bibliography notes to be
 %   carried forward from one run to the next.
 %    \begin{macrocode}
-\cs_new_protected_nopar:Npn \TotalNotes #1 {
-  \int_gset:Nn \g_@@_previous_notes_int {#1}
-}
+\cs_new_protected_nopar:Npn \TotalNotes #1
+  { \int_gset:Nn \g_@@_previous_notes_int {#1} }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1480,20 +1494,22 @@ This work consists of the file  notes2bib.dtx
 % that from the previous run. If not, then there is a need to re-run
 % LaTeX.
 %    \begin{macrocode}
-\AtEndDocument {
-  \tl_if_eq:NNTF \g_@@_all_before_clist \g_@@_previous_before_clist 
-    {
-      \tl_if_eq:NNF \g_@@_all_after_clist \g_@@_previous_after_clist 
-        { \msg_info:nn { notes2bib } { rerun } }
-    }
-    { \msg_info:nn { notes2bib } { rerun } }
-}
-\msg_new:nnn { notes2bib } { rerun } {
-  To~get~notes~in~the~correct~order,~please~run: \\%
-  \c_space_tl 1)~LaTeX  \\
-  \c_space_tl 2)~BibTeX \\
-  \c_space_tl 3)~LaTeX
-}
+\AtEndDocument
+  {
+    \tl_if_eq:NNTF \g_@@_all_before_clist \g_@@_previous_before_clist 
+      {
+        \tl_if_eq:NNF \g_@@_all_after_clist \g_@@_previous_after_clist 
+          { \msg_info:nn { notes2bib } { rerun } }
+      }
+      { \msg_info:nn { notes2bib } { rerun } }
+  }
+\msg_new:nnn { notes2bib } { rerun }
+  {
+    To~get~notes~in~the~correct~order,~please~run: \\%
+    \c_space_tl 1)~LaTeX  \\
+    \c_space_tl 2)~BibTeX \\
+    \c_space_tl 3)~LaTeX
+  }
 %    \end{macrocode}
 %  
 % \begin{macro}{\@@_write_note_file:}  
@@ -1501,20 +1517,22 @@ This work consists of the file  notes2bib.dtx
 % The notes themselves are now written in one block: this avoids 
 % using up a stream for any longer than necessary.   
 %    \begin{macrocode}
-\AtEndDocument {
-  \if@filesw
-    \exp_after:wN \@@_write_note_file:
-  \fi:
-}
-\cs_new_protected_nopar:Npn \@@_write_note_file: {
-  \tl_if_empty:NF \g_@@_notes_tl {
-    \iow_open:Nn \g_@@_file_iow { \g_@@_filename_tl .bib }
-    \iow_now:Nx \g_@@_file_iow { \c_@@_file_message_tl }
-    \iow_now:Nx \g_@@_file_iow 
-      { \exp_not:V \g_@@_notes_tl }
-    \iow_close:N \g_@@_file_iow  
+\AtEndDocument
+  {
+    \if@filesw
+      \exp_after:wN \@@_write_note_file:
+    \fi:
   }
-}
+\cs_new_protected_nopar:Npn \@@_write_note_file:
+  {
+    \tl_if_empty:NF \g_@@_notes_tl
+      {
+        \iow_open:Nn \g_@@_file_iow { \g_@@_filename_tl .bib }
+        \iow_now:Nx \g_@@_file_iow { \c_@@_file_message_tl }
+        \iow_now:Nx \g_@@_file_iow { \exp_not:V \g_@@_notes_tl }
+        \iow_close:N \g_@@_file_iow  
+      }
+  }
 \iow_new:N \g_@@_file_iow
 %    \end{macrocode}
 % \end{macro}
@@ -1540,14 +1558,15 @@ This work consists of the file  notes2bib.dtx
 %   is the kernel definition modified: if an alternative version is in use
 %   things may go wrong.
 %    \begin{macrocode}
-\cs_set:Npn \thanks #1 {
-  \@@_footnotemark:w
-  \protected@xdef \@thanks 
-    {
-      \@thanks
-      \protect \@@_footnotetext:w [ \the \c@footnote ] {#1}
-    }
-}
+\cs_set:Npn \thanks #1
+  {
+    \@@_footnotemark:w
+    \protected@xdef \@thanks 
+      {
+        \@thanks
+        \protect \@@_footnotetext:w [ \the \c@footnote ] {#1}
+      }
+  }
 %    \end{macrocode}
 % \end{macro}    
 %
