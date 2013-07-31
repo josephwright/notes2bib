@@ -636,10 +636,10 @@ This work consists of the file  notes2bib.dtx
 %    
 %\subsection{Variables and constants}
 %
-%\begin{macro}{\c_@@_file_message_tl}
-% A short piece of text that is added to the top of an auto-generated
-% file. Setting this up as a constant means that it can be changed
-% (for example for translation) if necessary.
+% \begin{macro}{\c_@@_file_message_tl}
+%   A short piece of text that is added to the top of an auto-generated
+%   file. Setting this up as a constant means that it can be changed
+%   (for example for translation) if necessary.
 %    \begin{macrocode}
 \tl_const:Nn \c_@@_file_message_tl 
   {
@@ -654,121 +654,116 @@ This work consists of the file  notes2bib.dtx
       \iow_newline:
   }
 %    \end{macrocode}
-%\end{macro}
+% \end{macro}
 %
-%\begin{macro}{\g_@@_after_clist}
-%\begin{macro}{\g_@@_before_clist}
-% Notes to be placed either before or after citations need to be tracked
-% by the module. Simple comma lists will achieve this.
+% \begin{macro}{\g_@@_after_clist, \g_@@_before_clist}
+%   Notes to be placed either before or after citations need to be tracked
+%   by the module. Simple comma lists will achieve this.
 %    \begin{macrocode}
 \clist_new:N \g_@@_after_clist
 \clist_new:N \g_@@_before_clist
 %    \end{macrocode}
-%\end{macro}
-%\end{macro}
+% \end{macro}
 %
-%\begin{macro}{\g_@@_all_after_clist}
-%\begin{macro}{\g_@@_all_before_clist}
-% As notes after citations can be flushed, there is a need for a second
-% list which is never emptied.
+% \begin{macro}{\g_@@_all_after_clist, \g_@@_all_before_clist}
+%   As notes after citations can be flushed, there is a need for a second
+%   list which is never emptied.
 %    \begin{macrocode}
 \clist_new:N \g_@@_all_after_clist
 \clist_new:N \g_@@_all_before_clist
 %    \end{macrocode}
-%\end{macro}
-%\end{macro}
+% \end{macro}
 %
-%\begin{macro}{\g_@@_note_int}
-% A counter for the automatically-created notes is needed. This is a
-% global value (life will get very complicated if not).
+% \begin{macro}{\g_@@_note_int}
+%   A counter for the automatically-created notes is needed. This is a
+%   global value (life will get very complicated if not).
 %    \begin{macrocode}
 \int_new:N \g_@@_note_int
 %    \end{macrocode}
-%\end{macro}
+% \end{macro}
 %
-%\begin{macro}{\l_@@_presort_tl}
-%\begin{macro}{\l_@@_sortkey_tl}
-% The text used for sorting citations is stored here: it is never set
-% directly, as it depends on the type of sorting taking place.
+% \begin{macro}{\l_@@_presort_tl, \l_@@_sortkey_tl}
+%   The text used for sorting citations is stored here: it is never set
+%   directly, as it depends on the type of sorting taking place.
 %    \begin{macrocode}
 \tl_new:N \l_@@_presort_tl
 \tl_new:N \l_@@_sortkey_tl
 %    \end{macrocode}
-%\end{macro}
-%\end{macro}
+% \end{macro}
 %
-%\begin{macro}{\g_@@_previous_after_clist}
-%\begin{macro}{\g_@@_previous_before_clist}
-% For comparison purposes, the lists of out-of-order notes from the
-% previous LaTeX run are needed.
+% \begin{macro}{\g_@@_previous_after_clist, \g_@@_previous_before_clist}
+%   For comparison purposes, the lists of out-of-order notes from the
+%   previous LaTeX run are needed.
 %    \begin{macrocode}
 \clist_new:N \g_@@_previous_after_clist
 \clist_new:N \g_@@_previous_before_clist
 %    \end{macrocode}
-%\end{macro}
-%\end{macro}
+% \end{macro}
 %
-%\begin{macro}{\g_@@_previous_notes_int}
-% The total number of notes created is needed, as this is used to see
-% if any zero-padding is required for the numbers. Of course, for this
-% to work there has to be a second LaTeX run.
+% \begin{macro}{\g_@@_previous_notes_int}
+%   The total number of notes created is needed, as this is used to see
+%   if any zero-padding is required for the numbers. Of course, for this
+%   to work there has to be a second LaTeX run.
 %    \begin{macrocode}
 \int_new:N \g_@@_previous_notes_int
 %    \end{macrocode}
-%\end{macro}
+% \end{macro}
 %
-%\begin{macro}{\g_@@_notes_tl}
-% Used to collect up the note text for writing in a single block
-% at the end of the document.
+% \begin{macro}{\g_@@_notes_tl}
+%   Used to collect up the note text for writing in a single block
+%   at the end of the document.
 %    \begin{macrocode}
 \tl_new:N \g_@@_notes_tl
 %    \end{macrocode}
-%\end{macro}
+% \end{macro}
 %
-%\begin{macro}{\l_@@_sortkey_field_tl}
-% The key for sorting is called \texttt{key} by standard \BibTeX\ and
-% \texttt{sortkey} by \pkg{biblatex}. It keeps everything clearer if
-% the appropriate name is stored in a token list. The value itself is
-% set up later.
+% \begin{macro}{\l_@@_sortkey_field_tl}
+%   The key for sorting is called \texttt{key} by standard \BibTeX\ and
+%   \texttt{sortkey} by \pkg{biblatex}. It keeps everything clearer if
+%   the appropriate name is stored in a token list. The value itself is
+%   set up later.
 %    \begin{macrocode}
 \tl_new:N \l_@@_sortkey_field_tl
 %    \end{macrocode}
-%\end{macro}
+% \end{macro}
 %
-%\begin{macro}{\g_@@_total_notes_int}
-% Tracks the total number of notes created, so that the module can tell
-% if any have been used.
+% \begin{macro}{\g_@@_total_notes_int}
+%   Tracks the total number of notes created, so that the module can tell
+%   if any have been used.
 %    \begin{macrocode}
 \int_new:N \g_@@_total_notes_int
 %    \end{macrocode}
-%\end{macro}
+% \end{macro}
 %
-%\subsection{Control options}
+% \subsection{Control options}
 %
-%\begin{macro}{\@@_cite:w}
-% The underlying function for citation starts off with no value:
-% this is then set up by the key--value settings given next.
+% \begin{macro}{\@@_cite:w}
+%   The underlying function for citation starts off with no value:
+%   this is then set up by the key--value settings given next.
 %    \begin{macrocode}
 \cs_new_nopar:Npn \@@_cite:w { }
 %    \end{macrocode}
-%\end{macro}
+% \end{macro}
 %
-%\begin{macro}{\g_@@_filename_tl}
-%\begin{macro}{\l_@@_keyword_tl}
-%\begin{macro}{\l_@@_note_field_tl}
-%\begin{macro}{\l_@@_note_name_tl}
-%\begin{macro}{\l_@@_presort_after_tl}
-%\begin{macro}{\l_@@_presort_before_tl}
-%\begin{macro}{\l_@@_presort_mixed_tl}
-%\begin{macro}{\l_@@_record_type_tl}
-%\begin{macro}{\l_@@_refsection_name_tl}
-%\begin{macro}{\l_@@_refsection_sep_tl}
-%\begin{macro}{\l_@@_record_type_tl}
-%\begin{macro}{\l_@@_sortkey_after_tl}
-%\begin{macro}{\l_@@_sortkey_before_tl}
-%\begin{macro}{\l_@@_sortkey_mixed_tl}
-%\begin{macro}{\l_@@_write_sortkey_bool}
-% The various package options are created.
+% \begin{macro}{\g_@@_filename_tl}
+% \begin{macro}
+%   {
+%     \l_@@_keyword_tl,
+%     \l_@@_note_field_tl,
+%     \l_@@_note_name_tl,
+%     \l_@@_presort_after_tl,
+%     \l_@@_presort_before_tl,
+%     \l_@@_presort_mixed_tl,
+%     \l_@@_record_type_tl,
+%     \l_@@_refsection_name_tl,
+%     \l_@@_refsection_sep_tl,
+%     \l_@@_record_type_tl,
+%     \l_@@_sortkey_after_tl,
+%     \l_@@_sortkey_before_tl,
+%     \l_@@_sortkey_mixed_tl,
+%     \l_@@_write_sortkey_bool
+%  }
+%   The various package options are created.
 %    \begin{macrocode}
 \keys_define:nn { notes2bib } {
   cite-function     .code:n      = 
@@ -825,21 +820,8 @@ This work consists of the file  notes2bib.dtx
   use-sort-key         .bool_set:N  = \l_@@_write_sortkey_bool  ,
 }
 %    \end{macrocode}
-%\end{macro}
-%\end{macro}
-%\end{macro}
-%\end{macro}
-%\end{macro}
-%\end{macro}
-%\end{macro}
-%\end{macro}
-%\end{macro}
-%\end{macro}
-%\end{macro}
-%\end{macro}
-%\end{macro}
-%\end{macro}
-%\end{macro}
+% \end{macro}
+% \end{macro}
 %
 % Default values for the keys are set up. Many of these probably never
 % change, but done in this way the package is much more flexible.
@@ -862,9 +844,9 @@ This work consists of the file  notes2bib.dtx
 }
 %    \end{macrocode}
 %    
-%\changes{v2.0d}{2011/01/08}{Use new \cs{bibnote} record type with
-%  \pkg{biblatex} v1.1a or later}
-%\changes{v2.0e}{2011/01/18}{Add back references to bibnotes}
+% \changes{v2.0d}{2011/01/08}{Use new \cs{bibnote} record type with
+%   \pkg{biblatex} v1.1a or later}
+% \changes{v2.0e}{2011/01/18}{Add back references to bibnotes}
 % A few options need to be altered or deactivated at the start of
 % the document.
 %    \begin{macrocode}
@@ -908,12 +890,12 @@ This work consists of the file  notes2bib.dtx
   { The~option~'#1'~can~only~be~used~in~the~preamble. }
 %    \end{macrocode}
 %    
-%\subsection{Support for \pkg{biblatex} \texttt{refsection} system}
+% \subsection{Support for \pkg{biblatex} \texttt{refsection} system}
 %
-%\begin{macro}{\@@_insert_refsection:}
-%\changes{v2.0d}{2011/01/08}{Added support for refsections}
-% When using \pkg{biblatex}, it's possible that \texttt{refsection}s are
-% in use. If so, to ensure that labels are always unique the
+% \begin{macro}{\@@_insert_refsection:}
+%   \changes{v2.0d}{2011/01/08}{Added support for refsections}
+%   When using \pkg{biblatex}, it's possible that \texttt{refsection}s are
+%   in use. If so, to ensure that labels are always unique the
 % \texttt{refsection} number is added to the label.
 %    \begin{macrocode}
 \cs_new_nopar:Npn \@@_insert_refsection: { }
@@ -933,11 +915,11 @@ This work consists of the file  notes2bib.dtx
     { }
 }
 %    \end{macrocode}
-%\end{macro}
+% \end{macro}
 %    
-%\subsection{Options from version one}
+% \subsection{Options from version one}
 %
-%\changes{v2.0k}{2013/07/11}{Drop use of \texttt{.meta:x} key property}
+% \changes{v2.0k}{2013/07/11}{Drop use of \texttt{.meta:x} key property}
 % The new option names are preferred, but the old ones still need to 
 % work correctly.
 %    \begin{macrocode}
@@ -973,15 +955,15 @@ This work consists of the file  notes2bib.dtx
 }
 %    \end{macrocode}
 %    
-%\subsection{Utility functions}
+% \subsection{Utility functions}
 %    
-%\begin{macro}{\@@_note_name:}
-% When note citations are generated automatically, the text to indicate
-% a note plus the number of the current note needs to be turned into
-% something printable. The value tests here mean that if there are more
-% than nine notes, notes 1--9 have the number padded to get proper 
-% sorting. This needs two passes, as the total number of notes is only
-% available at the end of the LaTeX run.
+% \begin{macro}{\@@_note_name:}
+%   When note citations are generated automatically, the text to indicate
+%   a note plus the number of the current note needs to be turned into
+%   something printable. The value tests here mean that if there are more
+%   than nine notes, notes 1--9 have the number padded to get proper 
+%   sorting. This needs two passes, as the total number of notes is only
+%   available at the end of the LaTeX run.
 %    \begin{macrocode}
 \cs_new_nopar:Npn \@@_note_name: {
   \@@_insert_refsection:
@@ -991,36 +973,34 @@ This work consists of the file  notes2bib.dtx
   \int_to_arabic:n { \g_@@_note_int }
 }
 %    \end{macrocode}
-%\end{macro}
+% \end{macro}
 %
-%\begin{macro}{\@@_filesw:}
-% Making sorting work means messing about with \cs{if@filesw}. The 
-% function created here is used to store the current status of the
-% flag.
+% \begin{macro}{\@@_filesw:}
+%   Making sorting work means messing about with \cs{if@filesw}. The 
+%   function created here is used to store the current status of the
+%   flag.
 %    \begin{macrocode}
 \cs_new_nopar:Npn \@@_filesw: { }
 %    \end{macrocode}
-%\end{macro}
+% \end{macro}
 %
-%\subsection{Marking notes in the text}
+% \subsection{Marking notes in the text}
 %
-%\begin{macro}{\@@_mark_note:n}
-%\begin{macro}{\@@_mark_note:x}
-% The function to mark note positions is initially declared with no
-% expansion. The real meaning will be set by the key--value setting, 
-% and depends on the placement of notes compared with real citations.
+% \begin{macro}{\@@_mark_note:n, \@@_mark_note:x}
+%   The function to mark note positions is initially declared with no
+%   expansion. The real meaning will be set by the key--value setting, 
+%   and depends on the placement of notes compared with real citations.
 %    \begin{macrocode}
 \cs_new:Npn \@@_mark_note:n #1 { }
 \cs_generate_variant:Nn \@@_mark_note:n { x }
 %    \end{macrocode}
-%\end{macro}
-%\end{macro}
+% \end{macro}
 %
-%\begin{macro}{\@@_mark_note_after:n}
-%\begin{macro}[aux]{\@@_mark_note_after_aux:n}
-% For notes which come after citations, the entry is recorded and an
-% auxiliary is called. The nature of the second function is dependent
-% on the other packages loaded.
+% \begin{macro}{\@@_mark_note_after:n}
+% \begin{macro}[aux]{\@@_mark_note_after_aux:n}
+%   For notes which come after citations, the entry is recorded and an
+%   auxiliary is called. The nature of the second function is dependent
+%   on the other packages loaded.
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_mark_note_after:n #1 {
   \int_gincr:N \g_@@_total_notes_int
@@ -1029,12 +1009,12 @@ This work consists of the file  notes2bib.dtx
 }
 \cs_new:Npn \@@_mark_note_after_aux:n #1 { }
 %    \end{macrocode}
-%\end{macro}
-%\end{macro}
+% \end{macro}
+% \end{macro}
 %
-%\begin{macro}{\@@_mark_note_before:n}
-% Notes to appear before all citations are simple recorded, as they will
-% be set up on the next LaTeX run.
+% \begin{macro}{\@@_mark_note_before:n}
+%   Notes to appear before all citations are simple recorded, as they will
+%   be set up on the next \LaTeX{} run.
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_mark_note_before:n #1 {
   \int_gincr:N \g_@@_total_notes_int
@@ -1042,28 +1022,27 @@ This work consists of the file  notes2bib.dtx
   \@@_cite:w {#1}
 }
 %    \end{macrocode}
-%\end{macro}
+% \end{macro}
 %
-%\begin{macro}{\@@_mark_note_mixed:n}
-% Mixed citations are very easy to handle: just use whatever cite
-% command is current.
+% \begin{macro}{\@@_mark_note_mixed:n}
+%   Mixed citations are very easy to handle: just use whatever cite
+%   command is current.
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_mark_note_mixed:n #1 {
   \int_gincr:N \g_@@_total_notes_int
   \@@_cite:w {#1}
 }
 %    \end{macrocode}
-%\end{macro}
+% \end{macro}
 %
-%\subsection{Writing note text to the database}
+% \subsection{Writing note text to the database}
 %    
-%\begin{macro}{\@@_write_field:nn}
-%\begin{macro}{\@@_write_field:Vn}
-% To keep the auto-generated database readable, there needs to be some
-% formatting. This is provided by using a dedicated function to 
-% write the various fields to it. Although the \texttt{V} variant is
-% not technically needed (writing expands everything), it helps to keep
-% the intention of the code here clearer.
+% \begin{macro}{\@@_write_field:nn, \@@_write_field:Vn}
+%   To keep the auto-generated database readable, there needs to be some
+%   formatting. This is provided by using a dedicated function to 
+%   write the various fields to it. Although the \texttt{V} variant is
+%   not technically needed (writing expands everything), it helps to keep
+%   the intention of the code here clearer.
 %    \begin{macrocode}
 \cs_new:Npn \@@_write_field:nn #1#2 {
   \c_space_tl \c_space_tl #1 \c_space_tl = \c_space_tl {#2} , 
@@ -1071,18 +1050,17 @@ This work consists of the file  notes2bib.dtx
 }
 \cs_generate_variant:Nn \@@_write_field:nn { V }
 %    \end{macrocode}
-%\end{macro}
-%\end{macro}
+% \end{macro}
 %    
-%\begin{macro}{\@@_write_note:nn}
-%\changes{v2.0b}{2010/01/09}{Add \cs{else:} branch to handle case
-%  where \cs{if@filesw} is false}
-%\begin{macro}[aux]{\@@_write_note_aux:nn}
-%\begin{macro}{\@@_write_note:xn}
-% The writing function takes two arguments: the name of the note, and
-% the text itself. There is a need to check on the LaTeX2e system to
-% turn off writing, with a hand-over so there is no problem with 
-% balancing ifs.
+% \begin{macro}{\@@_write_note:nn}
+%   \changes{v2.0b}{2010/01/09}{Add \cs{else:} branch to handle case
+%     where \cs{if@filesw} is false}
+% \begin{macro}[aux]{\@@_write_note_aux:nn}
+% \begin{macro}{\@@_write_note:xn}
+%    The writing function takes two arguments: the name of the note, and
+%    the text itself. There is a need to check on the \LaTeXe{} system to
+%    turn off writing, with a hand-over so there is no problem with 
+%    balancing ifs.
 %    \begin{macrocode}
 \cs_new_protected_nopar:Npn \@@_write_note:nn {
   \if@filesw
@@ -1112,20 +1090,20 @@ This work consists of the file  notes2bib.dtx
 }
 \cs_generate_variant:Nn \@@_write_note:nn { x }
 %    \end{macrocode}
-%\end{macro}    
-%\end{macro}
-%\end{macro} 
+% \end{macro}    
+% \end{macro}
+% \end{macro} 
 %
-%\subsection{Handling out of order notes}
+% \subsection{Handling out of order notes}
 %
-%\begin{macro}{\@@_record_notes:}
-%\begin{macro}[aux]{\@@_flush_notes_aux:}
-% Notes after citations are not written to the \file{aux} file when 
-% given, but are held in a queue. This is flushed here, which means
-% actually doing the citation and also recording the notes so they
-% are available in the next LaTeX run. The list is also transferred
-% to a secondary one, which is used for comparison purposes right at the
-% end of the document.
+% \begin{macro}{\@@_record_notes:}
+% \begin{macro}[aux]{\@@_flush_notes_aux:}
+%   Notes after citations are not written to the \file{aux} file when 
+%   given, but are held in a queue. This is flushed here, which means
+%   actually doing the citation and also recording the notes so they
+%   are available in the next LaTeX run. The list is also transferred
+%   to a secondary one, which is used for comparison purposes right at the
+%   end of the document.
 %    \begin{macrocode}
 \cs_new_protected_nopar:Npn \@@_record_notes: {
   \if@filesw
@@ -1150,14 +1128,14 @@ This work consists of the file  notes2bib.dtx
     }
 }
 %    \end{macrocode}
-%\end{macro}
-%\end{macro}
+% \end{macro}
+% \end{macro}
 %
-%\subsection{Interchanging note types}
+% \subsection{Interchanging note types}
 %
-%\begin{macro}{\@@_to_bibnote:n}
-% Converting other notes to bibliography notes is simple: just set
-% them equal.
+% \begin{macro}{\@@_to_bibnote:n}
+%   Converting other notes to bibliography notes is simple: just set
+%   them equal.
 %    \begin{macrocode}
 \cs_new_protected_nopar:Npn \@@_to_bibnote:n #1 {
   \cs_set_eq:cN {#1}        \bibnote
@@ -1165,11 +1143,11 @@ This work consists of the file  notes2bib.dtx
   \cs_set_eq:cN { #1 text } \bibnotetext
 }
 %    \end{macrocode}
-%\end{macro}
+% \end{macro}
 %
-%\begin{macro}{\@@_from_bibnote:n}
-% The reverse process needs the original definitions, which are saved
-% by the module for later recovery.
+% \begin{macro}{\@@_from_bibnote:n}
+%   The reverse process needs the original definitions, which are saved
+%   by the module for later recovery.
 %    \begin{macrocode}
 \cs_new_protected_nopar:Npn \@@_from_bibnote:n #1 {
   \cs_set_eq:cc {#1}        { @@_ #1 :w }
@@ -1177,17 +1155,17 @@ This work consists of the file  notes2bib.dtx
   \cs_set_eq:cc { #1 text } { @@_ #1 text:w }
 }
 %    \end{macrocode}
-%\end{macro}
+% \end{macro}
 %
-%\begin{macro}{\@@_endnote:w}
-%\begin{macro}{\@@_endnotemark:w}
-%\begin{macro}{\@@_endnotetext:w}
-%\begin{macro}{\@@_footnote:w}
-%\begin{macro}{\@@_footnotemark:w}
-%\begin{macro}{\@@_footnotetext:w}
-% At the start of the document, the definitions for endnotes and 
-% footnotes are saved so that footnotes and endnotes can be turned into
-% bibliography notes and back again.
+% \begin{macro}{\@@_endnote:w}
+% \begin{macro}{\@@_endnotemark:w}
+% \begin{macro}{\@@_endnotetext:w}
+% \begin{macro}{\@@_footnote:w}
+% \begin{macro}{\@@_footnotemark:w}
+% \begin{macro}{\@@_footnotetext:w}
+%   At the start of the document, the definitions for endnotes and 
+%   footnotes are saved so that footnotes and endnotes can be turned into
+%   bibliography notes and back again.
 %    \begin{macrocode}
 \AtBeginDocument {
   \cs_set_eq:NN \@@_endnote:w     \endnote     
@@ -1198,21 +1176,21 @@ This work consists of the file  notes2bib.dtx
   \cs_set_eq:NN \@@_footnotetext:w \footnotetext
 }
 %    \end{macrocode}
-%\end{macro}
-%\end{macro}
-%\end{macro}
-%\end{macro}
-%\end{macro}
-%\end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
 %
-%\subsection{Package-dependent code}
+% \subsection{Package-dependent code}
 %
-%\begin{macro}{\@@_create_print_notes:}
-%\begin{macro}{\@@_print_notes:}
-% The method for printing notes depends on whether \pkg{biblatex} is
-% in use. If it is, then a selective call to \cs{printbibliography} is
-% made. Otherwise, the original \cs{bibliography} function is called,
-% and passed the name of the notes file.
+% \begin{macro}{\@@_create_print_notes:}
+% \begin{macro}{\@@_print_notes:}
+%   The method for printing notes depends on whether \pkg{biblatex} is
+%   in use. If it is, then a selective call to \cs{printbibliography} is
+%   made. Otherwise, the original \cs{bibliography} function is called,
+%   and passed the name of the notes file.
 %    \begin{macrocode}
 \AtBeginDocument {
   \@ifpackageloaded { biblatex } 
@@ -1234,24 +1212,24 @@ This work consists of the file  notes2bib.dtx
 }
 \cs_new_nopar:Npn \@@_create_print_notes: { }
 %    \end{macrocode}
-%\end{macro}
-%\end{macro}
+% \end{macro}
+% \end{macro}
 %
-%\begin{macro}{\@@_attach_bibliography:}
-%\changes{v2.0d}{2011/01/08}{Use new \cs{bibliography*} function with
-%  \pkg{biblatex} v1.1a or later}
-%\changes{v2.0f}{2011/02/23}{Use new \cs{addglobalbib} function with
-%  \pkg{biblatex} v1.2 or later}
-%\changes{v2.0h}{2011/09/09}{Use \cs{addglobalbib} function irrespective
-%  of load order}
-%\begin{macro}{\bibliography}
-%\begin{macro}{\@@_bibliography:n}
-% Getting the database created here to be scanned by \BibTeX\ is
-% dependant on whether \pkg{biblatex} is being used. If it is, and it is
-% already loaded, then the data can be added now. On the other hand, if
-% it is not already loaded a check is made at the end of the preamble.
-% The \cs{bibliography} function has to be patched if \pkg{biblatex} is
-% not in use.
+% \begin{macro}{\@@_attach_bibliography:}
+% \changes{v2.0d}{2011/01/08}{Use new \cs{bibliography*} function with
+%   \pkg{biblatex} v1.1a or later}
+% \changes{v2.0f}{2011/02/23}{Use new \cs{addglobalbib} function with
+%   \pkg{biblatex} v1.2 or later}
+% \changes{v2.0h}{2011/09/09}{Use \cs{addglobalbib} function irrespective
+%   of load order}
+% \begin{macro}{\bibliography}
+% \begin{macro}{\@@_bibliography:n}
+%   Getting the database created here to be scanned by \BibTeX\ is
+%   dependant on whether \pkg{biblatex} is being used. If it is, and it is
+%   already loaded, then the data can be added now. On the other hand, if
+%   it is not already loaded a check is made at the end of the preamble.
+%   The \cs{bibliography} function has to be patched if \pkg{biblatex} is
+%   not in use.
 %    \begin{macrocode}
 \cs_new_nopar:Npn \@@_attach_bibliography: {
   \@ifpackageloaded { biblatex } 
@@ -1303,9 +1281,9 @@ This work consists of the file  notes2bib.dtx
   }
   { \AtBeginDocument { \@@_attach_bibliography: } }
 %    \end{macrocode}
-%\end{macro}
-%\end{macro}
-%\end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
 %
 % \pkg{biblatex} uses the name \texttt{sortkey} for a key to sort by,
 % whereas other style call the same concept \texttt{key}.
@@ -1343,12 +1321,12 @@ This work consists of the file  notes2bib.dtx
 }
 %    \end{macrocode}
 %
-%\begin{macro}{\@@_aux_hook:}
-% If the \pkg{cite} package is loaded, then there is a hook to
-% reset the \file{aux} file after the citation. This means that moving
-% punctuation will still work under these circumstances.  However, the
-% way \pkg{cite} sets things up is a little complicated. The link needs
-% to be made at the end of the \cs{document} macro.
+% \begin{macro}{\@@_aux_hook:}
+%  If the \pkg{cite} package is loaded, then there is a hook to
+%  reset the \file{aux} file after the citation. This means that moving
+%  punctuation will still work under these circumstances.  However, the
+%  way \pkg{cite} sets things up is a little complicated. The link needs
+%  to be made at the end of the \cs{document} macro.
 %    \begin{macrocode}
 \AtBeginDocument {
   \@ifpackageloaded { cite } 
@@ -1375,19 +1353,19 @@ This work consists of the file  notes2bib.dtx
     { }
 }
 %    \end{macrocode}
-%\end{macro}
+% \end{macro}
 %
 %\subsection{User functions}
 %
-%\begin{macro}{\bibnote}
-%\begin{macro}{\@@_bibnote:nn}
-%\begin{macro}{\@@_bibnote:xn}
-% Creating a not from scratch is a multi-step operation. First, check
-% if a label was given by the user. If it was not, then one is created
-% by incrementing the automatic number and fully expanding 
-% \cs{@@_note_name:}. The second phase is to create the note. The text
-% is dealt with first as this leaves the note-marking code at the end
-% of the function (needed if punctuation is to be moved).
+% \begin{macro}{\bibnote}
+% \begin{macro}{\@@_bibnote:nn}
+% \begin{macro}{\@@_bibnote:xn}
+%   Creating a not from scratch is a multi-step operation. First, check
+%   if a label was given by the user. If it was not, then one is created
+%   by incrementing the automatic number and fully expanding 
+%   \cs{@@_note_name:}. The second phase is to create the note. The text
+%   is dealt with first as this leaves the note-marking code at the end
+%   of the function (needed if punctuation is to be moved).
 %    \begin{macrocode}
 \NewDocumentCommand \bibnote { o +m } {
   \IfNoValueTF {#1} 
@@ -1403,13 +1381,13 @@ This work consists of the file  notes2bib.dtx
 }
 \cs_generate_variant:Nn \@@_bibnote:nn { x }
 %    \end{macrocode}
-%\end{macro}
-%\end{macro}
-%\end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
 %
-%\begin{macro}{\bibnotemark}
-% Simply marking a note has similar requirements, but as there is only
-% a single internal function to call the code is less complex.
+% \begin{macro}{\bibnotemark}
+%   Simply marking a note has similar requirements, but as there is only
+%   a single internal function to call the code is less complex.
 %    \begin{macrocode}
 \NewDocumentCommand \bibnotemark { o } {
   \IfNoValueTF {#1} 
@@ -1420,13 +1398,13 @@ This work consists of the file  notes2bib.dtx
     { \@@_mark_note:x { \@@_insert_refsection: #1 } }
 }
 %    \end{macrocode}
-%\end{macro}
+% \end{macro}
 %
-%\begin{macro}{\bibnotetext}
-% As text for a note uses the same number as the preceeding mark,
-% things are slightly less complex here. The basic \texttt{o} argument
-% type is used as this means that full expansion of the note name can
-% take place \enquote{early}.
+% \begin{macro}{\bibnotetext}
+%   As text for a note uses the same number as the preceding mark,
+%   things are slightly less complex here. The basic \texttt{o} argument
+%   type is used as this means that full expansion of the note name can
+%   take place \enquote{early}.
 %    \begin{macrocode}
 \NewDocumentCommand \bibnotetext { o +m } {
   \IfNoValueTF {#1} 
@@ -1434,43 +1412,43 @@ This work consists of the file  notes2bib.dtx
     { \@@_write_note:xn { \@@_insert_refsection: #1 } {#2} }
 }
 %    \end{macrocode}
-%\end{macro}
+% \end{macro}
 %
-%\begin{macro}{\recordnotes}
-% A direct call to the internal function: no arguments are needed.
+% \begin{macro}{\recordnotes}
+%   A direct call to the internal function: no arguments are needed.
 %    \begin{macrocode}
 \NewDocumentCommand \recordnotes { } {
   \@@_record_notes:
 }
 %    \end{macrocode}
-%\end{macro}
+% \end{macro}
 %
-%\begin{macro}{\bibnotesetup}
+% \begin{macro}{\bibnotesetup}
 % A user set up function.
 %    \begin{macrocode}
 \NewDocumentCommand \bibnotesetup { m } {
   \keys_set:nn { notes2bib } {#1}
 }
 %    \end{macrocode}
-%\end{macro}
+% \end{macro}
 %
-%\begin{macro}{\printbibnotes}
-% A direct translation for the internal function.
+% \begin{macro}{\printbibnotes}
+%   A direct translation for the internal function.
 %    \begin{macrocode}
 \NewDocumentCommand \printbibnotes { } {
   \@@_print_notes:
 }
 %    \end{macrocode}
-%\end{macro}
+% \end{macro}
 %
-%\begin{macro}{\citenote}
-%\changes{v2.0}{2009/09/25}{Depreciated in favour of \cs{bibnotemark}}
-%\begin{macro}{\flushnotestack}
-%\changes{v2.0}{2009/09/28}{Depreciated in favour of 
+% \begin{macro}{\citenote}
+% \changes{v2.0}{2009/09/25}{Depreciated in favour of \cs{bibnotemark}}
+% \begin{macro}{\flushnotestack}
+% \changes{v2.0}{2009/09/28}{Depreciated in favour of 
 %  \cs{recordnotes}}
-%\begin{macro}{\niibsetup}
-%\changes{v2.0}{2009/09/25}{Depreciated in favour of \cs{bibnotesetup}}
-% A few functions which are depreciated in version two.
+% \begin{macro}{\niibsetup}
+% \changes{v2.0}{2009/09/25}{Depreciated in favour of \cs{bibnotesetup}}
+%   A few functions which are depreciated in version two.
 %    \begin{macrocode}
 \NewDocumentCommand \citenote { m } { 
   \@@_mark_note:n {#1}
@@ -1478,11 +1456,11 @@ This work consists of the file  notes2bib.dtx
 \cs_new_eq:NN \flushnotestack \recordnotes
 \cs_new_eq:NN \niibsetup      \bibnotesetup
 %    \end{macrocode}
-%\end{macro}
-%\end{macro}
-%\end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
 %
-%\subsection{Auxiliary file functions}
+% \subsection{Auxiliary file functions}
 %
 % \pkg{notes2bib} needs to write information to the \file{aux} file
 % for carrying information between runs. Rather than give them cryptic
@@ -1490,16 +1468,16 @@ This work consists of the file  notes2bib.dtx
 % as protected functions so that writing to the \file{aux} file is 
 % easier.
 %
-%\begin{macro}{\NotesAfterCitations}
-%\changes{v2.0b}{2009/01/09}{Define using 
-%  \cs{cs_new_protected_nopar:Npn}}
-%\begin{macro}{\NotesBeforeCitations}
-%\changes{v2.0b}{2009/01/09}{Define using 
-%  \cs{cs_new_protected_nopar:Npn}}
-% The functions to pass information on out-of-order notes from one
-% run to another both add the information to the appropriate lists.
-% For notes before citations, there is also a need to put the 
-% \cs{citation} calls into the \file{aux} file at the correct stage.
+% \begin{macro}{\NotesAfterCitations}
+% \changes{v2.0b}{2009/01/09}{Define using 
+%   \cs{cs_new_protected_nopar:Npn}}
+% \begin{macro}{\NotesBeforeCitations}
+% \changes{v2.0b}{2009/01/09}{Define using 
+%   \cs{cs_new_protected_nopar:Npn}}
+%   The functions to pass information on out-of-order notes from one
+%   run to another both add the information to the appropriate lists.
+%   For notes before citations, there is also a need to put the 
+%   \cs{citation} calls into the \file{aux} file at the correct stage.
 %    \begin{macrocode}
 \cs_new_protected_nopar:Npn \NotesAfterCitations #1 {
   \clist_gput_right:Nn \g_@@_previous_after_clist {#1}
@@ -1509,35 +1487,35 @@ This work consists of the file  notes2bib.dtx
   \tl_gput_right:Nn \g_@@_document_hook_tl { \nocite {#1} }
 }
 %    \end{macrocode}
-%\end{macro}
-%\end{macro}
+% \end{macro}
+% \end{macro}
 % 
-%\begin{macro}{\TotalNotes}
-%\changes{v2.0b}{2009/01/09}{Define using 
-%  \cs{cs_new_protected_nopar:Npn}}
-% This function allows the total number of bibliography notes to be
-% carried forward from one run to the next.
+% \begin{macro}{\TotalNotes}
+% \changes{v2.0b}{2009/01/09}{Define using 
+%   \cs{cs_new_protected_nopar:Npn}}
+%   This function allows the total number of bibliography notes to be
+%   carried forward from one run to the next.
 %    \begin{macrocode}
 \cs_new_protected_nopar:Npn \TotalNotes #1 {
   \int_gset:Nn \g_@@_previous_notes_int {#1}
 }
 %    \end{macrocode}
-%\end{macro}
+% \end{macro}
 %
-%\subsection{Code at the start of the document}
+% \subsection{Code at the start of the document}
 %
-%\begin{macro}{\g_@@_document_hook_tl}
-% \pkg{notes2bib} needs to be able to carry out a few tasks right at the
-% beginning of the document. To do that, a hook is added to the
-% \cs{document} macro, which can be treated as a token list variable
-% as it has no arguments.
+% \begin{macro}{\g_@@_document_hook_tl}
+%   \pkg{notes2bib} needs to be able to carry out a few tasks right at the
+%   beginning of the document. To do that, a hook is added to the
+%   \cs{document} macro, which can be treated as a token list variable
+%   as it has no arguments.
 %    \begin{macrocode}
 \tl_gput_right:Nn \document { \g_@@_document_hook_tl }
 \tl_new:N \g_@@_document_hook_tl
 %    \end{macrocode}
-%\end{macro}
+% \end{macro}
 %
-%\subsection{Code at end of the document}
+% \subsection{Code at end of the document}
 %
 % There are a few tasks which have to be carried out a the end of 
 % the LaTeX run, so that data is available for the next run.
@@ -1568,8 +1546,8 @@ This work consists of the file  notes2bib.dtx
 }
 %    \end{macrocode}
 %  
-%\begin{macro}{\@@_write_note_file:}  
-%\begin{macro}{\g_@@_file_iow} 
+% \begin{macro}{\@@_write_note_file:}  
+% \begin{macro}{\g_@@_file_iow} 
 %  \changes{v2.0i}{2012/07/16}{Define stream in all cases}
 % The notes themselves are now written in one block: this avoids 
 % using up a stream for any longer than necessary.   
@@ -1590,8 +1568,8 @@ This work consists of the file  notes2bib.dtx
 }
 \iow_new:N \g_@@_file_iow
 %    \end{macrocode}
-%\end{macro}
-%\end{macro}
+% \end{macro}
+% \end{macro}
 % 
 % The total number of bibliography notes from the current run is
 % recorded to the \file{aux} file. This will then be picked up in the
@@ -1605,13 +1583,13 @@ This work consists of the file  notes2bib.dtx
 }
 %    \end{macrocode}
 %
-%\subsection{Tidying up}
+% \subsection{Tidying up}
 %
-%\begin{macro}{\thanks}
-% The \cs{thanks} macro has to be replaced by one that uses the original 
-% \cs{footnotemark} and \cs{footnotetext} under all circumstances. This
-% is the kernel definition modified: if an alternative version is in use
-% things may go wrong.
+% \begin{macro}{\thanks}
+%   The \cs{thanks} macro has to be replaced by one that uses the original 
+%   \cs{footnotemark} and \cs{footnotetext} under all circumstances. This
+%   is the kernel definition modified: if an alternative version is in use
+%   things may go wrong.
 %    \begin{macrocode}
 \cs_set:Npn \thanks #1 {
   \@@_footnotemark:w
@@ -1622,7 +1600,7 @@ This work consists of the file  notes2bib.dtx
     }
 }
 %    \end{macrocode}
-%\end{macro}    
+% \end{macro}    
 %
 % The final job is to set note placement: this is done here as various
 % parts of the module need to be in place for this to work correctly.    
@@ -1639,7 +1617,7 @@ This work consists of the file  notes2bib.dtx
 %</package>
 %    \end{macrocode}
 %
-%\end{implementation}
+% \end{implementation}
 %
-%\PrintChanges
-%\PrintIndex
+% \PrintChanges
+% \PrintIndex
