@@ -871,7 +871,7 @@ This work consists of the file  notes2bib.dtx
 %    
 % \subsection{Support for \pkg{biblatex} \texttt{refsection} system}
 %
-% \begin{macro}{\@@_insert_refsection:}
+% \begin{macro}[EXP]{\@@_insert_refsection:}
 %   When using \pkg{biblatex}, it's possible that \texttt{refsection}s are
 %   in use. If so, to ensure that labels are always unique the
 %   \texttt{refsection} number is added to the label.
@@ -936,13 +936,13 @@ This work consists of the file  notes2bib.dtx
 %    
 % \subsection{Utility functions}
 %    
-% \begin{macro}{\@@_note_name:}
+% \begin{macro}[EXP]{\@@_note_name:}
 %   When note citations are generated automatically, the text to indicate
 %   a note plus the number of the current note needs to be turned into
 %   something printable. The value tests here mean that if there are more
 %   than nine notes, notes 1--9 have the number padded to get proper 
 %   sorting. This needs two passes, as the total number of notes is only
-%   available at the end of the LaTeX run.
+%   available at the end of the \LaTeX{} run.
 %    \begin{macrocode}
 \cs_new_nopar:Npn \@@_note_name:
   {
@@ -1020,7 +1020,7 @@ This work consists of the file  notes2bib.dtx
 %
 % \subsection{Writing note text to the database}
 %    
-% \begin{macro}{\@@_write_field:nn, \@@_write_field:Vn}
+% \begin{macro}[EXP]{\@@_write_field:nn, \@@_write_field:Vn}
 %   To keep the auto-generated database readable, there needs to be some
 %   formatting. This is provided by using a dedicated function to 
 %   write the various fields to it. Although the \texttt{V} variant is
