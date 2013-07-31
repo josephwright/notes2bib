@@ -1159,12 +1159,12 @@ This work consists of the file  notes2bib.dtx
 %    \begin{macrocode}
 \AtBeginDocument
   {
-    \cs_set_eq:NN \@@_endnote:w     \endnote     
-    \cs_set_eq:NN \@@_endnotemark:w \endnotemark 
-    \cs_set_eq:NN \@@_endnotetext:w \endnotetext
-    \cs_set_eq:NN \@@_footnote:w     \footnote     
-    \cs_set_eq:NN \@@_footnotemark:w \footnotemark 
-    \cs_set_eq:NN \@@_footnotetext:w \footnotetext
+    \cs_new_eq:NN \@@_endnote:w     \endnote
+    \cs_new_eq:NN \@@_endnotemark:w \endnotemark
+    \cs_new_eq:NN \@@_endnotetext:w \endnotetext
+    \cs_new_eq:NN \@@_footnote:w     \footnote
+    \cs_new_eq:NN \@@_footnotemark:w \footnotemark
+    \cs_new_eq:NN \@@_footnotetext:w \footnotetext
   }
 %    \end{macrocode}
 % \end{macro}
