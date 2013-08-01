@@ -228,7 +228,7 @@ This work consists of the file  notes2bib.dtx
 %   which will always be added to the bibliography. The package allows
 %   footnotes and endnotes to be moved into the bibliography in the same
 %   way.  The package can be used with \pkg{natbib} and \pkg{biblatex} as
-%   well as plain LaTeX citations. Both sorted and unsorted bibliography 
+%   well as plain \LaTeX{} citations. Both sorted and unsorted bibliography 
 %   styles are supported.
 % \end{abstract}
 %
@@ -242,14 +242,14 @@ This work consists of the file  notes2bib.dtx
 % separate entities. However, in some parts of the physical sciences
 % (chemistry and physics) it is usual for references to the
 % literature and notes to be given together in a \enquote{References and
-% Notes} section.  By default, this requires that \BibTeX\ users
+% Notes} section.  By default, this requires that \BibTeX{} users
 % create a notes database for each document that they write. This is
 % also true if complex references are needed, which cannot be handled
 % automatically.
 % 
 % The aim of the \pkg{notes2bib} package is to make integration of notes
 % into the bibliography easy.  Notes can be written as normal in the
-% LaTeX source, and are automatically moved to the bibliography. The 
+% \LaTeX{} source, and are automatically moved to the bibliography. The 
 % package is compatible with sorted and unsorted bibliography styles. 
 % The package has been designed for use with numerical citations, 
 % although it will work with other systems.
@@ -267,13 +267,13 @@ This work consists of the file  notes2bib.dtx
 % \texttt{latex \jobname.dtx} will extract it and also typeset the
 % documentation.
 %
-% The package requires LaTeX3 support as provided in the 
+% The package requires \LaTeX3 support as provided in the 
 % \pkg{l3kernel} and \pkg{l3packages} bundles. Both of these are available
 % on \href{http://www.ctan.org}{\textsc{ctan}} as ready-to-install
 % zip files. Suitable versions are available in MiKTeX 2.9 and
 % TeX Live 2011 (updating the relevant packages online may be
-% necessary). LaTeX3, and so \pkg{notes2bib}, requires the e-TeX 
-% extensions: these are available on all modern \TeX\ systems.
+% necessary). \LaTeX3, and so \pkg{notes2bib}, requires the e-\TeX{}
+% extensions: these are available on all modern \TeX{} systems.
 % 
 % Typesetting the documentation requires a number of packages in
 % addition to those needed to use the package. This is mainly 
@@ -303,7 +303,7 @@ This work consists of the file  notes2bib.dtx
 % macro. This is used in exactly the same way as footnotes, taking
 % a mandatory argument, the \meta{text} of the note, and an optional 
 % argument, a \meta{name} for the note. The \meta{text} will be saved to
-% a \BibTeX\ database file for later inclusion in the bibliography, and
+% a \BibTeX{} database file for later inclusion in the bibliography, and
 % a reference will be placed in the body text at the position of the 
 % note.
 % \begin{LaTeXdemo}
@@ -338,7 +338,7 @@ This work consists of the file  notes2bib.dtx
 % \end{syntax} 
 % In common with \cs{footnote}, the basic \cs{bibnote} macro has
 % companion macros \cs{bibnotemark} and \cs{bibnotetext}. In contrast
-% to the LaTeX2e kernel \cs{footnote} macro, \cs{bibnote} is naturally
+% to the \LaTeXe{} kernel \cs{footnote} macro, \cs{bibnote} is naturally
 % robust and so \cs{bibnotemark} and \cs{bibnotetext} should be needed
 % much more rarely than the \cs{footnote} versions.
 % 
@@ -347,7 +347,7 @@ This work consists of the file  notes2bib.dtx
 % \meta{name} of the note. \cs{bibnotetext} also recognises the same 
 % optional \meta{name} argument as well as the mandatory \meta{text}.
 % \begin{LaTeXdemo}
-%   A note without a name \bibnotemark\ can be given with some
+%   A note without a name \bibnotemark{} can be given with some
 %   text \bibnotetext{Text for the fourth example}. Note can also be
 %   given names \bibnotemark[named], which are then used for the
 %   text\bibnotetext[named]{More text for the fourth example}.
@@ -396,7 +396,7 @@ This work consists of the file  notes2bib.dtx
 % automatically by the package. This consists of two parts, a name and
 % a number. The text of the name can be set up using the 
 % \opt{note-name} option. This should not contain any spaces, as 
-% \BibTeX\ does not support records with spaces in names. The numerical
+% \BibTeX{} does not support records with spaces in names. The numerical
 % part of the label is always generated automatically, and is the
 % number of the note. The standard setting for \opt{note-name} is
 % \opt{Note}.
@@ -436,11 +436,11 @@ This work consists of the file  notes2bib.dtx
 % options, this value can only be set in the preamble.
 % 
 % \DescribeOption {record-type} 
-% Each note is written to the database as a standard \BibTeX\ record.
+% Each note is written to the database as a standard \BibTeX{} record.
 % The type of record created is set using the \opt{record-type}
 % option. Usually, this will be set to \opt{misc}; \pkg{biblatex} v1.1a
 % upwards provides the \opt{bibnote} record type, and this is used if
-% available. Some \BibTeX\ styles have dedicated support for notes: if
+% available. Some \BibTeX{} styles have dedicated support for notes: if
 % so, the appropriate value should be set for this option.
 % 
 % \DescribeOption {note-field} 
@@ -450,7 +450,7 @@ This work consists of the file  notes2bib.dtx
 %
 % \DescribeOption {keyword-entry} 
 % Some styles (most notably \pkg{biblatex}) recognise keywords in 
-% \BibTeX\ records, stored in a \texttt{keywords} field. To allow the 
+% \BibTeX{} records, stored in a \texttt{keywords} field. To allow the 
 % selective printing of notes, \pkg{notes2bib} includes a keyword in
 % each note record. The keyword is set using the \opt{keyword-entry}
 % option: the standard setting is \opt{note}.
@@ -487,7 +487,7 @@ This work consists of the file  notes2bib.dtx
 % \DescribeOption {sort-key-mixed} 
 % \DescribeOption {sort-key-after} 
 % There are a number of different mechanisms used by \pkg{notes2bib} to
-% achieve the desired ordering. Most standard \BibTeX\ styles recognise
+% achieve the desired ordering. Most standard \BibTeX{} styles recognise
 % a \texttt{key} field, which can be used to override sorting by author
 % or title. This is used by \pkg{notes2bib}, with the note name prefixed
 % by a string to force the sort order. The appropriate strings are 
@@ -579,8 +579,8 @@ This work consists of the file  notes2bib.dtx
 % \end{syntax}
 % These functions record the notes which have been placed outside of
 % the normal order by the package. This information is used to check
-% for changes in note order between LaTeX runs, so that the need for
-% re-running LaTeX and BibTeX can be detected.
+% for changes in note order between \LaTeX{} runs, so that the need for
+% re-running \LaTeX{} and \BibTeX{} can be detected.
 % 
 % \section{Notes for upgrading from version one}
 %
@@ -673,7 +673,7 @@ This work consists of the file  notes2bib.dtx
 %
 % \begin{macro}{\g_@@_previous_after_clist, \g_@@_previous_before_clist}
 %   For comparison purposes, the lists of out-of-order notes from the
-%   previous LaTeX run are needed.
+%   previous \LaTeX{} run are needed.
 %    \begin{macrocode}
 \clist_new:N \g_@@_previous_after_clist
 \clist_new:N \g_@@_previous_before_clist
@@ -683,7 +683,7 @@ This work consists of the file  notes2bib.dtx
 % \begin{macro}{\g_@@_previous_notes_int}
 %   The total number of notes created is needed, as this is used to see
 %   if any zero-padding is required for the numbers. Of course, for this
-%   to work there has to be a second LaTeX run.
+%   to work there has to be a second \LaTeX{} run.
 %    \begin{macrocode}
 \int_new:N \g_@@_previous_notes_int
 %    \end{macrocode}
@@ -698,7 +698,7 @@ This work consists of the file  notes2bib.dtx
 % \end{macro}
 %
 % \begin{macro}{\l_@@_sortkey_field_tl}
-%   The key for sorting is called \texttt{key} by standard \BibTeX\ and
+%   The key for sorting is called \texttt{key} by standard \BibTeX{} and
 %   \texttt{sortkey} by \pkg{biblatex}. It keeps everything clearer if
 %   the appropriate name is stored in a token list. The value itself is
 %   set up later.
@@ -1085,7 +1085,7 @@ This work consists of the file  notes2bib.dtx
 %   Notes after citations are not written to the \file{aux} file when 
 %   given, but are held in a queue. This is flushed here, which means
 %   actually doing the citation and also recording the notes so they
-%   are available in the next LaTeX run. The list is also transferred
+%   are available in the next \LaTeX{} run. The list is also transferred
 %   to a secondary one, which is used for comparison purposes right at the
 %   end of the document.
 %    \begin{macrocode}
@@ -1204,7 +1204,7 @@ This work consists of the file  notes2bib.dtx
 % \begin{macro}{\@@_attach_bibliography:}
 % \begin{macro}{\bibliography}
 % \begin{macro}{\@@_bibliography:n}
-%   Getting the database created here to be scanned by \BibTeX\ is
+%   Getting the database created here to be scanned by \BibTeX{} is
 %   dependant on whether \pkg{biblatex} is being used. If it is, and it is
 %   already loaded, then the data can be added now. On the other hand, if
 %   it is not already loaded a check is made at the end of the preamble.
@@ -1479,7 +1479,7 @@ This work consists of the file  notes2bib.dtx
 % \subsection{Code at end of the document}
 %
 % There are a few tasks which have to be carried out a the end of 
-% the LaTeX run, so that data is available for the next run.
+% the \LaTeX{} run, so that data is available for the next run.
 % 
 % First, all of the notes need to be added to the auxiliary file.
 % This ensures that the comparisons made in the next step make sense.
@@ -1489,7 +1489,7 @@ This work consists of the file  notes2bib.dtx
 % 
 % The list of out-of-order notes from the current run needs to match
 % that from the previous run. If not, then there is a need to re-run
-% LaTeX.
+% \LaTeX{}.
 %    \begin{macrocode}
 \AtEndDocument
   {
