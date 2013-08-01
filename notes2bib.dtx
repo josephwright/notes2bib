@@ -596,6 +596,20 @@ This work consists of the file  notes2bib.dtx
 % In common with other \LaTeX3 modules, \pkg{notes2bib} makes functionality
 % available at a code (\cs{ExplSyntaxOn}) level. End users \emph{do not}
 % need to read this section!
+% 
+% Programmers should note that \pkg{notes2bib} uses the module prefix
+% \texttt{notestobib}, but that the options use the \pkg{l3keys} module
+% name \texttt{notes2bib}.
+% 
+% \begin{function}{\notestobib_write_note:nn, \notestobib_write_note:xn}
+%   \begin{syntax}
+%     \cs{notestobib_write_note:nn} \marg{note} \marg{text}
+%   \end{syntax}
+%   Adds the \meta{text} for the \meta{note} to the dynamic database
+%   created by \pkg{notes2bib}. Note that the \meta{note} name should be
+%   unique and that the writing operation is delayed by the package until
+%   either the end of the document or an explicit write request.
+% \end{function}
 %
 % \end{documentation}
 %
@@ -1042,22 +1056,23 @@ This work consists of the file  notes2bib.dtx
 %    \end{macrocode}
 % \end{macro}
 %    
-% \begin{macro}{\@@_write_note:nn, \@@_write_note:xn}
-% \begin{macro}[aux]{\@@_write_note_aux:nn}
+% \begin{macro}{\notestobib_write_note:nn, \notestobib_write_note:xn}
+% \begin{macro}[aux]{\@@_write_note:nn}
 %    The writing function takes two arguments: the name of the note, and
 %    the text itself. There is a need to check on the \LaTeXe{} system to
 %    turn off writing, with a hand-over so there is no problem with 
 %    balancing ifs.
 %    \begin{macrocode}
-\cs_new_protected_nopar:Npn \@@_write_note:nn
+\cs_new_protected_nopar:Npn \notestobib_write_note:nn
   {
     \if@filesw
-      \exp_after:wN \@@_write_note_aux:nn
+      \exp_after:wN \@@_write_note:nn
     \else:
       \exp_after:wN \use_none:nn  
     \fi:
   }
-\cs_new_protected:Npn \@@_write_note_aux:nn #1#2
+\cs_generate_variant:Nn \notestobib_write_note:nn { x }
+\cs_new_protected:Npn \@@_write_note:nn #1#2
   {
     \tl_gput_right:Nx \g_@@_notes_tl
       {
@@ -1077,7 +1092,6 @@ This work consists of the file  notes2bib.dtx
         \iow_newline:  
       }
   }
-\cs_generate_variant:Nn \@@_write_note:nn { x }
 %    \end{macrocode}
   
 % \end{macro}
@@ -1356,7 +1370,7 @@ This work consists of the file  notes2bib.dtx
   }
 \cs_new_protected:Npn \@@_bibnote:nn #1#2
   {
-    \@@_write_note:nn {#1} {#2}
+    \notestobib_write_note:nn {#1} {#2}
     \@@_mark_note:n {#1}
   }
 \cs_generate_variant:Nn \@@_bibnote:nn { x }
@@ -1389,8 +1403,8 @@ This work consists of the file  notes2bib.dtx
 \NewDocumentCommand \bibnotetext { o +m }
   {
     \IfNoValueTF {#1} 
-      { \@@_write_note:xn { \@@_note_name: } {#2} }
-      { \@@_write_note:xn { \@@_insert_refsection: #1 } {#2} }
+      { \notestobib_write_note:xn { \@@_note_name: } {#2} }
+      { \notestobib_write_note:xn { \@@_insert_refsection: #1 } {#2} }
   }
 %    \end{macrocode}
 % \end{macro}
