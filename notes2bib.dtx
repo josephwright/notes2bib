@@ -121,122 +121,122 @@ This work consists of the file  notes2bib.dtx
 %</driver>
 % \fi
 % 
-%\makeatletter 
+% \makeatletter 
 % 
-%^^A For creating examples with nice highlighting of code, and so
-%^^A on; based on the system used in the listings source (lstsample).
-%\lst@RequireAspects{writefile}
-%\newsavebox{\LaTeXdemo@box}
-%\lstnewenvironment{LaTeXdemo}[1][code and example]{^^A
-%  \global\let\lst@intname\@empty
-%  \expandafter\let\expandafter\LaTeXdemo@end
-%    \csname LaTeXdemo@#1@end\endcsname
-%  \@nameuse{LaTeXdemo@#1}^^A
-%}{^^A
-%  \LaTeXdemo@end
-%}
-%\newcommand*\LaTeXdemo@new[3]{^^A
-%  \expandafter\newcommand\expandafter*\expandafter
-%    {\csname LaTeXdemo@#1\endcsname}{#2}^^A
-%  \expandafter\newcommand\expandafter*\expandafter
-%    {\csname LaTeXdemo@#1@end\endcsname}{#3}^^A
-%}
-%\newcommand*\LaTeXdemo@common{^^A
-%  \setkeys{lst}{
-%    basicstyle   = \small\ttfamily,
-%    basewidth    = 0.51em,
-%    gobble       = 3,
-%    keywordstyle = \color{blue},
-%    language     = [LaTeX]{TeX},
-%    moretexcs    = {
-%      bibnote       ,
-%      bibnotemark   ,
-%      bibnotesetup  ,
-%      bibnotetext   ,
-%      printbibnotes
-%    }
-%  }^^A 
-%}
-%\newcommand*\LaTeXdemo@input{^^A
-%  \MakePercentComment
-%  \catcode`\^^M=10\relax
-%  \small
-%  \begingroup
-%    \setkeys{lst}{
-%      SelectCharTable=\lst@ReplaceInput{\^\^I}{\lst@ProcessTabulator}
-%    }^^A
-%    \leavevmode 
-%      \input{\jobname.tmp}^^A
-%  \endgroup
-%  \MakePercentIgnore
-%}
-%\LaTeXdemo@new{code and example}{^^A
-%  \setbox\LaTeXdemo@box=\hbox\bgroup
-%    \lst@BeginAlsoWriteFile{\jobname.tmp}^^A
-%    \LaTeXdemo@common
-%}{^^A
-%    \lst@EndWriteFile
-%  \egroup
-%  \begin{center}
-%    \ifdim\wd\LaTeXdemo@box>0.48\linewidth\relax
-%      \hbox to\linewidth{\box\LaTeXdemo@box\hss}^^A
-%        \begin{minipage}{\linewidth}
-%          \LaTeXdemo@input
-%        \end{minipage}
-%    \else
-%      \begin{minipage}{0.48\linewidth}
-%        \LaTeXdemo@input
-%      \end{minipage}
-%      \hfill
-%      \begin{minipage}{0.48\linewidth}
-%        \hbox to\linewidth{\box\LaTeXdemo@box\hss}^^A
-%      \end{minipage}
-%    \fi
-%  \end{center}
-%}
-%\LaTeXdemo@new{code only}{^^A
-%  \LaTeXdemo@common
-%}{^^A
-%}
+% ^^A For creating examples with nice highlighting of code, and so
+% ^^A on; based on the system used in the listings source (lstsample).
+% \lst@RequireAspects{writefile}
+% \newsavebox{\LaTeXdemo@box}
+% \lstnewenvironment{LaTeXdemo}[1][code and example]{^^A
+%   \global\let\lst@intname\@empty
+%   \expandafter\let\expandafter\LaTeXdemo@end
+%     \csname LaTeXdemo@#1@end\endcsname
+%   \@nameuse{LaTeXdemo@#1}^^A
+% }{^^A
+%   \LaTeXdemo@end
+% }
+% \newcommand*\LaTeXdemo@new[3]{^^A
+%   \expandafter\newcommand\expandafter*\expandafter
+%     {\csname LaTeXdemo@#1\endcsname}{#2}^^A
+%   \expandafter\newcommand\expandafter*\expandafter
+%     {\csname LaTeXdemo@#1@end\endcsname}{#3}^^A
+% }
+% \newcommand*\LaTeXdemo@common{^^A
+%   \setkeys{lst}{
+%     basicstyle   = \small\ttfamily,
+%     basewidth    = 0.51em,
+%     gobble       = 4,
+%     keywordstyle = \color{blue},
+%     language     = [LaTeX]{TeX},
+%     moretexcs    = {
+%       bibnote       ,
+%       bibnotemark   ,
+%       bibnotesetup  ,
+%       bibnotetext   ,
+%       printbibnotes
+%     }
+%   }^^A 
+% }
+% \newcommand*\LaTeXdemo@input{^^A
+%   \MakePercentComment
+%   \catcode`\^^M=10\relax
+%   \small
+%   \begingroup
+%     \setkeys{lst}{
+%       SelectCharTable=\lst@ReplaceInput{\^\^I}{\lst@ProcessTabulator}
+%     }^^A
+%     \leavevmode 
+%       \input{\jobname.tmp}^^A
+%   \endgroup
+%   \MakePercentIgnore
+% }
+% \LaTeXdemo@new{code and example}{^^A
+%   \setbox\LaTeXdemo@box=\hbox\bgroup
+%     \lst@BeginAlsoWriteFile{\jobname.tmp}^^A
+%     \LaTeXdemo@common
+% }{^^A
+%     \lst@EndWriteFile
+%   \egroup
+%   \begin{center}
+%     \ifdim\wd\LaTeXdemo@box>0.48\linewidth\relax
+%       \hbox to\linewidth{\box\LaTeXdemo@box\hss}^^A
+%         \begin{minipage}{\linewidth}
+%           \LaTeXdemo@input
+%         \end{minipage}
+%     \else
+%       \begin{minipage}{0.48\linewidth}
+%         \LaTeXdemo@input
+%       \end{minipage}
+%       \hfill
+%       \begin{minipage}{0.48\linewidth}
+%         \hbox to\linewidth{\box\LaTeXdemo@box\hss}^^A
+%       \end{minipage}
+%     \fi
+%   \end{center}
+% }
+% \LaTeXdemo@new{code only}{^^A
+%   \LaTeXdemo@common
+% }{^^A
+% }
 %
-%\providecommand*\opt[1]{\texttt{#1}}
+% \providecommand*\opt[1]{\texttt{#1}}
 %
-%\makeatother
+% \makeatother
 % 
-%\GetFileInfo{\jobname.sty} 
+% \GetFileInfo{\jobname.sty} 
 % 
-%\changes{v1.0}{2007/08/30}{Initial public release}
-%\changes{v2.0}{2009/09/24}{Second version of package using \pkg{expl3}
-% internally}
+% \changes{v1.0}{2007/08/30}{Initial public release}
+% \changes{v2.0}{2009/09/24}{Second version of package using \pkg{expl3}
+%  internally}
 %
-%\title{^^A
-%  \pkg{notes2bib} --- Integrating notes into the bibliography^^A
-%    \thanks{^^A
-%      This file describes version \fileversion, last revised 
-%      \filedate.^^A
-%    }^^A
-%}
-%\author{^^A
-%  Joseph Wright\thanks{E-mail: joseph.wright@morningstar2.co.uk}^^A
-%}
-%\date{Released \filedate}
+% \title{^^A
+%   \pkg{notes2bib} --- Integrating notes into the bibliography^^A
+%     \thanks{^^A
+%       This file describes version \fileversion, last revised 
+%       \filedate.^^A
+%     }^^A
+% }
+% \author{^^A
+%   Joseph Wright\thanks{E-mail: joseph.wright@morningstar2.co.uk}^^A
+% }
+% \date{Released \filedate}
 %
-%\maketitle
+% \maketitle
 %
-%\begin{abstract}
-% The \pkg{notes2bib} package defines a new type of note, \cs{bibnote}, 
-% which will always be added to the bibliography. The package allows
-% footnotes and endnotes to be moved into the bibliography in the same
-% way.  The package can be used with \pkg{natbib} and \pkg{biblatex} as
-% well as plain LaTeX citations. Both sorted and unsorted bibliography 
-% styles are supported.
-%\end{abstract}
+% \begin{abstract}
+%   The \pkg{notes2bib} package defines a new type of note, \cs{bibnote}, 
+%   which will always be added to the bibliography. The package allows
+%   footnotes and endnotes to be moved into the bibliography in the same
+%   way.  The package can be used with \pkg{natbib} and \pkg{biblatex} as
+%   well as plain LaTeX citations. Both sorted and unsorted bibliography 
+%   styles are supported.
+% \end{abstract}
 %
-%\tableofcontents
+% \tableofcontents
 %
-%\begin{documentation}
+% \begin{documentation}
 %
-%\section{Introduction}
+ %\section{Introduction}
 %
 % In most subject areas, bibliographic citations and notes are
 % separate entities. However, in some parts of the physical sciences
@@ -254,10 +254,10 @@ This work consists of the file  notes2bib.dtx
 % The package has been designed for use with numerical citations, 
 % although it will work with other systems.
 % 
-%\section{Installation}
+% \section{Installation}
 %
-%\changes{v2.0b}{2010/01/08}{Better documentation for unpacking and
-%  installation}
+% \changes{v2.0b}{2010/01/08}{Better documentation for unpacking and
+%   installation}
 % The package is supplied in \file{dtx} format and as a pre-extracted
 % zip file, \file{\jobname.tds.zip}. The later is most convenient for
 % most users: simply unzip this in your local texmf directory and
@@ -280,25 +280,25 @@ This work consists of the file  notes2bib.dtx
 % because of the number of demonstration items included in the text. To
 % compile the documentation without error, you will need the packages:
 % \begin{itemize}
-% \item \pkg{csquotes}
-% \item \pkg{helvet}
-% \item \pkg{mathpazo}
-% \item \pkg{listings}
-%\end{itemize}
+%   \item \pkg{csquotes}
+%   \item \pkg{helvet}
+%   \item \pkg{mathpazo}
+%   \item \pkg{listings}
+% \end{itemize}
 %
-%\section{Using the package}
+% \section{Using the package}
 %
 % The package should be loaded as normal in the preamble. The package 
 % recognises a number of options, which can also be used in teh document
 % body. These are described later in this document.
-%\begin{LaTeXdemo}[code only]
-%  \usepackage[<options>]{notes2bib}
-%\end{LaTeXdemo}
+% \begin{LaTeXdemo}[code only]
+%   \usepackage[<options>]{notes2bib}
+% \end{LaTeXdemo}
 %
-%\DescribeMacro {\bibnote}
-%\begin{syntax}
-%  \cs{bibnote} \oarg{name} \marg{text}
-%\end{syntax}
+% \DescribeMacro {\bibnote}
+% \begin{syntax}
+%   \cs{bibnote} \oarg{name} \marg{text}
+% \end{syntax}
 % The basic function provided by \pkg{notes2bib} is the \cs{bibnote}
 % macro. This is used in exactly the same way as footnotes, taking
 % a mandatory argument, the \meta{text} of the note, and an optional 
@@ -306,36 +306,36 @@ This work consists of the file  notes2bib.dtx
 % a \BibTeX\ database file for later inclusion in the bibliography, and
 % a reference will be placed in the body text at the position of the 
 % note.
-%\begin{LaTeXdemo}
-%  A very simple example of a bibliography note
-%  \bibnote{Note for the first example}.
-%\end{LaTeXdemo}
+% \begin{LaTeXdemo}
+%   A very simple example of a bibliography note
+%   \bibnote{Note for the first example}.
+% \end{LaTeXdemo}
 % When used without the optional \meta{name} argument, each note is 
 % given an automatically-generated name. If notes need to be referred to
 % again in a document, the optional argument avoids the need to 
 % understand the detail of the automated system.
-%\begin{LaTeXdemo}
-%  An example of a named note \bibnote[labelled]{Note for the second 
-%  example}. The text can then continue and reference the note again 
-%  later \bibnotemark[labelled].
-%\end{LaTeXdemo}
+% \begin{LaTeXdemo}
+%   An example of a named note \bibnote[labelled]{Note for the second 
+%   example}. The text can then continue and reference the note again 
+%   later \bibnotemark[labelled].
+% \end{LaTeXdemo}
 %
 % Verbatim text cannot be added directly to notes (in the same way that
 % it cannot be used in footnotes). This means that the normal care
 % will be needed with verbatim-like material. 
-%\begin{LaTeXdemo}
-%  The next note contains some awkward text
-%  \bibnote{Some \texttt{\textbackslash verb}-like output}.
-%\end{LaTeXdemo}
+% \begin{LaTeXdemo}
+%   The next note contains some awkward text
+%   \bibnote{Some \texttt{\textbackslash verb}-like output}.
+% \end{LaTeXdemo}
 %
-%\DescribeMacro {\bibnotemark}
-%\begin{syntax}
-%  \cs{bibnotemark} \oarg{name} 
-%\end{syntax} 
-%\DescribeMacro \bibnotetext
-%\begin{syntax}
-%  \cs{bibnotetext} \oarg{name} \marg{text}
-%\end{syntax} 
+% \DescribeMacro {\bibnotemark}
+% \begin{syntax}
+%   \cs{bibnotemark} \oarg{name} 
+% \end{syntax} 
+% \DescribeMacro \bibnotetext
+% \begin{syntax}
+%   \cs{bibnotetext} \oarg{name} \marg{text}
+% \end{syntax} 
 % In common with \cs{footnote}, the basic \cs{bibnote} macro has
 % companion macros \cs{bibnotemark} and \cs{bibnotetext}. In contrast
 % to the LaTeX2e kernel \cs{footnote} macro, \cs{bibnote} is naturally
@@ -346,26 +346,26 @@ This work consists of the file  notes2bib.dtx
 % used alone or will recognise an optional argument giving the 
 % \meta{name} of the note. \cs{bibnotetext} also recognises the same 
 % optional \meta{name} argument as well as the mandatory \meta{text}.
-%\begin{LaTeXdemo}
-%  A note without a name \bibnotemark\ can be given with some
-%  text \bibnotetext{Text for the fourth example}. Note can also be
-%  given names \bibnotemark[named], which are then used for the
-%  text\bibnotetext[named]{More text for the fourth example}.
-%\end{LaTeXdemo}
+% \begin{LaTeXdemo}
+%   A note without a name \bibnotemark\ can be given with some
+%   text \bibnotetext{Text for the fourth example}. Note can also be
+%   given names \bibnotemark[named], which are then used for the
+%   text\bibnotetext[named]{More text for the fourth example}.
+% \end{LaTeXdemo}
 %
 % The \cs{bibnotemark} macro can also be used to cross-reference notes
 % given earlier in the document. This method is preferred for 
 % referencing notes over using the \cs{cite} macro as 
 % \cs{bibnotemark} will cope correctly with out-of-order notes
 % (see Section~\ref{out-of-order}).
-%\begin{LaTeXdemo}
-%  See notes \bibnotemark[labelled] and \bibnotemark[named].
-%\end{LaTeXdemo}
+% \begin{LaTeXdemo}
+%   See notes \bibnotemark[labelled] and \bibnotemark[named].
+% \end{LaTeXdemo}
 %
-%\DescribeMacro {\printbibnotes}
-%\begin{syntax}
-%  \cs{printbibnotes}
-%\end{syntax}
+% \DescribeMacro {\printbibnotes}
+% \begin{syntax}
+%   \cs{printbibnotes}
+% \end{syntax}
 % In most cases, there will be both notes and references in a document.
 % The notes will be printed along with cited literature in the 
 % bibliography, produced using the \cs{bibliography} macro (or
@@ -373,14 +373,14 @@ This work consists of the file  notes2bib.dtx
 % possible to print only the notes in a document using the
 % \cs{printbibnotes} macro.
 % \bibliographystyle{unsrt}
-%\begin{LaTeXdemo}
-%  \printbibnotes
-%\end{LaTeXdemo}
+% \begin{LaTeXdemo}
+%   \printbibnotes
+% \end{LaTeXdemo}
 %
-%\DescribeMacro {\bibnotesetup}
-%\begin{syntax}
-%  \cs{bibnotesetup} \marg{key--value list}
-%\end{syntax}
+% \DescribeMacro {\bibnotesetup}
+% \begin{syntax}
+%   \cs{bibnotesetup} \marg{key--value list}
+% \end{syntax}
 % The behaviour of \pkg{notes2bib} can be altered by setting one or
 % more package options. These are given as arguments to the 
 % \cs{bibnotesetup} function, which takes a \meta{key--value list} and
@@ -389,9 +389,9 @@ This work consists of the file  notes2bib.dtx
 % preamble or the document body. The various package options are
 % described below.
 %
-%\subsection{Auto-generated note names}
+% \subsection{Auto-generated note names}
 %
-%\DescribeOption {note-name}
+% \DescribeOption {note-name}
 % When no explicit label is given for a note, one is generated 
 % automatically by the package. This consists of two parts, a name and
 % a number. The text of the name can be set up using the 
@@ -401,8 +401,8 @@ This work consists of the file  notes2bib.dtx
 % number of the note. The standard setting for \opt{note-name} is
 % \opt{Note}.
 % 
-%\DescribeOption {refsection-name} 
-%\DescribeOption {refsection-separator} 
+% \DescribeOption {refsection-name} 
+% \DescribeOption {refsection-separator} 
 % When using \pkg{biblatex}'s \texttt{refsection} system, additional
 % information is added to all labels from the second \texttt{refsection}
 % onward (\emph{i.e.}~to all except \texttt{refsection} 0). This
@@ -413,9 +413,9 @@ This work consists of the file  notes2bib.dtx
 % has default \opt{Refsection}, while \opt{refsection-separator} comes
 % after it and has default value \opt{-}.
 %
-%\subsection{Underlying citation system}
+% \subsection{Underlying citation system}
 %
-%\DescribeOption {cite-function}
+% \DescribeOption {cite-function}
 % \pkg{notes2bib} works by making the text of notes into citations.
 % To do this, each note has to be \enquote{cited} in the appropriate
 % place. \pkg{notes2bib} does not carry out any low-level citation 
@@ -424,9 +424,9 @@ This work consists of the file  notes2bib.dtx
 % which should be set to a citation macro taking one mandatory
 % argument. The initial setting is \opt{cite-function = \cs{cite}}.
 %
-%\subsection{Controlling the temporary database}
+% \subsection{Controlling the temporary database}
 % 
-%\DescribeOption {file-name}
+% \DescribeOption {file-name}
 % The file name used for the database of notes is set using the
 % \opt{file-name} option. The standard setting is to call the file
 % |notes2bib-\jobname|, which may not be appropriate (for example, file
@@ -435,7 +435,7 @@ This work consists of the file  notes2bib.dtx
 % file extension fixed as \file{bib}. In contrast to the other package
 % options, this value can only be set in the preamble.
 % 
-%\DescribeOption {record-type} 
+% \DescribeOption {record-type} 
 % Each note is written to the database as a standard \BibTeX\ record.
 % The type of record created is set using the \opt{record-type}
 % option. Usually, this will be set to \opt{misc}; \pkg{biblatex} v1.1a
@@ -443,22 +443,22 @@ This work consists of the file  notes2bib.dtx
 % available. Some \BibTeX\ styles have dedicated support for notes: if
 % so, the appropriate value should be set for this option.
 % 
-%\DescribeOption {note-field} 
+% \DescribeOption {note-field} 
 % The database field used to store the text of the note is available
 % for change \emph{via} the \opt{note-field} option. The standard 
 % setting is \opt{note}.
 %
-%\DescribeOption {keyword-entry} 
+% \DescribeOption {keyword-entry} 
 % Some styles (most notably \pkg{biblatex}) recognise keywords in 
 % \BibTeX\ records, stored in a \texttt{keywords} field. To allow the 
 % selective printing of notes, \pkg{notes2bib} includes a keyword in
 % each note record. The keyword is set using the \opt{keyword-entry}
 % option: the standard setting is \opt{note}.
 %
-%\subsection{Ordering notes in relation to citations}
-%\label{out-of-order}
+% \subsection{Ordering notes in relation to citations}
+% \label{out-of-order}
 %
-%\DescribeOption {placement}
+% \DescribeOption {placement}
 % The standard method used by \pkg{notes2bib} places notes into the
 % bibliography with no particular control of the relative position of
 % notes with respect to citations. For unsorted bibliography styles, 
@@ -480,12 +480,12 @@ This work consists of the file  notes2bib.dtx
 % it is the recommended method for referencing notes under all 
 % circumstances.
 % 
-%\DescribeOption {presort-before} 
-%\DescribeOption {presort-mixed} 
-%\DescribeOption {presort-after} 
-%\DescribeOption {sort-key-before} 
-%\DescribeOption {sort-key-mixed} 
-%\DescribeOption {sort-key-after} 
+% \DescribeOption {presort-before} 
+% \DescribeOption {presort-mixed} 
+% \DescribeOption {presort-after} 
+% \DescribeOption {sort-key-before} 
+% \DescribeOption {sort-key-mixed} 
+% \DescribeOption {sort-key-after} 
 % There are a number of different mechanisms used by \pkg{notes2bib} to
 % achieve the desired ordering. Most standard \BibTeX\ styles recognise
 % a \texttt{key} field, which can be used to override sorting by author
@@ -502,10 +502,10 @@ This work consists of the file  notes2bib.dtx
 % These standard values will probably be appropriate in almost all 
 % cases.
 % 
-%\subsection{Converting footnotes and endnotes}
+% \subsection{Converting footnotes and endnotes}
 %
-%\DescribeOption {convert-endnotes}
-%\DescribeOption {convert-footnotes}
+% \DescribeOption {convert-endnotes}
+% \DescribeOption {convert-footnotes}
 % It is possible to convert both \cs{footnote} and \cs{endnote}
 % entries in a file into \cs{bibnote} entries in a flexible manner.
 % This behaviour is controlled using the \opt{convert-endnotes} and
@@ -514,17 +514,17 @@ This work consists of the file  notes2bib.dtx
 % appropriate macros are stored by \pkg{notes2bib}, and so it is 
 % possible to switch this behaviour on and off.
 % 
-%\DescribeMacro {\thanks} 
+% \DescribeMacro {\thanks} 
 % The package is designed so that converting footnotes to bibliographic
 % notes will not affect the \cs{thanks} macro. Thus the option
 % \opt{convert-footnotes = true} can be given before \cs{maketitle}
 % with no implication for and \cs{thanks}.
 % 
-%\subsection{Using unsorted bibliography styles}
+% \subsection{Using unsorted bibliography styles}
 %
-%\changes{v2.0b}{2010/01/08}{Improvements to details concerning
-%  \opt{use-sort-key} option}
-%\DescribeOption {use-sort-key}
+% \changes{v2.0b}{2010/01/08}{Improvements to details concerning
+%   \opt{use-sort-key} option}
+% \DescribeOption {use-sort-key}
 % Some bibliography styles (most notably those using the 
 % author--date system) may not work well with the settings
 % of the package as supplied. Some of the data written by 
@@ -533,14 +533,14 @@ This work consists of the file  notes2bib.dtx
 % database, the option \opt{use-sort-key} should be set to \opt{false}
 % with these problematic styles. At the same time, it may be necessary
 % to alter the \opt{note-name} option to a blank value.
-%\begin{LaTeXdemo}[code only]
-%  \bibnotesetup{
-%    note-name    = ,
-%    use-sort-key = false
-%  }
-%\end{LaTeXdemo} 
+% \begin{LaTeXdemo}[code only]
+%   \bibnotesetup{
+%     note-name    = ,
+%     use-sort-key = false
+%   }
+% \end{LaTeXdemo} 
 % 
-%\section{Data written to the \texttt{aux} file}
+% \section{Data written to the \texttt{aux} file}
 % 
 % \pkg{notes2bib} writes some information to the \file{aux} file, so
 % that it is available between runs. The functions added to the 
@@ -548,7 +548,7 @@ This work consists of the file  notes2bib.dtx
 % for completeness. However, it may be necessary to worry about the
 % \file{aux} file when splitting bibliographies.
 % 
-%\DescribeMacro {\recordnotes}
+% \DescribeMacro {\recordnotes}
 % \begin{syntax}
 %   \cs{recordnotes}
 % \end{syntax}
@@ -561,19 +561,19 @@ This work consists of the file  notes2bib.dtx
 % \cs{recordnotes} is available. It should be used immediately
 % before changing between auxiliary files.
 % 
-%\DescribeMacro {\TotalNotes}
-%\begin{syntax}
-%  \cs{TotalNotes} \marg{number}
-%\end{syntax}
+% \DescribeMacro {\TotalNotes}
+% \begin{syntax}
+%   \cs{TotalNotes} \marg{number}
+% \end{syntax}
 % Records the total number of auto-numbered notes in a run. This 
 % information is needed to check if zero-filling is needed for the
 % numbers used.
 % 
-%\DescribeMacro {\NotesAfterCitations}
-% \begin{syntax}
-%   \cs{NotesAfterCitations} \marg{note-list}
-% \end{syntax}
-%\DescribeMacro {\NotesBeforeCitations}
+% \DescribeMacro {\NotesAfterCitations}
+%  \begin{syntax}
+%    \cs{NotesAfterCitations} \marg{note-list}
+%  \end{syntax}
+% \DescribeMacro {\NotesBeforeCitations}
 % \begin{syntax}
 %   \cs{NotesBeforeCitations} \marg{note-list}
 % \end{syntax}
@@ -582,7 +582,7 @@ This work consists of the file  notes2bib.dtx
 % for changes in note order between LaTeX runs, so that the need for
 % re-running LaTeX and BibTeX can be detected.
 % 
-%\section{Notes for upgrading from version one}
+% \section{Notes for upgrading from version one}
 %
 % Documents which compile with version one of \pkg{notes2bib} should
 % work equally well with version two. The package recognises the
@@ -592,7 +592,7 @@ This work consists of the file  notes2bib.dtx
 % altered, it may be necessary to delete \file{aux} files for documents
 % processed initially with older versions of \pkg{notes2bib}. 
 %
-%\end{documentation}
+% \end{documentation}
 %
 % \begin{implementation}
 %
