@@ -740,7 +740,7 @@ This work consists of the file  notes2bib.dtx
 %   The underlying function for citation starts off with no value:
 %   this is then set up by the key--value settings given next.
 %    \begin{macrocode}
-\cs_new_nopar:Npn \@@_cite:w { }
+\cs_new:Npn \@@_cite:w { }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -895,12 +895,12 @@ This work consists of the file  notes2bib.dtx
 %   in use. If so, to ensure that labels are always unique the
 %   \texttt{refsection} number is added to the label.
 %    \begin{macrocode}
-\cs_new_nopar:Npn \@@_insert_refsection: { }
+\cs_new:Npn \@@_insert_refsection: { }
 \AtBeginDocument
   {
     \@ifpackageloaded { biblatex }
       {
-        \cs_set_nopar:Npn \@@_insert_refsection:
+        \cs_set:Npn \@@_insert_refsection:
           {
             \int_compare:nNnT { \value { refsection } } > { 0 }
               {
@@ -963,7 +963,7 @@ This work consists of the file  notes2bib.dtx
 %   sorting. This needs two passes, as the total number of notes is only
 %   available at the end of the \LaTeX{} run.
 %    \begin{macrocode}
-\cs_new_nopar:Npn \@@_note_name:
+\cs_new:Npn \@@_note_name:
   {
     \@@_insert_refsection:
     \tl_use:N \l_@@_note_name_tl
@@ -1063,7 +1063,7 @@ This work consists of the file  notes2bib.dtx
 %    turn off writing, with a hand-over so there is no problem with
 %    balancing ifs.
 %    \begin{macrocode}
-\cs_new_protected_nopar:Npn \notestobib_write_note:nn
+\cs_new_protected:Npn \notestobib_write_note:nn
   {
     \if@filesw
       \exp_after:wN \@@_write_note:nn
@@ -1108,13 +1108,13 @@ This work consists of the file  notes2bib.dtx
 %   to a secondary one, which is used for comparison purposes right at the
 %   end of the document.
 %    \begin{macrocode}
-\cs_new_protected_nopar:Npn \@@_record_notes:
+\cs_new_protected:Npn \@@_record_notes:
   {
     \if@filesw
       \exp_after:wN \@@_flush_notes_aux:
     \fi
   }
-\cs_new_protected_nopar:Npn \@@_flush_notes_aux:
+\cs_new_protected:Npn \@@_flush_notes_aux:
   {
     \clist_if_empty:NF \g_@@_before_clist
       {
@@ -1201,9 +1201,9 @@ This work consists of the file  notes2bib.dtx
   {
     \@ifpackageloaded { biblatex }
       {
-        \cs_new_protected_nopar:Npn \@@_print_notes:
+        \cs_new_protected:Npn \@@_print_notes:
           {
-            \cs_set_nopar:Npx \@@_create_print_notes:
+            \cs_set:Npx \@@_create_print_notes:
               {
                 \printbibliography
                   [ keyword = \exp_not:V \l_@@_keyword_tl ]
@@ -1212,11 +1212,11 @@ This work consists of the file  notes2bib.dtx
           }
       }
       {
-        \cs_new_protected_nopar:Npn \@@_print_notes:
+        \cs_new_protected:Npn \@@_print_notes:
           { \exp_args:NV \@@_bibliography:n \g_@@_filename_tl }
       }
   }
-\cs_new_protected_nopar:Npn \@@_create_print_notes: { }
+\cs_new_protected:Npn \@@_create_print_notes: { }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1230,7 +1230,7 @@ This work consists of the file  notes2bib.dtx
 %   The \cs{bibliography} function has to be patched if \pkg{biblatex} is
 %   not in use.
 %    \begin{macrocode}
-\cs_new_protected_nopar:Npn \@@_attach_bibliography:
+\cs_new_protected:Npn \@@_attach_bibliography:
   {
     \@ifpackageloaded { biblatex }
       {
@@ -1249,7 +1249,7 @@ This work consists of the file  notes2bib.dtx
             \int_compare:nNnTF \g_@@_total_notes_int = \c_zero
               { \@@_bibliography:n {##1} }
               {
-                \cs_set_nopar:Npx \@@_attach_bibliography:
+                \cs_set:Npx \@@_attach_bibliography:
                   {
                     \exp_not:N \@@_bibliography:n
                       { \exp_not:n {##1} , \exp_not:V \g_@@_filename_tl }
@@ -1328,14 +1328,14 @@ This work consists of the file  notes2bib.dtx
           {
             \cs_set_eq:NN \@@_filesw: \if@filesw
             \@fileswfalse
-            \cs_set_nopar:Npn \@@_aux_hook:
+            \cs_set:Npn \@@_aux_hook:
               {
                 \cs_set_eq:NN \if@filesw \@@_filesw:
-                \cs_set_nopar:Npn \@@_aux_hook: { }
+                \cs_set:Npn \@@_aux_hook: { }
               }
             \@@_cite:w {#1}
           }
-        \cs_new_nopar:Npn \@@_aux_hook: { }
+        \cs_new:Npn \@@_aux_hook: { }
         \tl_gput_right:Nn \g_@@_document_hook_tl
           {
             \cs_if_exist:NF \@restore@auxhandle
@@ -1462,9 +1462,9 @@ This work consists of the file  notes2bib.dtx
 %   For notes before citations, there is also a need to put the
 %   \cs{citation} calls into the \file{aux} file at the correct stage.
 %    \begin{macrocode}
-\cs_new_protected_nopar:Npn \NotesAfterCitations #1
+\cs_new_protected:Npn \NotesAfterCitations #1
   { \clist_gput_right:Nn \g_@@_previous_after_clist {#1} }
-\cs_new_protected_nopar:Npn \NotesBeforeCitations #1
+\cs_new_protected:Npn \NotesBeforeCitations #1
   {
     \clist_gput_right:Nn \g_@@_previous_after_clist {#1}
     \tl_gput_right:Nn \g_@@_document_hook_tl { \nocite {#1} }
@@ -1477,7 +1477,7 @@ This work consists of the file  notes2bib.dtx
 %   This function allows the total number of bibliography notes to be
 %   carried forward from one run to the next.
 %    \begin{macrocode}
-\cs_new_protected_nopar:Npn \TotalNotes #1
+\cs_new_protected:Npn \TotalNotes #1
   { \int_gset:Nn \g_@@_previous_notes_int {#1} }
 %    \end{macrocode}
 % \end{macro}
@@ -1539,7 +1539,7 @@ This work consists of the file  notes2bib.dtx
       \exp_after:wN \@@_write_note_file:
     \fi:
   }
-\cs_new_protected_nopar:Npn \@@_write_note_file:
+\cs_new_protected:Npn \@@_write_note_file:
   {
     \tl_if_empty:NF \g_@@_notes_tl
       {
