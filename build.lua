@@ -15,9 +15,9 @@ packtdszip  = true
 -- No implementation as standard
 typesetcmds = "\\AtBeginDocument{\\DisableImplementation}"
 
--- Auto-versioning
-versionform = "ProvidesExplPackage"
-
 -- Find and run the build system
-kpse.set_program_name ("kpsewhich")
-dofile (kpse.lookup ("l3build.lua"))
+kpse.set_program_name("kpsewhich")
+if not release_date then
+  dofile(kpse.lookup("l3build.lua"))
+end
+
