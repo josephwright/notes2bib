@@ -966,8 +966,8 @@ This work consists of the file  notes2bib.dtx
   {
     \@@_insert_refsection:
     \tl_use:N \l_@@_note_name_tl
-    \int_compare:nNnT \g_@@_previous_notes_int > \c_nine
-      { \int_compare:nNnT \g_@@_note_int < \c_ten { 0 } }
+    \int_compare:nNnT \g_@@_previous_notes_int > 9
+      { \int_compare:nNnT \g_@@_note_int < { 10 } { 0 } }
     \int_to_arabic:n { \g_@@_note_int }
   }
 %    \end{macrocode}
@@ -1245,7 +1245,7 @@ This work consists of the file  notes2bib.dtx
         \cs_new_eq:NN \@@_bibliography:n \bibliography
         \RenewDocumentCommand \bibliography { m }
           {
-            \int_compare:nNnTF \g_@@_total_notes_int = \c_zero
+            \int_compare:nNnTF \g_@@_total_notes_int = 0
               { \@@_bibliography:n {##1} }
               {
                 \cs_set:Npx \@@_attach_bibliography:
@@ -1558,7 +1558,7 @@ This work consists of the file  notes2bib.dtx
 %    \begin{macrocode}
 \AtEndDocument
   {
-    \int_compare:nNnT \g_@@_note_int > \c_zero
+    \int_compare:nNnT \g_@@_note_int > 0
       {
         \iow_now:Nx \@auxout
           { \TotalNotes { \int_to_arabic:n { \g_@@_note_int } } }
