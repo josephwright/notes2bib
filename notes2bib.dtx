@@ -996,7 +996,7 @@ This work consists of the file  notes2bib.dtx
 % \end{macro}
 %
 % \begin{macro}{\@@_mark_note_after:n}
-% \begin{macro}[aux]{\@@_mark_note_after_aux:n}
+% \begin{macro}{\@@_mark_note_after_aux:n}
 %   For notes which come after citations, the entry is recorded and an
 %   auxiliary is called. The nature of the second function is dependent
 %   on the other packages loaded.
@@ -1056,7 +1056,7 @@ This work consists of the file  notes2bib.dtx
 % \end{macro}
 %
 % \begin{macro}{\notestobib_write_note:nn, \notestobib_write_note:xn}
-% \begin{macro}[aux]{\@@_write_note:nn}
+% \begin{macro}{\@@_write_note:nn}
 %    The writing function takes two arguments: the name of the note, and
 %    the text itself. There is a need to check on the \LaTeXe{} system to
 %    turn off writing, with a hand-over so there is no problem with
@@ -1099,7 +1099,7 @@ This work consists of the file  notes2bib.dtx
 % \subsection{Handling out of order notes}
 %
 % \begin{macro}{\@@_record_notes:}
-% \begin{macro}[aux]{\@@_flush_notes_aux:}
+% \begin{macro}{\@@_flush_notes_aux:}
 %   Notes after citations are not written to the \file{aux} file when
 %   given, but are held in a queue. This is flushed here, which means
 %   actually doing the citation and also recording the notes so they
